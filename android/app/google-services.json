@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "480748657353",
+    "project_id": "watt-way-10bf2",
+    "storage_bucket": "watt-way-10bf2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480748657353:android:ba20a4ed9ad36d60a00b18",
+        "android_client_info": {
+          "package_name": "com.wattway"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrt2esuoNFDwKUwbn7SjVdNCHMKtdPMqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
