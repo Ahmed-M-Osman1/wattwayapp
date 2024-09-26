@@ -7,7 +7,7 @@ import User from '../../../types/User';
 import SwitchFilterComponent
   from '../../../components/search/filter/controls/switch/SwitchFilterComponent';
 import { GlobalFilters } from '../../../types/Filter';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import computeStyleSheet from './UsersFiltersStyles';
 import SecuredStorage from '../../../utils/SecuredStorage';
 import { View } from 'react-native';
@@ -41,7 +41,7 @@ export default class UsersFilters extends ScreenFilters<UsersFiltersDef> {
               internalFilterID={GlobalFilters.ROAMING}
               enabledValue={true}
               style={style.switchFilterControlComponentContainer}
-              label={I18n.t('filters.usersRoamingFilterLabel')}
+              label={t('filters.usersRoamingFilterLabel')}
               initialValue={filters?.issuer}
               ref={async (
                 roamingFilterControlComponent: SwitchFilterComponent<boolean>

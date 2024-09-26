@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import moment from 'moment';
 import { HStack, Icon, IIconProps } from 'native-base';
 import React from 'react';
@@ -132,11 +132,11 @@ export default class SideBar extends React.Component<Props, State> {
             </View>
             <View style={style.versionContainer}>
               {!appVersion?.needsUpdate ? (
-                <Text style={style.versionText}>{`${I18n.t('general.version')} ${DeviceInfo.getVersion()}`}</Text>
+                <Text style={style.versionText}>{`${t('general.version')} ${DeviceInfo.getVersion()}`}</Text>
               ) : (
                 <TouchableOpacity style={style.newVersionContainer}>
                   <SidebarIcon style={style.newVersionIcon} as={MaterialIcons} name={'update'} />
-                  <Text style={style.newVersionText}>{I18n.t('appUpdate.appUpdateDialogTitle')}</Text>
+                  <Text style={style.newVersionText}>{t('appUpdate.appUpdateDialogTitle')}</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -183,13 +183,13 @@ export default class SideBar extends React.Component<Props, State> {
                 </Text>
                 <HStack style={{alignItems: 'center'}}>
                   <TouchableOpacity style={style.settingsContainer} onPress={() => this.navigateTo('SettingsNavigator', 'Settings')}>
-                    <Text numberOfLines={1} ellipsizeMode={'tail'} style={style.logoutText}>{I18n.t('sidebar.settings')}</Text>
+                    <Text numberOfLines={1} ellipsizeMode={'tail'} style={style.logoutText}>{t('sidebar.settings')}</Text>
                   </TouchableOpacity>
                   <View style={{width: scale(4), height: scale(4), borderRadius: scale(4), backgroundColor: commonColor.primary, marginHorizontal: scale(10)}} />
                   <AuthContext.Consumer>
                     {authService => (
                       <TouchableOpacity style={style.logoutContainer} onPress={() => void this.logoff(() => authService.handleSignOut())}>
-                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={style.logoutText}>{I18n.t('authentication.logOut')}</Text>
+                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={style.logoutText}>{t('authentication.logOut')}</Text>
                       </TouchableOpacity>
                     )}
                   </AuthContext.Consumer>

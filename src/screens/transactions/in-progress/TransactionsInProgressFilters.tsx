@@ -9,7 +9,7 @@ import User from '../../../types/User';
 import SwitchFilterComponent
   from '../../../components/search/filter/controls/switch/SwitchFilterComponent';
 import { GlobalFilters } from '../../../types/Filter';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import computeStyleSheet from './TransactionsInProgressFiltersStyles';
 import SecuredStorage from '../../../utils/SecuredStorage';
 import { View } from 'react-native';
@@ -47,7 +47,7 @@ export default class TransactionsInProgressFilters extends ScreenFilters<Transac
               internalFilterID={GlobalFilters.ROAMING}
               enabledValue={true}
               style={style.switchFilterControlComponentContainer}
-              label={I18n.t('filters.transactionsRoamingFilterLabel')}
+              label={t('filters.transactionsRoamingFilterLabel')}
               initialValue={filters?.issuer}
               ref={async (
                 roamingFilterControlComponent : SwitchFilterComponent<boolean>

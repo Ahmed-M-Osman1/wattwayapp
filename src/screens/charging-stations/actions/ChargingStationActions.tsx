@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Button, HStack, Icon, Spinner } from 'native-base';
 import React from 'react';
 import { Alert, ScrollView, Text, View } from 'react-native';
@@ -76,17 +76,17 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
 
   public resetHardConfirm() {
     const { chargingStation } = this.state;
-    Alert.alert(I18n.t('chargers.resetHard'), I18n.t('chargers.resetHardMessage', { chargeBoxID: chargingStation.id }), [
-      { text: I18n.t('general.yes'), onPress: async () => this.reset(chargingStation.id, 'Hard') },
-      { text: I18n.t('general.cancel') }
+    Alert.alert(t('chargers.resetHard'), t('chargers.resetHardMessage', { chargeBoxID: chargingStation.id }), [
+      { text: t('general.yes'), onPress: async () => this.reset(chargingStation.id, 'Hard') },
+      { text: t('general.cancel') }
     ]);
   }
 
   public resetSoftConfirm() {
     const { chargingStation } = this.state;
-    Alert.alert(I18n.t('chargers.resetSoft'), I18n.t('chargers.resetSoftMessage', { chargeBoxID: chargingStation.id }), [
-      { text: I18n.t('general.yes'), onPress: async () => this.reset(chargingStation.id, 'Soft') },
-      { text: I18n.t('general.cancel') }
+    Alert.alert(t('chargers.resetSoft'), t('chargers.resetSoftMessage', { chargeBoxID: chargingStation.id }), [
+      { text: t('general.yes'), onPress: async () => this.reset(chargingStation.id, 'Soft') },
+      { text: t('general.cancel') }
     ]);
   }
 
@@ -101,9 +101,9 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
       const status = await this.centralServerProvider.reset(chargeBoxID, type);
       // Check
       if (status.status && status.status === 'Accepted') {
-        Message.showSuccess(I18n.t('details.accepted'));
+        Message.showSuccess(t('details.accepted'));
       } else {
-        Message.showError(I18n.t('details.denied'));
+        Message.showError(t('details.denied'));
       }
       this.setState({
         spinnerResetHard: false,
@@ -126,9 +126,9 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
 
   public clearCacheConfirm() {
     const { chargingStation } = this.state;
-    Alert.alert(I18n.t('chargers.clearCache'), I18n.t('chargers.clearCacheMessage', { chargeBoxID: chargingStation.id }), [
-      { text: I18n.t('general.yes'), onPress: async () => this.clearCache(chargingStation.id) },
-      { text: I18n.t('general.cancel') }
+    Alert.alert(t('chargers.clearCache'), t('chargers.clearCacheMessage', { chargeBoxID: chargingStation.id }), [
+      { text: t('general.yes'), onPress: async () => this.clearCache(chargingStation.id) },
+      { text: t('general.cancel') }
     ]);
   }
 
@@ -139,14 +139,14 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
       const status = await this.centralServerProvider.clearCache(chargeBoxID);
       // Check
       if (status.status && status.status === 'Accepted') {
-        Message.showSuccess(I18n.t('details.accepted'));
+        Message.showSuccess(t('details.accepted'));
       } else {
-        Message.showError(I18n.t('details.denied'));
+        Message.showError(t('details.denied'));
       }
       this.setState({ spinnerClearCache: false });
     } catch (error) {
       this.setState({ spinnerClearCache: false });
-      Message.showError(I18n.t('details.denied'));
+      Message.showError(t('details.denied'));
       // Other common Error
       await Utils.handleHttpUnexpectedError(
         this.centralServerProvider,
@@ -160,14 +160,14 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
   public unlockConnectorConfirm(connectorId: number) {
     const { chargingStation } = this.state;
     Alert.alert(
-      I18n.t('chargers.unlockConnector', { connectorId: Utils.getConnectorLetterFromConnectorID(connectorId) }),
-      I18n.t('chargers.unlockConnectorMessage', {
+      t('chargers.unlockConnector', { connectorId: Utils.getConnectorLetterFromConnectorID(connectorId) }),
+      t('chargers.unlockConnectorMessage', {
         chargeBoxID: chargingStation.id,
         connectorId: Utils.getConnectorLetterFromConnectorID(connectorId)
       }),
       [
-        { text: I18n.t('general.yes'), onPress: async () => this.unlockConnector(chargingStation.id, connectorId) },
-        { text: I18n.t('general.cancel') }
+        { text: t('general.yes'), onPress: async () => this.unlockConnector(chargingStation.id, connectorId) },
+        { text: t('general.cancel') }
       ]
     );
   }
@@ -184,9 +184,9 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
       const status = await this.centralServerProvider.unlockConnector(chargeBoxID, connectorID);
       // Check
       if (status.status && status.status === 'Unlocked') {
-        Message.showSuccess(I18n.t('details.accepted'));
+        Message.showSuccess(t('details.accepted'));
       } else {
-        Message.showError(I18n.t('details.denied'));
+        Message.showError(t('details.denied'));
       }
       spinnerConnectors.set(connectorID, false);
       this.setState({
@@ -240,8 +240,8 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
       <View style={style.container}>
         <HeaderComponent
           navigation={this.props.navigation}
-          title={chargingStation ? chargingStation.id : I18n.t('connector.unknown')}
-          subTitle={chargingStation && chargingStation.inactive ? `(${I18n.t('details.inactive')})` : null}
+          title={chargingStation ? chargingStation.id : t('connector.unknown')}
+          subTitle={chargingStation && chargingStation.inactive ? `(${t('details.inactive')})` : null}
           containerStyle={style.headerContainer}
         />
         <ScrollView contentContainerStyle={style.scrollViewContainer}>
@@ -254,7 +254,7 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
                 <HStack alignItems={'center'}>
                   {spinnerResetHard ? <Spinner color="grey" /> : <Icon size={scale(20)} style={style.actionButtonIcon} as={MaterialIcons} name="repeat" />}
                   <Text style={style.actionButtonText}>
-                    {I18n.t('chargers.resetHard')}
+                    {t('chargers.resetHard')}
                   </Text>
                 </HStack>
               </Button>
@@ -274,7 +274,7 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
                         <Icon size={scale(20)} style={style.actionButtonIcon} as={MaterialIcons} name="lock-open" />
                       )}
                       <Text style={style.actionButtonText}>
-                        {I18n.t('chargers.unlockConnector', { connectorId: Utils.getConnectorLetterFromConnectorID(connector.connectorId) })}
+                        {t('chargers.unlockConnector', { connectorId: Utils.getConnectorLetterFromConnectorID(connector.connectorId) })}
                       </Text>
                     </HStack>
                   </Button>
@@ -292,7 +292,7 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
                     <Icon size={scale(20)} style={style.actionButtonIcon} as={MaterialIcons} name="layers-clear" />
                   )}
                   <Text style={style.actionButtonText}>
-                    {I18n.t('chargers.resetSoft')}
+                    {t('chargers.resetSoft')}
                   </Text>
                 </HStack>
               </Button>
@@ -305,7 +305,7 @@ export default class ChargingStationActions extends BaseAutoRefreshScreen<Props,
                 <HStack alignItems={'center'}>
                   {spinnerClearCache ? <Spinner color="grey" /> : <Icon size={scale(20)} style={style.actionButtonIcon} as={MaterialIcons} name="refresh" />}
                   <Text style={style.actionButtonText}>
-                    {I18n.t('chargers.clearCache')}
+                    {t('chargers.clearCache')}
                   </Text>
                 </HStack>
               </Button>

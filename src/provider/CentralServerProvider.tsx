@@ -3,7 +3,7 @@ import {Buffer} from 'buffer';
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import {NavigationContainerRef, StackActions} from '@react-navigation/native';
 import {AxiosInstance} from 'axios';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import jwtDecode from 'jwt-decode';
 import {Platform} from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
@@ -1046,7 +1046,7 @@ export default class CentralServerProvider {
   /* eslint-disable @typescript-eslint/indent */
   public async downloadInvoice(invoice: BillingInvoice): Promise<void> {
     this.debugMethod('downloadInvoice');
-    const fileName = `${I18n.t('invoices.invoice')}_${invoice.number}.pdf`;
+    const fileName = `${t('invoices.invoice')}_${invoice.number}.pdf`;
     let config;
     if (Platform.OS === PLATFORM.IOS) {
       config = { fileCache: true, path: ReactNativeBlobUtil.fs.dirs.DocumentDir + '/' + fileName, appendExt: 'pdf' };
@@ -1060,7 +1060,7 @@ export default class CentralServerProvider {
           notification: true,
           title: fileName,
           mediaScannable: true,
-          description: `${I18n.t('invoices.invoiceFileDescription')} ${invoice.number}`
+          description: `${t('invoices.invoiceFileDescription')} ${invoice.number}`
         }
       };
     }

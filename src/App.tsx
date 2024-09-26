@@ -13,10 +13,9 @@ import {Icon, NativeBaseProvider} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {Appearance, ColorSchemeName, NativeEventSubscription, StatusBar, Text} from 'react-native';
 import { scale } from 'react-native-size-matters';
-
 import DeepLinkingManager from './deeplinking/DeepLinkingManager';
 import I18nManager from './I18n/I18nManager';
-// import LocationManager from './location/LocationManager';
+import LocationManager from './location/LocationManager';
 import MigrationManager from './migration/MigrationManager';
 import Notifications from './notification/Notifications';
 import CentralServerProvider from './provider/CentralServerProvider';
@@ -61,7 +60,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Settings from './screens/settings/Settings';
-// import {hide} from 'react-native-bootsplash';
 import {ThemeType} from './types/Theme';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import messaging from '@react-native-firebase/messaging';
@@ -132,7 +130,7 @@ function AuthNavigator(props: BaseProps) {
         <AuthStack.Navigator initialRouteName={'Login'} screenOptions={{ headerShown: false }}>
             <AuthStack.Screen name="Login" component={Login} initialParams={props?.route?.params?.params} />
             <AuthStack.Screen name="Tenants" component={Tenants} initialParams={props?.route?.params?.params} />
-            {/*<AuthStack.Screen name="TenantQrCode" component={TenantQrCode} initialParams={props?.route?.params?.params} />*/}
+            <AuthStack.Screen name="TenantQrCode" component={TenantQrCode} initialParams={props?.route?.params?.params} />
             <AuthStack.Screen name="Eula" component={Eula} initialParams={props?.route?.params?.params} />
             <AuthStack.Screen name="SignUp" component={SignUp} initialParams={props?.route?.params?.params} />
             <AuthStack.Screen name="ResetPassword" component={ResetPassword} initialParams={props?.route?.params?.params} />
@@ -890,9 +888,9 @@ export default class App extends React.Component<Props, State> {
 
     private onReady(): void {
         // Set up deep linking
-        // this.deepLinkingManager = DeepLinkingManager.getInstance();
+        this.deepLinkingManager = DeepLinkingManager.getInstance();
         this.deepLinkingManager?.initialize(this.navigationRef?.current, this.centralServerProvider);
         // Activate Deep links
-        // this.deepLinkingManager.startListening();
+        this.deepLinkingManager.startListening();
     }
 }

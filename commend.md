@@ -1,1 +1,2 @@
-cd android && ./gradlew clean && cd .. 
+yarn android --port 7777 --deviceId "emulator-5556"
+

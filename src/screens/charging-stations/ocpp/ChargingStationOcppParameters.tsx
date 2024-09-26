@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Button, HStack, Icon, Spinner } from 'native-base';
 import React from 'react';
 import { Alert, FlatList, RefreshControl, ScrollView, Text, View } from 'react-native';
@@ -119,11 +119,11 @@ export default class ChargingStationOcppParameters extends BaseScreen<Props, Sta
   public requestChargingStationOcppParametersConfirm() {
     const { chargingStation } = this.state;
     Alert.alert(
-      I18n.t('chargers.requestConfiguration', { chargeBoxID: chargingStation.id }),
-      I18n.t('chargers.requestConfigurationMessage', { chargeBoxID: chargingStation.id }),
+      t('chargers.requestConfiguration', { chargeBoxID: chargingStation.id }),
+      t('chargers.requestConfigurationMessage', { chargeBoxID: chargingStation.id }),
       [
-        { text: I18n.t('general.yes'), onPress: async () => this.requestChargingStationOcppParameters(chargingStation.id) },
-        { text: I18n.t('general.cancel') }
+        { text: t('general.yes'), onPress: async () => this.requestChargingStationOcppParameters(chargingStation.id) },
+        { text: t('general.cancel') }
       ]
     );
   }
@@ -134,10 +134,10 @@ export default class ChargingStationOcppParameters extends BaseScreen<Props, Sta
       const status = await this.centralServerProvider.requestChargingStationOcppParameters(chargeBoxID);
       // Check
       if (status.status && status.status === 'Accepted') {
-        Message.showSuccess(I18n.t('details.accepted'));
+        Message.showSuccess(t('details.accepted'));
         await this.refresh();
       } else {
-        Message.showError(I18n.t('details.denied'));
+        Message.showError(t('details.denied'));
       }
     } catch (error) {
       // Other common Error
@@ -158,8 +158,8 @@ export default class ChargingStationOcppParameters extends BaseScreen<Props, Sta
       <View style={style.container}>
         <HeaderComponent
           navigation={this.props.navigation}
-          title={chargingStation ? chargingStation.id : I18n.t('connector.unknown')}
-          subTitle={chargingStation && chargingStation.inactive ? `(${I18n.t('details.inactive')})` : null}
+          title={chargingStation ? chargingStation.id : t('connector.unknown')}
+          subTitle={chargingStation && chargingStation.inactive ? `(${t('details.inactive')})` : null}
           containerStyle={style.headerContainer}
         />
         <Button
@@ -169,7 +169,7 @@ export default class ChargingStationOcppParameters extends BaseScreen<Props, Sta
           <HStack alignItems={'center'}>
             <Icon size={scale(20)}  style={style.actionButtonIcon} as={MaterialIcons} name="get-app" />
             <Text style={style.actionButtonText}>
-              {I18n.t('chargers.requestConfiguration')}
+              {t('chargers.requestConfiguration')}
             </Text>
           </HStack>
         </Button>
@@ -188,7 +188,7 @@ export default class ChargingStationOcppParameters extends BaseScreen<Props, Sta
             )}
             keyExtractor={(item) => `${item.key}`}
             refreshControl={<RefreshControl onRefresh={this.manualRefresh} refreshing={this.state.refreshing} />}
-            ListEmptyComponent={() => <ListEmptyTextComponent navigation={navigation} text={I18n.t('chargers.noOCPPParameters')} />}
+            ListEmptyComponent={() => <ListEmptyTextComponent navigation={navigation} text={t('chargers.noOCPPParameters')} />}
           />
         )}
       </View>

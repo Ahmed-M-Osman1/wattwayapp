@@ -1,6 +1,6 @@
 import { CommonActions } from '@react-navigation/native';
 import { StatusCodes } from 'http-status-codes';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import {Icon, Spinner} from 'native-base';
 import React from 'react';
 
@@ -129,7 +129,7 @@ export default class RetrievePassword extends BaseScreen<Props, State> {
         // Login Success
         this.setState({ retrievingPassword: false, performRetrievePassword: false });
         // Show
-        Message.showSuccess(I18n.t('authentication.resetSuccess'));
+        Message.showSuccess(t('authentication.resetSuccess'));
         // Navigate
         this.props.navigation.dispatch(
           CommonActions.reset({
@@ -154,18 +154,18 @@ export default class RetrievePassword extends BaseScreen<Props, State> {
           switch (error.request.status) {
             // Invalid Captcha
             case HTTPError.INVALID_CAPTCHA:
-              Message.showError(I18n.t('authentication.invalidCaptcha'));
+              Message.showError(t('authentication.invalidCaptcha'));
               break;
             // Unknown Email
             case StatusCodes.NOT_FOUND:
-              Message.showError(I18n.t('authentication.wrongEmail'));
+              Message.showError(t('authentication.wrongEmail'));
               break;
             default:
               // Other common Error
               await Utils.handleHttpUnexpectedError(this.centralServerProvider, error, 'authentication.resetPasswordUnexpectedError', null, null, async () => this.retrievePassword());
           }
         } else {
-          Message.showError(I18n.t('authentication.resetPasswordUnexpectedError'));
+          Message.showError(t('authentication.resetPasswordUnexpectedError'));
         }
       }
     }
@@ -184,7 +184,7 @@ export default class RetrievePassword extends BaseScreen<Props, State> {
         <HeaderComponent
           containerStyle={style.headerContainer}
           navigation={this.props.navigation}
-          title={I18n.t('authentication.retrievePassword')}
+          title={t('authentication.retrievePassword')}
         />
         <AuthHeader containerStyle={{marginHorizontal: '5%', marginBottom: scale(10)}} navigation={this.props.navigation} tenantName={tenantName} tenantLogo={tenantLogo} />
         <KeyboardAwareScrollView bounces={false} contentContainerStyle={style.scrollViewContentContainer} style={style.scrollView}>
@@ -194,7 +194,7 @@ export default class RetrievePassword extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={formStyle.inputTextContainer}
             value={email}
-            placeholder={I18n.t('authentication.email')}
+            placeholder={t('authentication.email')}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize="none"
             autoCorrect={false}
@@ -205,7 +205,7 @@ export default class RetrievePassword extends BaseScreen<Props, State> {
             onChangeText={(newEmail) => this.setState({ email: newEmail })}
           />
           <Button
-            title={I18n.t('authentication.retrievePassword')}
+            title={t('authentication.retrievePassword')}
             titleStyle={formStyle.buttonText}
             disabled={!email}
             disabledStyle={formStyle.buttonDisabled}

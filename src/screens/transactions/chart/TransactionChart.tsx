@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Spinner } from 'native-base';
 import React from 'react';
 import { View, processColor, Text } from 'react-native';
@@ -189,7 +189,7 @@ export default class TransactionChart extends BaseAutoRefreshScreen<Props, State
     if (!Utils.isEmptyArray(powerValues)) {
       chartDefinition.data.dataSets.push({
         values: powerValues,
-        label: I18n.t('details.instantPowerChartLabel'),
+        label: t('details.instantPowerChartLabel'),
         config: {
           mode: 'LINEAR',
           drawValues: false,
@@ -214,7 +214,7 @@ export default class TransactionChart extends BaseAutoRefreshScreen<Props, State
     if (transaction?.stateOfCharge > 0 || transaction?.stop?.stateOfCharge > 0) {
       chartDefinition.data.dataSets.push({
         values: stateOfChargeValues,
-        label: I18n.t('details.batteryChartLabel'),
+        label: t('details.batteryChartLabel'),
         config: {
           axisDependency: 'RIGHT',
           mode: 'LINEAR',
@@ -242,7 +242,7 @@ export default class TransactionChart extends BaseAutoRefreshScreen<Props, State
       if (!Utils.isEmptyArray(gridLimitationValues)) {
         chartDefinition.data.dataSets.push({
           values: gridLimitationValues,
-          label: I18n.t('details.gridLimitChartLabel'),
+          label: t('details.gridLimitChartLabel'),
           config: {
             axisDependency: 'LEFT',
             mode: 'LINEAR',
@@ -268,7 +268,7 @@ export default class TransactionChart extends BaseAutoRefreshScreen<Props, State
         );
       chartDefinition.data.dataSets.push({
         values: cumulatedConsumptionValues,
-        label: I18n.t('details.cumulatedConsumptionLabel'),
+        label: t('details.cumulatedConsumptionLabel'),
         config: {
           axisDependency: 'LEFT',
           mode: 'LINEAR',
@@ -295,7 +295,7 @@ export default class TransactionChart extends BaseAutoRefreshScreen<Props, State
     if (!Utils.isEmptyArray(priceValues) && this.securityProvider?.isComponentPricingActive()) {
       chartDefinition.data.dataSets.push({
         values: priceValues,
-        label: I18n.t('details.priceLabel') + (priceCurrencySymbol ? ` (${priceCurrencySymbol})` : ''),
+        label: t('details.priceLabel') + (priceCurrencySymbol ? ` (${priceCurrencySymbol})` : ''),
         config: {
           axisDependency: 'LEFT',
           mode: 'LINEAR',
@@ -384,7 +384,7 @@ export default class TransactionChart extends BaseAutoRefreshScreen<Props, State
         <HeaderComponent
           navigation={this.props.navigation}
           title={chargingStation ? chargingStation.id : ''}
-          subTitle={chargingStation ? `(${I18n.t('details.connector')} ${connectorLetter})` : ''}
+          subTitle={chargingStation ? `(${t('details.connector')} ${connectorLetter})` : ''}
           containerStyle={style.headerContainer}
         />
         {loading ? <Spinner size={scale(30)} style={style.spinner} color="grey" /> : (
@@ -443,12 +443,12 @@ export default class TransactionChart extends BaseAutoRefreshScreen<Props, State
             ) : (
               transaction || (connector?.currentTransactionID) ? (
                 canDisplayTransaction ? (
-                  <Text style={style.notData}>{I18n.t('details.noConsumptionData')}</Text>
+                  <Text style={style.notData}>{t('details.noConsumptionData')}</Text>
                 ) : (
-                  <Text style={style.notData}>{I18n.t('details.notAuthorized')}</Text>
+                  <Text style={style.notData}>{t('details.notAuthorized')}</Text>
                 )
               ) : (
-                <Text style={style.notData}>{I18n.t('details.noConsumptionData')}</Text>
+                <Text style={style.notData}>{t('details.noConsumptionData')}</Text>
               )
             )}
           </View>

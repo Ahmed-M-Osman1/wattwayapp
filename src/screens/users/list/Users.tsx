@@ -42,8 +42,8 @@ export default class Users extends SelectableList<User> {
 
   public constructor(props: Props) {
     super(props);
-    this.singleItemTitle = I18n.t('users.user');
-    this.multiItemsTitle = I18n.t('users.users');
+    this.singleItemTitle = t('users.user');
+    this.multiItemsTitle = t('users.users');
     this.selectMultipleTitle = 'users.selectUsers';
     this.selectSingleTitle = 'users.selectUser';
     this.state = {
@@ -168,7 +168,7 @@ export default class Users extends SelectableList<User> {
               refreshing={refreshing}
               manualRefresh={isModal ? null : this.manualRefresh.bind(this)}
               onEndReached={this.onEndScroll}
-              emptyTitle={I18n.t('users.noUsers')}
+              emptyTitle={t('users.noUsers')}
             />
           </View>
         )}

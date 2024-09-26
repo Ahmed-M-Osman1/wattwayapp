@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import { Image, ImageStyle, ScrollView, Text, View } from 'react-native';
@@ -97,7 +97,7 @@ export default class TransactionDetails extends BaseScreen<Props, State> {
     } catch (error) {
       switch (error.request.status) {
         case StatusCodes.NOT_FOUND:
-          Message.showError(I18n.t('transactions.transactionDoesNotExist'));
+          Message.showError(t('transactions.transactionDoesNotExist'));
           break;
         default:
           await Utils.handleHttpUnexpectedError(
@@ -240,8 +240,8 @@ export default class TransactionDetails extends BaseScreen<Props, State> {
       <View style={style.container}>
         <HeaderComponent
           navigation={this.props.navigation}
-          title={transaction ? transaction.chargeBoxID : I18n.t('connector.unknown')}
-          subTitle={`(${I18n.t('details.connector')} ${connectorLetter})`}
+          title={transaction ? transaction.chargeBoxID : t('connector.unknown')}
+          subTitle={`(${t('details.connector')} ${connectorLetter})`}
           containerStyle={style.headerContainer}
         />
         {/* Site Image */}
@@ -252,7 +252,7 @@ export default class TransactionDetails extends BaseScreen<Props, State> {
             <Text style={style.subHeaderName}>({transaction?.stop ? I18nManager.formatDateTime(transaction.stop.timestamp, {dateStyle: 'medium', timeStyle: 'short'}) : ''})</Text>
             {transaction?.userID !== transaction?.stop?.userID && (
               <Text style={style.subSubHeaderName}>
-                ({I18n.t('details.stoppedBy')} {Utils.buildUserName(transaction?.stop?.user)})
+                ({t('details.stoppedBy')} {Utils.buildUserName(transaction?.stop?.user)})
               </Text>
             )}
           </View>
@@ -278,21 +278,21 @@ export default class TransactionDetails extends BaseScreen<Props, State> {
         {!Utils.isNullOrUndefined(transaction?.carStateOfCharge) && (
           <View style={style.columnContainer}>
             <Icon size={scale(25)} as={MaterialIcons} name="battery-charging-full" style={style.icon} />
-            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{I18n.t('transactions.initialStateOfCharge')}</Text>
+            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{t('transactions.initialStateOfCharge')}</Text>
             <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue]}>{transaction.carStateOfCharge}%</Text>
           </View>
         )}
         {!!transaction?.targetStateOfCharge && (
           <View style={style.columnContainer}>
             <Icon size={scale(25)} as={MaterialIcons} name="battery-charging-full" style={style.icon} />
-            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{I18n.t('transactions.targetStateOfCharge')}</Text>
+            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{t('transactions.targetStateOfCharge')}</Text>
             <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue]}>{transaction.targetStateOfCharge}%</Text>
           </View>
         )}
         {!!transaction?.departureTime && (
           <View style={style.columnContainer}>
             <Icon size={scale(25)} as={MaterialCommunityIcons} name="clock-end" style={style.icon} />
-            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{I18n.t('transactions.departureTime')}</Text>
+            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{t('transactions.departureTime')}</Text>
             <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue]}>{departureTimeFormatted}</Text>
           </View>
         )}

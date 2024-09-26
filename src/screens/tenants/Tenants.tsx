@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import { FlatList, RefreshControl, SafeAreaView, TouchableOpacity, View } from 'react-native';
@@ -138,7 +138,7 @@ export default class Tenants extends BaseScreen<Props, State> {
           )}
           <HeaderComponent
             navigation={this.props.navigation}
-            title={I18n.t('general.tenants')}
+            title={t('general.tenants')}
             backAction={() => this.onBack()}
             sideBar={false}
             containerStyle={style.headerContainer}
@@ -188,21 +188,21 @@ export default class Tenants extends BaseScreen<Props, State> {
     return (
       <DialogModal
         animationIn={'fadeInLeft'}
-        title={I18n.t('authentication.addTenantTitle')}
+        title={t('authentication.addTenantTitle')}
         renderIcon={(iconStyle) => <Icon size={scale(iconStyle.fontSize)} style={iconStyle} as={MaterialIcons} name={'add-business'} />}
-        description={I18n.t('authentication.addTenantText')}
+        description={t('authentication.addTenantText')}
         close={() => this.setState({ showAddTenantDialog: false })}
         withCancel={true}
         withCloseButton={true}
         buttons={[
           {
-            text: I18n.t('qrCode.qrCode'),
+            text: t('qrCode.qrCode'),
             action: () => this.setState({ showAddTenantDialog: false }, () => this.openQrCodeScanner()),
             buttonTextStyle: style.modalPrimaryButtonText,
             buttonStyle: style.modalPrimaryButton
           },
           {
-            text: I18n.t('general.manually'),
+            text: t('general.manually'),
             action: () => this.setState({ showAddTenantManuallyDialog: true, showAddTenantDialog: false }),
             buttonTextStyle: style.modalPrimaryButtonText,
             buttonStyle: style.modalPrimaryButton
@@ -233,16 +233,16 @@ export default class Tenants extends BaseScreen<Props, State> {
     const { navigation } = this.props;
     return (
       <DialogModal
-        title={I18n.t('general.newTenantAddedDialogTitle', { organizationName: newTenant?.name })}
-        description={I18n.t('general.newTenantAddedDialogDescription', { tenantName: newTenant?.name })}
+        title={t('general.newTenantAddedDialogTitle', { organizationName: newTenant?.name })}
+        description={t('general.newTenantAddedDialogDescription', { tenantName: newTenant?.name })}
         withCloseButton={true}
         withCancel={true}
         animationIn={'fadeInLeft'}
-        cancelButtonText={I18n.t('general.close')}
+        cancelButtonText={t('general.close')}
         close={() => this.setState({ newTenant: null })}
         buttons={[
           {
-            text: I18n.t('authentication.signUp'),
+            text: t('authentication.signUp'),
             buttonTextStyle: style.modalPrimaryButtonText,
             buttonStyle: style.modalPrimaryButton,
             action: () =>
@@ -251,7 +251,7 @@ export default class Tenants extends BaseScreen<Props, State> {
               )
           },
           {
-            text: I18n.t('authentication.signIn'),
+            text: t('authentication.signIn'),
             buttonTextStyle: style.modalPrimaryButtonText,
             buttonStyle: style.modalPrimaryButton,
             action: () =>
@@ -286,6 +286,6 @@ export default class Tenants extends BaseScreen<Props, State> {
     // Remove cache
     await SecuredStorage.deleteUserCredentials(subdomain);
     this.setState({ tenants });
-    Message.showSuccess(I18n.t('general.deleteTenantSuccess', { tenantName: tenant.name }));
+    Message.showSuccess(t('general.deleteTenantSuccess', { tenantName: tenant.name }));
   };
 }

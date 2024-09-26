@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import moment from 'moment';
 import React from 'react';
 import { Text, View, ViewStyle } from 'react-native';
@@ -39,7 +39,7 @@ export default class PaymentMethodComponent extends React.Component<Props, State
     const expirationDate = moment(paymentMethod.expiringOn).format('MM/YYYY');
     const status = Utils.buildPaymentMethodStatus(paymentMethod);
     const statusStyle = this.buildStatusStyle(status, style);
-    const paymentMethodType = I18n.t('paymentMethodType.card');
+    const paymentMethodType = t('paymentMethodType.card');
     return (
       <View style={[listItemCommonStyle.container, style.paymentMethodContainer, ...(containerStyle || [])]}>
         <View style={style.paymentMethodLogoContainer}>{this.renderPaymentMethodLogo(paymentMethod.brand, style)}</View>
@@ -53,14 +53,14 @@ export default class PaymentMethodComponent extends React.Component<Props, State
             <Text style={style.text}>{paymentMethod.last4} </Text>
             {paymentMethod.isDefault && (
               <View style={style.defaultContainer}>
-                <Text style={style.badgeText}>{I18n.t('general.default')}</Text>
+                <Text style={style.badgeText}>{t('general.default')}</Text>
               </View>
             )}
           </View>
           <View style={style.expirationDateContainer}>
             <Text style={style.text}>{expirationDate}</Text>
             <View style={[style.status, statusStyle]}>
-              <Text style={style.badgeText}>{I18n.t(`paymentMethodStatus.${status}`)}</Text>
+              <Text style={style.badgeText}>{t(`paymentMethodStatus.${status}`)}</Text>
             </View>
           </View>
           <Text style={style.text}>{paymentMethodType}</Text>

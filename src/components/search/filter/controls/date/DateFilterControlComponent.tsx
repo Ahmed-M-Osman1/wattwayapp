@@ -9,7 +9,7 @@ import computeStyleSheet from './DateFilterControlComponentStyles';
 import I18nManager from '../../../../../I18n/I18nManager';
 import { scale } from 'react-native-size-matters';
 import Foundation from 'react-native-vector-icons/Foundation';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 
 export interface Props extends FilterControlComponentProps<Date> {
   minimumDate: Date;
@@ -76,8 +76,8 @@ export default class DateFilterControlComponent extends FilterControlComponent<D
               <Icon padding={0} size={scale(28)} style={internalStyle.dateIcon} as={Foundation} name={'calendar'} />
             </TouchableOpacity>
             <DateTimePickerModal
-              confirmTextIOS={I18n.t('general.ok')}
-              cancelTextIOS={I18n.t('general.cancel')}
+              confirmTextIOS={t('general.ok')}
+              cancelTextIOS={t('general.cancel')}
               isVisible={this.state.openDatePicker}
               date={value}
               mode={'date'}

@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import { SafeAreaView, TouchableOpacity, View } from 'react-native';
@@ -44,8 +44,8 @@ export default class Cars extends SelectableList<Car> {
     super(props);
     this.selectMultipleTitle = 'cars.selectCars';
     this.selectSingleTitle = 'cars.selectCar';
-    this.singleItemTitle = I18n.t('cars.car');
-    this.multiItemsTitle = I18n.t('cars.cars');
+    this.singleItemTitle = t('cars.car');
+    this.multiItemsTitle = t('cars.cars');
     this.state = {
       cars: [],
       skip: 0,
@@ -195,7 +195,7 @@ export default class Cars extends SelectableList<Car> {
               refreshing={refreshing}
               manualRefresh={this.manualRefresh.bind(this)}
               onEndReached={this.onEndScroll}
-              emptyTitle={I18n.t('cars.noCars')}
+              emptyTitle={t('cars.noCars')}
             />
           </View>
         )}

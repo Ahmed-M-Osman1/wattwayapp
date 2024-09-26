@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Spinner } from 'native-base';
 import React from 'react';
 import {Keyboard, Text, TextInput, TouchableOpacity, View} from 'react-native';
@@ -76,14 +76,14 @@ export default class ReportError extends BaseScreen<Props, State> {
         // Submit
         await this.centralServerProvider.sendErrorReport(phoneNumber, title, description);
         // Ok
-        Message.showSuccess(I18n.t('authentication.reportErrorSuccess'));
+        Message.showSuccess(t('authentication.reportErrorSuccess'));
       } catch (error) {
         // Check request?
         if (error.request) {
           // Other common Error
           await Utils.handleHttpUnexpectedError(this.centralServerProvider, error, 'authentication.reportErrorFailed');
         } else {
-          Message.showError(I18n.t('authentication.reportErrorFailed'));
+          Message.showError(t('authentication.reportErrorFailed'));
         }
       }
     }
@@ -102,13 +102,13 @@ export default class ReportError extends BaseScreen<Props, State> {
         <HeaderComponent
           sideBar={this.canOpenDrawer}
           navigation={this.props.navigation}
-          title={I18n.t('sidebar.reportError')}
+          title={t('sidebar.reportError')}
           containerStyle={style.headerContainer}
         />
         <KeyboardAwareScrollView bounces={false} persistentScrollbar={true} contentContainerStyle={style.scrollViewContentContainer} style={style.scrollView}>
           <View style={style.clearButton}>
             <TouchableOpacity onPress={() => this.clearForm()}>
-              <Text style={style.clearButtonText}>{I18n.t('general.clear')}</Text>
+              <Text style={style.clearButtonText}>{t('general.clear')}</Text>
             </TouchableOpacity>
           </View>
           <Input
@@ -117,7 +117,7 @@ export default class ReportError extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={[formStyle.inputTextContainer, !this.checkPhoneNumber() && formStyle.inputTextContainerError]}
             value={phoneNumber}
-            placeholder={`${I18n.t('authentication.phone')}*`}
+            placeholder={`${t('authentication.phone')}*`}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCorrect={false}
             autoComplete={'tel'}
@@ -126,7 +126,7 @@ export default class ReportError extends BaseScreen<Props, State> {
             returnKeyType={'next'}
             onSubmitEditing={() => this.subjectInput.focus()}
             renderErrorMessage={!this.checkPhoneNumber()}
-            errorMessage={!this.checkPhoneNumber() ? I18n.t('authentication.invalidMobile') : null}
+            errorMessage={!this.checkPhoneNumber() ? t('authentication.invalidMobile') : null}
             errorStyle={formStyle.inputError}
             onChangeText={(newPhoneNumber) => this.setState({phoneNumber: newPhoneNumber})}
           />
@@ -136,7 +136,7 @@ export default class ReportError extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={formStyle.inputTextContainer}
             value={title}
-            placeholder={`${I18n.t('general.errorTitle')}*`}
+            placeholder={`${t('general.errorTitle')}*`}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize={'words'}
             autoCorrect={false}
@@ -153,7 +153,7 @@ export default class ReportError extends BaseScreen<Props, State> {
             inputContainerStyle={[formStyle.inputTextContainer, formStyle.inputTextMultilineContainer, description && {height: Math.max(descriptionInputHeight ?? 0, scale(90))}]}
             value={description}
             multiline={true}
-            placeholder={`${I18n.t('general.errorDescription')}*`}
+            placeholder={`${t('general.errorDescription')}*`}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize={'words'}
             autoCorrect={false}
@@ -165,7 +165,7 @@ export default class ReportError extends BaseScreen<Props, State> {
             onContentSizeChange={(event) => this.setState({descriptionInputHeight: event?.nativeEvent?.contentSize?.height})}
           />
           <Button
-            title={I18n.t('general.send')}
+            title={t('general.send')}
             titleStyle={formStyle.buttonTitle}
             disabled={!this.isFormValid()}
             disabledStyle={formStyle.buttonDisabled}

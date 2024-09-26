@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Modal } from 'react-native';
 import { Icon } from 'native-base';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import computeStyleSheet from './DialogModalStyle';
 import computeModalCommonStyles from '../modal/ModalCommonStyle';
 import { Animation } from 'react-native-animatable';
@@ -115,7 +115,7 @@ export default class DialogModal extends React.Component<Props, State> {
                 ))}
                 {withCancel && (
                   <Button
-                    title={(cancelButtonText ?? I18n.t('general.cancel')).toUpperCase()}
+                    title={(cancelButtonText ?? t('general.cancel')).toUpperCase()}
                     containerStyle={buttonContainerCommonStyle}
                     buttonStyle={[modalCommonStyles.primaryButton, style.cancelButton, style.button]}
                     titleStyle={[style.buttonText, style.cancelButtonText]}

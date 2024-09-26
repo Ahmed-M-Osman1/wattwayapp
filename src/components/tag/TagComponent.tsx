@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import React from 'react';
 import { Image, ImageStyle, Text, View, ViewStyle } from 'react-native';
 
@@ -62,15 +62,15 @@ export default class TagComponent extends React.Component<Props, State> {
             </Text>
           )}
           <Text numberOfLines={1} ellipsizeMode={'tail'} style={[style.text, style.tagVisualID]}>
-            {I18n.t('tags.visualID')}: {tag?.visualID}
+            {t('tags.visualID')}: {tag?.visualID}
           </Text>
           <View style={style.bottomLine}>
             <View style={[style.statusContainer, tag?.default && style.statusContainerWithRightBorder]}>
-              <Text style={[style.text, statusStyle]}>{tag?.active ? I18n.t('tags.active') : I18n.t('tags.inactive')}</Text>
+              <Text style={[style.text, statusStyle]}>{tag?.active ? t('tags.active') : t('tags.inactive')}</Text>
             </View>
             {tag?.default && (
               <View style={style.defaultContainer}>
-                <Text style={[style.defaultText]}>{I18n.t('general.default')}</Text>
+                <Text style={[style.defaultText]}>{t('general.default')}</Text>
               </View>
             )}
           </View>

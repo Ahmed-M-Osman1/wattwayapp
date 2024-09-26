@@ -1,6 +1,6 @@
 import { CommonActions } from '@react-navigation/native';
 import { StatusCodes } from 'http-status-codes';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import {Icon, Spinner} from 'native-base';
 import React from 'react';
 import {Keyboard, TextInput} from 'react-native';
@@ -121,7 +121,7 @@ export default class ResetPassword extends BaseScreen<Props, State> {
         // Reset
         this.setState({ resettingPassword: false });
         // Show
-        Message.showSuccess(I18n.t('authentication.resetPasswordSuccess'));
+        Message.showSuccess(t('authentication.resetPasswordSuccess'));
         // Navigate
         this.props.navigation.dispatch(
           CommonActions.reset({
@@ -145,14 +145,14 @@ export default class ResetPassword extends BaseScreen<Props, State> {
           switch (error.request.status) {
             // Invalid Hash
             case StatusCodes.NOT_FOUND:
-              Message.showError(I18n.t('authentication.resetPasswordHashNotValid'));
+              Message.showError(t('authentication.resetPasswordHashNotValid'));
               break;
             default:
               // Other common Error
               await Utils.handleHttpUnexpectedError(this.centralServerProvider, error, 'authentication.resetPasswordUnexpectedError', null, null, async () => this.resetPassword());
           }
         } else {
-          Message.showError(I18n.t('authentication.resetPasswordUnexpectedError'));
+          Message.showError(t('authentication.resetPasswordUnexpectedError'));
         }
       }
     }
@@ -182,7 +182,7 @@ export default class ResetPassword extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={[formStyle.inputTextContainer, !Utils.validatePassword(password) && formStyle.inputTextContainerError]}
             value={password}
-            placeholder={I18n.t('authentication.password')}
+            placeholder={t('authentication.password')}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize="none"
             autoCorrect={false}
@@ -191,7 +191,7 @@ export default class ResetPassword extends BaseScreen<Props, State> {
             returnKeyType={'next'}
             onSubmitEditing={() => this.repeatPasswordInput.focus()}
             renderErrorMessage={!Utils.validatePassword(password)}
-            errorMessage={!Utils.validatePassword(password) ? I18n.t('authentication.passwordRule') : null}
+            errorMessage={!Utils.validatePassword(password) ? t('authentication.passwordRule') : null}
             errorStyle={formStyle.inputError}
             onChangeText={(newPassword) => this.setState({password: newPassword})}
           />
@@ -209,7 +209,7 @@ export default class ResetPassword extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={[formStyle.inputTextContainer, !this.checkPasswords() && formStyle.inputTextContainerError]}
             value={repeatPassword}
-            placeholder={I18n.t('authentication.repeatPassword')}
+            placeholder={t('authentication.repeatPassword')}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize="none"
             autoCorrect={false}
@@ -218,12 +218,12 @@ export default class ResetPassword extends BaseScreen<Props, State> {
             returnKeyType={'done'}
             onSubmitEditing={() => Keyboard.dismiss()}
             renderErrorMessage={!this.checkPasswords()}
-            errorMessage={!this.checkPasswords() ? I18n.t('authentication.passwordNotMatch') : null}
+            errorMessage={!this.checkPasswords() ? t('authentication.passwordNotMatch') : null}
             errorStyle={formStyle.inputError}
             onChangeText={(text) => this.setState({repeatPassword: text})}
           />
           <Button
-            title={I18n.t('authentication.resetPassword')}
+            title={t('authentication.resetPassword')}
             titleStyle={formStyle.buttonTitle}
             disabled={!this.isFormValid()}
             disabledStyle={formStyle.buttonDisabled}
@@ -235,7 +235,7 @@ export default class ResetPassword extends BaseScreen<Props, State> {
             onPress={() => void this.resetPassword()}
           />
           <Button
-            title={I18n.t('authentication.backLogin')}
+            title={t('authentication.backLogin')}
             titleStyle={formStyle.buttonTitle}
             containerStyle={formStyle.buttonContainer}
             buttonStyle={{...formStyle.button, ...formStyle.secondaryButton}}

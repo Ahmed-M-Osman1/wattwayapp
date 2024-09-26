@@ -1,5 +1,5 @@
 import { CommonActions } from '@react-navigation/native';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon, IIconProps, Spinner } from 'native-base';
 import React from 'react';
 import {Keyboard, Text, TextInput} from 'react-native';
@@ -153,7 +153,7 @@ export default class SignUp extends BaseScreen<Props, State> {
         // Reset
         this.setState({ signingUp: false, performSignUp: false });
         // Show
-        Message.showSuccess(I18n.t('authentication.registerSuccess'));
+        Message.showSuccess(t('authentication.registerSuccess'));
         // Navigate
         this.props.navigation.dispatch(
           CommonActions.reset({
@@ -178,18 +178,18 @@ export default class SignUp extends BaseScreen<Props, State> {
           switch (error.request.status) {
             // Email already exists
             case HTTPError.USER_EMAIL_ALREADY_EXIST_ERROR:
-              Message.showError(I18n.t('authentication.emailAlreadyExists'));
+              Message.showError(t('authentication.emailAlreadyExists'));
               break;
             // Invalid Captcha
             case HTTPError.INVALID_CAPTCHA:
-              Message.showError(I18n.t('authentication.invalidCaptcha'));
+              Message.showError(t('authentication.invalidCaptcha'));
               break;
             default:
               // Other common Error
               await Utils.handleHttpUnexpectedError(this.centralServerProvider, error, 'authentication.registerUnexpectedError', null, null, async () => this.signUp());
           }
         } else {
-          Message.showError(I18n.t('authentication.registerUnexpectedError'));
+          Message.showError(t('authentication.registerUnexpectedError'));
         }
       }
     }
@@ -222,7 +222,7 @@ export default class SignUp extends BaseScreen<Props, State> {
       <Spinner style={formStyle.spinner} color="grey" />
     ) : (
       <SafeAreaView edges={['bottom']} style={style.container}>
-        <HeaderComponent containerStyle={style.headerContainer} navigation={this.props.navigation} title={I18n.t('authentication.signUp')} />
+        <HeaderComponent containerStyle={style.headerContainer} navigation={this.props.navigation} title={t('authentication.signUp')} />
         <AuthHeader navigation={this.props.navigation} tenantName={tenantName} tenantLogo={tenantLogo} containerStyle={{marginHorizontal: '5%', marginBottom: scale(10)}} />
         <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'} bounces={false} persistentScrollbar={true} contentContainerStyle={style.scrollViewContentContainer} style={style.scrollView}>
           <Input
@@ -231,7 +231,7 @@ export default class SignUp extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={formStyle.inputTextContainer}
             value={name}
-            placeholder={I18n.t('authentication.name')}
+            placeholder={t('authentication.name')}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize="characters"
             autoCorrect={false}
@@ -250,7 +250,7 @@ export default class SignUp extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={formStyle.inputTextContainer}
             value={firstName}
-            placeholder={I18n.t('authentication.firstName')}
+            placeholder={t('authentication.firstName')}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize="words"
             autoCorrect={false}
@@ -269,7 +269,7 @@ export default class SignUp extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={formStyle.inputTextContainer}
             value={email}
-            placeholder={I18n.t('authentication.email')}
+            placeholder={t('authentication.email')}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize="none"
             autoCorrect={false}
@@ -293,7 +293,7 @@ export default class SignUp extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={[formStyle.inputTextContainer, !Utils.validatePassword(password) && formStyle.inputTextContainerError]}
             value={password}
-            placeholder={I18n.t('authentication.password')}
+            placeholder={t('authentication.password')}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize="none"
             autoCorrect={false}
@@ -303,7 +303,7 @@ export default class SignUp extends BaseScreen<Props, State> {
             returnKeyType={'next'}
             onSubmitEditing={() => this.repeatPasswordInput.focus()}
             renderErrorMessage={!Utils.validatePassword(password)}
-            errorMessage={!Utils.validatePassword(password) ? I18n.t('authentication.passwordRule') : null}
+            errorMessage={!Utils.validatePassword(password) ? t('authentication.passwordRule') : null}
             errorStyle={formStyle.inputError}
             onChangeText={(text) => this.setState({ password: text })}
           />
@@ -319,7 +319,7 @@ export default class SignUp extends BaseScreen<Props, State> {
             inputStyle={formStyle.inputText}
             inputContainerStyle={[formStyle.inputTextContainer, !this.checkPasswords() && formStyle.inputTextContainerError]}
             value={repeatPassword}
-            placeholder={I18n.t('authentication.repeatPassword')}
+            placeholder={t('authentication.repeatPassword')}
             placeholderTextColor={commonColor.placeholderTextColor}
             autoCapitalize="none"
             autoCorrect={false}
@@ -328,7 +328,7 @@ export default class SignUp extends BaseScreen<Props, State> {
             returnKeyType={'done'}
             onSubmitEditing={() => Keyboard.dismiss()}
             renderErrorMessage={!this.checkPasswords()}
-            errorMessage={!this.checkPasswords() ? I18n.t('authentication.passwordNotMatch') : null}
+            errorMessage={!this.checkPasswords() ? t('authentication.passwordNotMatch') : null}
             errorStyle={formStyle.inputError}
             onChangeText={(text) => this.setState({ repeatPassword: text })}
           />
@@ -339,9 +339,9 @@ export default class SignUp extends BaseScreen<Props, State> {
             onPress={() => this.setState({ eula: !eula })}
             title={
               <Text style={formStyle.checkboxText}>
-                {I18n.t('authentication.acceptEula')}
+                {t('authentication.acceptEula')}
                 <Text onPress={() => navigation.navigate('Eula')} style={style.eulaLink}>
-                  {I18n.t('authentication.eula')}
+                  {t('authentication.eula')}
                 </Text>
               </Text>
             }
@@ -349,7 +349,7 @@ export default class SignUp extends BaseScreen<Props, State> {
             checkedIcon={<InputIcon size={scale(25)} name="checkbox-outline" as={MaterialCommunityIcons} />}
           />
           <Button
-            title={I18n.t('authentication.createAccount')}
+            title={t('authentication.createAccount')}
             titleStyle={formStyle.buttonTitle}
             disabled={!this.isFormValid()}
             disabledStyle={formStyle.buttonDisabled}

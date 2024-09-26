@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import React from 'react';
 
 import BaseProps from '../../../types/BaseProps';
@@ -23,6 +23,6 @@ export default class ListEmptyTextComponent extends React.Component<Props, State
   public render() {
     const style = computeStyleSheet();
     const { text } = this.props;
-    return <Text style={style.noRecordFound}>{text || I18n.t('general.noRecordFound')}</Text>;
+    return <Text style={style.noRecordFound}>{text || t('general.noRecordFound')}</Text>;
   }
 }

@@ -65,9 +65,9 @@ export default class SelectableList<T extends ListItem> extends BaseScreen<Selec
   public buildModalHeaderTitle(): string {
     switch (this.props.selectionMode) {
       case ItemSelectionMode.SINGLE:
-        return I18n.t(this.selectSingleTitle);
+        return t(this.selectSingleTitle);
       default:
-        return I18n.t(this.selectMultipleTitle);
+        return t(this.selectMultipleTitle);
     }
   }
 

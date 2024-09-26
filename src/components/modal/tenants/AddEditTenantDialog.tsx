@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon } from 'native-base';
 import React from 'react';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -61,13 +61,13 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
     newTenantSubDomain: {
       presence: {
         allowEmpty: false,
-        message: '^' + I18n.t('authentication.mandatoryTenantSubDomain')
+        message: '^' + t('authentication.mandatoryTenantSubDomain')
       }
     },
     newTenantName: {
       presence: {
         allowEmpty: false,
-        message: '^' + I18n.t('authentication.mandatoryTenantName')
+        message: '^' + t('authentication.mandatoryTenantName')
       }
     }
   };
@@ -76,13 +76,13 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
     newEndpointName: {
       presence: {
         allowEmpty: false,
-        message: '^' + I18n.t('authentication.mandatoryEndpointName')
+        message: '^' + t('authentication.mandatoryEndpointName')
       }
     },
     newEndpointURL: {
       presence: {
         allowEmpty: false,
-        message: '^' + I18n.t('authentication.mandatoryEndpointURL')
+        message: '^' + t('authentication.mandatoryEndpointURL')
       }
     }
   };
@@ -136,7 +136,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
         animationOut={'fadeOutRight'}
         close={() => this.props.close?.()}
         withCancel={withCancel}
-        title={mode === TenantDialogMode.ADD ? I18n.t('authentication.addTenantManuallyTitle') : I18n.t('authentication.editTenantTitle')}
+        title={mode === TenantDialogMode.ADD ? t('authentication.addTenantManuallyTitle') : t('authentication.editTenantTitle')}
         withCloseButton={true}
         onBackButtonPressed={() => back?.()}
         onBackDropPress={() => {}}
@@ -144,7 +144,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
           mode === TenantDialogMode.ADD ?
             [
               {
-                text: I18n.t('general.create'),
+                text: t('general.create'),
                 buttonTextStyle: modalCommonStyle.primaryButtonText,
                 buttonStyle: modalCommonStyle.primaryButton,
                 action: () => {
@@ -152,7 +152,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
                 }
               },
               {
-                text: I18n.t('general.back'),
+                text: t('general.back'),
                 buttonTextStyle: modalCommonStyle.outlinedButtonText,
                 buttonStyle: {...modalCommonStyle.outlinedButton, ...style.backButton},
                 action: () => back?.()
@@ -161,7 +161,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
             :
             [
               {
-                text: I18n.t('general.save'),
+                text: t('general.save'),
                 buttonTextStyle: modalCommonStyle.primaryButtonText,
                 buttonStyle: modalCommonStyle.primaryButton,
                 action: () => {
@@ -197,11 +197,11 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
           autoCorrect={false}
           defaultValue={newTenantSubDomain}
           autoCapitalize={'none'}
-          placeholder={I18n.t('authentication.tenantSubdomainPlaceholder')}
+          placeholder={t('authentication.tenantSubdomainPlaceholder')}
           placeholderTextColor={commonColor.placeholderTextColor}
           errorMessage={this.state.errorNewTenantSubDomain?.join(' ')}
           errorStyle={style.inputError}
-          label={`${I18n.t('authentication.tenantSubdomain')}*`}
+          label={`${t('authentication.tenantSubdomain')}*`}
           labelStyle={style.inputLabel}
           containerStyle={style.inputContainer}
           inputContainerStyle={style.inputInnerContainer}
@@ -214,11 +214,11 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
           ref={(ref: TextInput) => this.nameInput = ref}
           autoCorrect={false}
           defaultValue={newTenantName}
-          placeholder={I18n.t('authentication.tenantNamePlaceholder')}
+          placeholder={t('authentication.tenantNamePlaceholder')}
           placeholderTextColor={commonColor.placeholderTextColor}
           errorMessage={this.state.errorNewTenantName?.join(' ')}
           errorStyle={style.inputError}
-          label={`${I18n.t('authentication.tenantName')}*`}
+          label={`${t('authentication.tenantName')}*`}
           labelStyle={style.inputLabel}
           containerStyle={style.inputContainer}
           inputContainerStyle={style.inputInnerContainer}
@@ -230,7 +230,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
 
         {/* TODO style arrow icon */}
         <Input
-          label={I18n.t('authentication.tenantEndpoint')}
+          label={t('authentication.tenantEndpoint')}
           autoCorrect={false}
           rightIconContainerStyle={style.rightIconContainerStyle}
           labelStyle={[style.inputLabel, style.selectLabel]}
@@ -248,7 +248,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
                   return (
                     <TouchableOpacity onPress={() => this.setState({showEndpointCreationForm: true})} style={style.selectDropdownRowContainer}>
                       <Icon size={scale(25)} as={MaterialIcons} name={'add'} style={[style.newEntryText, style.newEntryIcon]}/>
-                      <Text style={[style.selectDropdownRowText, style.newEntryText]}>{I18n.t('general.newEntry')}</Text>
+                      <Text style={[style.selectDropdownRowText, style.newEntryText]}>{t('general.newEntry')}</Text>
                     </TouchableOpacity>
                   );
                 }
@@ -276,15 +276,15 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
         {showEndpointCreationForm && (
           <View style={style.endpointCreationFormContainer}>
             <View style={style.endpointCreationFormHeader}>
-              <Text style={[style.inputLabel, style.endpointCreationFormTitle]}>{I18n.t('authentication.createEndpoint')}</Text>
+              <Text style={[style.inputLabel, style.endpointCreationFormTitle]}>{t('authentication.createEndpoint')}</Text>
               <TouchableOpacity onPress={() => this.setState({showEndpointCreationForm: false})}>
                 <Icon color={commonColor.textColor} size={scale(25)} as={EvilIcons} name={'close'} />
               </TouchableOpacity>
             </View>
             <Input
               defaultValue={newEndpointName}
-              label={`${I18n.t('authentication.endpointName')}*`}
-              placeholder={I18n.t('authentication.endpointName')}
+              label={`${t('authentication.endpointName')}*`}
+              placeholder={t('authentication.endpointName')}
               placeholderTextColor={commonColor.placeholderTextColor}
               errorMessage={this.state.errorNewEndpointName?.join(' ')}
               errorStyle={style.inputError}
@@ -301,8 +301,8 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
               defaultValue={newEndpointURL}
               autoCapitalize={'none'}
               autoCorrect={false}
-              label={`${I18n.t('authentication.endpointURL')}*`}
-              placeholder={I18n.t('authentication.endpointURL')}
+              label={`${t('authentication.endpointURL')}*`}
+              placeholder={t('authentication.endpointURL')}
               placeholderTextColor={commonColor.placeholderTextColor}
               errorMessage={this.state.errorNewEndpointURL?.join(' ')}
               errorStyle={style.inputError}
@@ -314,7 +314,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
             />
             <Button
               buttonStyle={[modalCommonStyles.primaryButton, style.button]}
-              title={I18n.t('authentication.addEndpoint').toUpperCase()}
+              title={t('authentication.addEndpoint').toUpperCase()}
               titleStyle={style.buttonText}
               loading={loadingAddNewEndpoint}
               onPress={() => this.addEndpoint(newEndpointName, newEndpointURL)}
@@ -336,7 +336,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
     }
     await SecuredStorage.saveEndpoints(userEndpoints);
     this.setState({userEndpoints, newTenantEndpointCloud}, () => {
-      Message.showSuccess(I18n.t('general.deleteEndpointSuccess', { endpointName: endpointName }));
+      Message.showSuccess(t('general.deleteEndpointSuccess', { endpointName: endpointName }));
     });
   }
 
@@ -350,13 +350,13 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
       if ( endpointWithSameName ) {
         isFormValid = false;
         const { errorNewEndpointName } = this.state;
-        errorNewEndpointName.push(I18n.t('general.endpointNameAlreadyExist'));
+        errorNewEndpointName.push(t('general.endpointNameAlreadyExist'));
         this.setState({ endpointWithSameName, errorNewEndpointName });
       }
       if ( endpointWithSameURL ) {
         isFormValid = false;
         const { errorNewEndpointURL } = this.state;
-        errorNewEndpointURL.push(I18n.t('general.endpointURLAlreadyExist', {endpointName: endpointWithSameURL.name}));
+        errorNewEndpointURL.push(t('general.endpointURLAlreadyExist', {endpointName: endpointWithSameURL.name}));
         this.setState({ endpointWithSameURL, errorNewEndpointURL });
       }
       if ( isFormValid ) {
@@ -364,7 +364,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
         userEndpoints.push(newEndpoint);
         await SecuredStorage.saveEndpoints(userEndpoints);
         this.setState({ userEndpoints, showEndpointCreationForm: false }, () => {
-          Message.showSuccess(I18n.t('general.createEndpointSuccess', { endpointName: newEndpointName }));
+          Message.showSuccess(t('general.createEndpointSuccess', { endpointName: newEndpointName }));
         });
       }
 
@@ -380,7 +380,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
       if (foundTenant) {
         formIsValid = false;
         const { errorNewTenantSubDomain } = this.state;
-        errorNewTenantSubDomain.push(`${I18n.t('general.subdomainAlreadyUsed', { tenantName: foundTenant.name })}`);
+        errorNewTenantSubDomain.push(`${t('general.subdomainAlreadyUsed', { tenantName: foundTenant.name })}`);
         this.setState({ errorNewTenantSubDomain });
       }
     }
@@ -392,7 +392,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
       };
       tenants[tenantIndex] = editedTenant;
       await SecuredStorage.saveTenants(tenants);
-      Message.showSuccess(I18n.t('general.editTenantSuccess'));
+      Message.showSuccess(t('general.editTenantSuccess'));
       this.props.close(editedTenant);
     }
   }
@@ -405,7 +405,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
     // Already exists
     if (foundTenant) {
       const { errorNewTenantSubDomain } = this.state;
-      errorNewTenantSubDomain.push(`${I18n.t('general.subdomainAlreadyUsed', { tenantName: foundTenant.name })}`);
+      errorNewTenantSubDomain.push(`${t('general.subdomainAlreadyUsed', { tenantName: foundTenant.name })}`);
       formIsValid = false;
       this.setState({ errorNewTenantSubDomain });
     }
@@ -418,7 +418,7 @@ export default class AddEditTenantDialog extends React.Component<Props, State> {
       // Save
       tenants.push(newTenant);
       await SecuredStorage.saveTenants(tenants);
-      Message.showSuccess(I18n.t('general.createTenantSuccess', { tenantName: newTenant.name }));
+      Message.showSuccess(t('general.createTenantSuccess', { tenantName: newTenant.name }));
       // Hide Modal
       close(newTenant);
     }

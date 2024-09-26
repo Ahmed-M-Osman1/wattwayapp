@@ -1,6 +1,6 @@
 import { CommonActions, NavigationContainerRef } from '@react-navigation/native';
 import { StatusCodes } from 'http-status-codes';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { EmitterSubscription, Linking } from 'react-native';
 
 import CentralServerProvider from '../provider/CentralServerProvider';
@@ -98,18 +98,18 @@ export default class DeepLinkingManager {
 
     private async handleResetPassword(tenant: string, hash: string) {
         if (!tenant) {
-            Message.showError(I18n.t('authentication.mandatoryTenant'));
+            Message.showError(t('authentication.mandatoryTenant'));
             return;
         }
 
         const tenantData = await this.centralServerProvider.getTenant(tenant);
         if (!tenantData) {
-            Message.showError(I18n.t('authentication.unknownTenant'));
+            Message.showError(t('authentication.unknownTenant'));
             return;
         }
 
         if (!hash) {
-            Message.showError(I18n.t('authentication.resetPasswordHashNotValid'));
+            Message.showError(t('authentication.resetPasswordHashNotValid'));
             return;
         }
 
@@ -122,23 +122,23 @@ export default class DeepLinkingManager {
 
     private async handleVerifyAccount(tenant: string, email: string, token: string, resetToken: string) {
         if (!tenant) {
-            Message.showError(I18n.t('authentication.mandatoryTenant'));
+            Message.showError(t('authentication.mandatoryTenant'));
             return;
         }
 
         if (!email) {
-            Message.showError(I18n.t('authentication.mandatoryEmail'));
+            Message.showError(t('authentication.mandatoryEmail'));
             return;
         }
 
         const tenantData = await this.centralServerProvider.getTenant(tenant);
         if (!tenantData) {
-            Message.showError(I18n.t('authentication.unknownTenant'));
+            Message.showError(t('authentication.unknownTenant'));
             return;
         }
 
         if (!token) {
-            Message.showError(I18n.t('authentication.verifyAccountTokenNotValid'));
+            Message.showError(t('authentication.verifyAccountTokenNotValid'));
             return;
         }
 
@@ -156,7 +156,7 @@ export default class DeepLinkingManager {
         try {
             const result = await this.centralServerProvider.verifyEmail(tenant, email, token);
             if (result.status === Constants.REST_RESPONSE_SUCCESS) {
-                Message.showSuccess(I18n.t('authentication.accountVerifiedSuccess'));
+                Message.showSuccess(t('authentication.accountVerifiedSuccess'));
 
                 if (resetToken && resetToken !== 'null') {
                     this.navigator.dispatch(
@@ -172,19 +172,19 @@ export default class DeepLinkingManager {
             if (error.request) {
                 switch (error.request.status) {
                     case HTTPError.USER_ACCOUNT_ALREADY_ACTIVE_ERROR:
-                        Message.showError(I18n.t('authentication.accountAlreadyActive'));
+                        Message.showError(t('authentication.accountAlreadyActive'));
                         break;
                     case HTTPError.INVALID_TOKEN_ERROR:
-                        Message.showError(I18n.t('authentication.activationTokenNotValid'));
+                        Message.showError(t('authentication.activationTokenNotValid'));
                         break;
                     case StatusCodes.NOT_FOUND:
-                        Message.showError(I18n.t('authentication.activationEmailNotValid'));
+                        Message.showError(t('authentication.activationEmailNotValid'));
                         break;
                     default:
                         await Utils.handleHttpUnexpectedError(this.centralServerProvider, error, 'authentication.activationUnexpectedError');
                 }
             } else {
-                Message.showError(I18n.t('authentication.activationUnexpectedError'));
+                Message.showError(t('authentication.activationUnexpectedError'));
             }
         }
     }

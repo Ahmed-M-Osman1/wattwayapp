@@ -1,5 +1,5 @@
 import {StatusCodes} from 'http-status-codes';
-import I18n from 'i18n-js';
+import i18next, { t } from 'i18next';
 import {HStack, Icon, Spinner} from 'native-base';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import React from 'react';
@@ -308,7 +308,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
         key: `${Utils.randomNumber()}`
       });
     } else {
-      Alert.alert(I18n.t('chargers.noSession'), I18n.t('chargers.noSessionMessage'));
+      Alert.alert(t('chargers.noSession'), t('chargers.noSessionMessage'));
     }
   };
 
@@ -358,7 +358,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
 
       // When Scanning a QR-Code, redirect if a session is already in progress. (if the connector has a non null userID)
       if (startTransactionFromQRCode && connector?.currentUserID) {
-        Message.showWarning(I18n.t('transactions.sessionAlreadyInProgressError'));
+        Message.showWarning(t('transactions.sessionAlreadyInProgressError'));
         this.props.navigation.goBack();
         return;
       }
@@ -435,7 +435,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
     const { chargingStation, connector, selectedTag, selectedCar, selectedUser, canStartTransaction, currentSoC, departureSoC, departureTime } = this.state;
     try {
       if (this.isButtonDisabled() || !canStartTransaction) {
-        Message.showError(I18n.t('general.notAuthorized'));
+        Message.showError(t('general.notAuthorized'));
         return;
       }
       this.setState({ buttonDisabled: true });
@@ -453,7 +453,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
       );
       if (response?.status === OCPPGeneralResponse.ACCEPTED) {
         // Show success message
-        Message.showSuccess(I18n.t('details.accepted'));
+        Message.showSuccess(t('details.accepted'));
         // Nb trials the button stays disabled
         this.setState({ transactionPending: true, transactionPendingTimesUp: false });
         setTimeout(() => this.setState({ transactionPendingTimesUp: true }), 40000);
@@ -463,9 +463,9 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
         this.setState({ buttonDisabled: false });
         // Show message
         if (this.state.connector?.status === ChargePointStatus.AVAILABLE) {
-          Message.showError(I18n.t('transactions.carNotConnectedError'));
+          Message.showError(t('transactions.carNotConnectedError'));
         } else {
-          Message.showError(I18n.t('details.denied'));
+          Message.showError(t('details.denied'));
         }
       }
     } catch (error) {
@@ -489,11 +489,11 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
       <DialogModal
         withCloseButton={true}
         close={() => this.setState({ showStopTransactionDialog: false })}
-        title={I18n.t('details.stopTransaction')}
-        description={I18n.t('details.stopTransactionMessage', { chargeBoxID: chargingStation.id })}
+        title={t('details.stopTransaction')}
+        description={t('details.stopTransactionMessage', { chargeBoxID: chargingStation.id })}
         buttons={[
           {
-            text: I18n.t('general.yes'),
+            text: t('general.yes'),
             action: () => {
               this.stopTransaction();
               this.setState({ showStopTransactionDialog: false });
@@ -502,7 +502,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
             buttonTextStyle: modalCommonStyle.primaryButtonText
           },
           {
-            text: I18n.t('general.no'),
+            text: t('general.no'),
             action: () => this.setState({ showStopTransactionDialog: false }),
             buttonStyle: modalCommonStyle.primaryButton,
             buttonTextStyle: modalCommonStyle.primaryButtonText
@@ -520,10 +520,10 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
       // Remote Stop the Transaction
       const response = await this.centralServerProvider.stopTransaction(connector.currentTransactionID);
       if (response?.status === 'Accepted') {
-        Message.showSuccess(I18n.t('details.accepted'));
+        Message.showSuccess(t('details.accepted'));
         await this.refresh();
       } else {
-        Message.showError(I18n.t('details.denied'));
+        Message.showError(t('details.denied'));
       }
     } catch (error) {
       // Other common Error
@@ -822,7 +822,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
         <HeaderComponent
           navigation={this.props.navigation}
           title={chargingStation ? chargingStation.id : ''}
-          subTitle={connector && connectorLetter ? `(${I18n.t('details.connector')} ${connectorLetter})` : ''}
+          subTitle={connector && connectorLetter ? `(${t('details.connector')} ${connectorLetter})` : ''}
         />
         {loading ? (
           <Spinner size={scale(30)} style={style.spinner} color="grey" />
@@ -920,21 +920,21 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
         {!Utils.isNullOrUndefined(transaction?.carStateOfCharge) && (
           <View style={style.columnContainer}>
             <Icon size={scale(25)} as={MaterialIcons} name="battery-charging-full" style={style.icon} />
-            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{I18n.t('transactions.initialStateOfCharge')}</Text>
+            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{t('transactions.initialStateOfCharge')}</Text>
             <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue]}>{transaction.carStateOfCharge}%</Text>
           </View>
         )}
         {!!transaction?.targetStateOfCharge && (
           <View style={style.columnContainer}>
             <Icon size={scale(25)} as={MaterialIcons} name="battery-charging-full" style={style.icon} />
-            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{I18n.t('transactions.targetStateOfCharge')}</Text>
+            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{t('transactions.targetStateOfCharge')}</Text>
             <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue]}>{transaction.targetStateOfCharge}%</Text>
           </View>
         )}
         {!!transaction?.departureTime && (
           <View style={style.columnContainer}>
             <Icon size={scale(25)} as={MaterialCommunityIcons} name="clock-end" style={style.icon} />
-            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{I18n.t('transactions.departureTime')}</Text>
+            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label]}>{t('transactions.departureTime')}</Text>
             <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue]}>{departureTimeFormatted}</Text>
           </View>
         )}
@@ -956,7 +956,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
     const is24Hour = I18nManager?.isLocale24Hour(locale);
     return (
       <View style={style.departureTimeContainer}>
-        <Text numberOfLines={1} ellipsizeMode={'tail'} style={style.settingLabel}>{I18n.t('transactions.departureTime')}</Text>
+        <Text numberOfLines={1} ellipsizeMode={'tail'} style={style.settingLabel}>{t('transactions.departureTime')}</Text>
         <TouchableOpacity style={style.departureTimeInput} onPress={() => this.setState({showTimePicker: true})}>
           <Text numberOfLines={1} ellipsizeMode={'tail'} style={style.departureTimeText}>{departureTimeFormatted}  ({durationFormatted})</Text>
           <Icon color={commonColors.textColor} size={scale(18)} as={MaterialIcons} name={'arrow-drop-down'} />
@@ -964,10 +964,10 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
         <DateTimePicker
           isVisible={showTimePicker}
           mode={'datetime'}
-          locale={I18n.locale}
+          locale={i18next.language}
           is24Hour={is24Hour}
-          cancelTextIOS={I18n.t('general.cancel')}
-          confirmTextIOS={I18n.t('general.confirm')}
+          cancelTextIOS={t('general.cancel')}
+          confirmTextIOS={t('general.confirm')}
           buttonTextColorIOS={commonColors.textColor}
           minimumDate={minimumDate}
           maximumDate={maximumDate}
@@ -989,7 +989,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
     return (
       <View style={style.socContainer}>
         <View style={style.socInputsContainer}>
-          <Text numberOfLines={1} ellipsizeMode={'tail'} style={style.settingLabel}>{I18n.t('transactions.stateOfCharge')}</Text>
+          <Text numberOfLines={1} ellipsizeMode={'tail'} style={style.settingLabel}>{t('transactions.stateOfCharge')}</Text>
           <HStack alignItems={'center'} flex={1} justifyContent={'space-between'}>
             {showCurrentSoCInput ? (
               <SocInput
@@ -997,7 +997,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
                   onChangeText: (newCurrentSoC: string) => this.onSoCChanged(this.computeNumericSoC(newCurrentSoC), departureSoC),
                   value: currentSoCText
                 }}
-                leftText={I18n.t('general.from')}
+                leftText={t('general.from')}
                 containerStyle={style.currentSocInputContainer}
               />
             ) : (
@@ -1009,7 +1009,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
                 value: departureSoCText,
                 editable: !tagCarLoading
               }}
-              leftText={I18n.t('general.to')}
+              leftText={t('general.to')}
               containerStyle={{...(settingsErrors?.departureSoCError && style.socInputContainerError)}}
             />
           </HStack>
@@ -1064,7 +1064,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
     return (
       <TouchableOpacity onPress={() => this.setState({ showChargingSettings: !showChargingSettings })} style={style.accordion}>
         <Text style={style.accordionText}>
-          {I18n.t('transactions.chargingSettings')}
+          {t('transactions.chargingSettings')}
           {Object.values(settingsErrors ?? {}).some(error => error) && (
             <Text style={style.errorAsterisk}>*</Text>
           )}
@@ -1104,14 +1104,14 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
             <Icon size={scale(50)} style={style.noPaymentMethodIcon} as={MaterialCommunityIcons} name={'credit-card-off'} />
             <View style={style.column}>
               <Text ellipsizeMode={'tail'} numberOfLines={2} style={style.errorMessage}>
-                {I18n.t('transactions.noPaymentMethodError')}
+                {t('transactions.noPaymentMethodError')}
               </Text>
               {selectedUser?.id === this.currentUser.id && (
                 <TouchableOpacity onPress={() => navigation.navigate('AddPaymentMethod')}>
                   <View style={style.addItemContainer}>
                     <Text style={[style.linkText, style.plusSign]}>+</Text>
                     <Text ellipsizeMode={'tail'} style={[style.messageText, style.linkText, style.linkLabel]}>
-                      {I18n.t('paymentMethods.addPaymentMethod')}
+                      {t('paymentMethods.addPaymentMethod')}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -1181,7 +1181,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
       <View style={[listItemCommonStyle.container, style.noItemContainer, style.noCarContainer]}>
         <Icon size={scale(50)} style={style.noCarIcon} as={MaterialCommunityIcons} name={'car'} />
         <View style={style.column}>
-          <Text style={style.messageText}>{I18n.t('cars.noCarMessageTitle')}</Text>
+          <Text style={style.messageText}>{t('cars.noCarMessageTitle')}</Text>
         </View>
       </View>
     );
@@ -1196,13 +1196,13 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
       <View style={[listItemCommonStyle.container, style.noItemContainer, style.noCarContainer]}>
         <Icon size={scale(50)} style={style.noCarIcon} as={MaterialCommunityIcons} name={'car'} />
         <View style={style.column}>
-          <Text style={style.messageText}>{I18n.t('cars.noCarMessageTitle')}</Text>
+          <Text style={style.messageText}>{t('cars.noCarMessageTitle')}</Text>
           {(this.currentUser?.id === selectedUser?.id || this.securityProvider.canListUsers()) && (
             <TouchableOpacity
               onPress={() => navigation.navigate('AddCar', { params: { user: selectedUser } })}
               style={style.addItemContainer}>
               <Text style={[style.linkText, style.plusSign]}>+</Text>
-              <Text style={[style.messageText, style.linkText, style.linkLabel]}>{I18n.t('cars.addCarTitle')}</Text>
+              <Text style={[style.messageText, style.linkText, style.linkLabel]}>{t('cars.addCarTitle')}</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -1242,8 +1242,8 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
       <View style={[listItemCommonStyle.container, style.noItemContainer, style.noTagContainer]}>
         <Icon size={scale(50)} as={MaterialCommunityIcons} name={'credit-card-off'} style={style.noTagIcon} />
         <View style={style.column}>
-          <Text style={style.errorMessage}>{I18n.t('tags.noTagMessageTitle')}</Text>
-          <Text style={style.errorMessage}>{I18n.t('tags.noTagMessageSubtitle')}</Text>
+          <Text style={style.errorMessage}>{t('tags.noTagMessageTitle')}</Text>
+          <Text style={style.errorMessage}>{t('tags.noTagMessageSubtitle')}</Text>
         </View>
       </View>
     );
@@ -1314,20 +1314,20 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
     const modalCommonStyle = computeModalCommonStyle();
     return (
       <DialogModal
-        title={I18n.t('details.startTransaction')}
+        title={t('details.startTransaction')}
         withCloseButton={true}
         close={() => this.setState({ showStartTransactionDialog: false })}
         renderIcon={(style) => <Icon style={style} size={scale(style.fontSize)} as={MaterialIcons} name={'play-circle-outline'} />}
-        description={I18n.t('details.startTransactionMessage', { chargeBoxID: chargingStationID })}
+        description={t('details.startTransactionMessage', { chargeBoxID: chargingStationID })}
         buttons={[
           {
-            text: I18n.t('general.yes'),
+            text: t('general.yes'),
             action: () => this.setState({ showStartTransactionDialog: false }, async () => this.startTransaction()),
             buttonTextStyle: modalCommonStyle.primaryButtonText,
             buttonStyle: modalCommonStyle.primaryButton
           },
           {
-            text: I18n.t('general.no'),
+            text: t('general.no'),
             action: () => this.setState({ showStartTransactionDialog: false }),
             buttonTextStyle: modalCommonStyle.primaryButtonText,
             buttonStyle: modalCommonStyle.primaryButton

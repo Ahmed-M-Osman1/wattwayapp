@@ -13,7 +13,7 @@ import UserComponent from '../../../../user/UserComponent';
 import { ItemSelectionMode } from '../../../../list/ItemsList';
 import Users from '../../../../../screens/users/list/Users';
 import { TouchableOpacity, Text, View } from 'react-native';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import Utils from '../../../../../utils/Utils';
 import { withBadge } from '@rneui/base';
 import ListItem from '../../../../../types/ListItem';
@@ -89,7 +89,7 @@ export default class UserFilterComponent extends FilterControlComponent<User[]> 
     return (
       <View style={[listItemCommonStyles.container, style.userFilterPlaceholder]}>
         <Icon marginX={scale(7)} size={scale(40)} style={style.userFilterPlaceholderIcon} as={Ionicons} name={'people'} />
-        <Text numberOfLines={2} ellipsizeMode={'tail'} style={style.userFilterPlaceholderText} >{I18n.t('users.selectOneOrSeveralUsers')}</Text>
+        <Text numberOfLines={2} ellipsizeMode={'tail'} style={style.userFilterPlaceholderText} >{t('users.selectOneOrSeveralUsers')}</Text>
       </View>
     )
   }

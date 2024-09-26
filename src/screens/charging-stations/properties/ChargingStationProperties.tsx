@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Spinner } from 'native-base';
 import React from 'react';
 import { FlatList, RefreshControl, ScrollView, Text, View } from 'react-native';
@@ -161,8 +161,8 @@ export default class ChargingStationProperties extends BaseScreen<Props, State> 
       <View style={style.container}>
         <HeaderComponent
           navigation={this.props.navigation}
-          title={chargingStation ? chargingStation.id : I18n.t('connector.unknown')}
-          subTitle={chargingStation && chargingStation.inactive ? `(${I18n.t('details.inactive')})` : null}
+          title={chargingStation ? chargingStation.id : t('connector.unknown')}
+          subTitle={chargingStation && chargingStation.inactive ? `(${t('details.inactive')})` : null}
           containerStyle={style.headerContainer}
         />
         {loading ? (
@@ -172,7 +172,7 @@ export default class ChargingStationProperties extends BaseScreen<Props, State> 
             data={this.displayedProperties}
             renderItem={({ item, index }) => (
               <View style={index % 2 ? [style.descriptionContainer, style.rowBackground] : style.descriptionContainer}>
-                <Text style={style.label}>{I18n.t(item.title)}</Text>
+                <Text style={style.label}>{t(item.title)}</Text>
                 {item.formatter && item.value !== '-' ? (
                   item.formatterWithComponents ? (
                     <ScrollView horizontal alwaysBounceHorizontal={false} contentContainerStyle={style.scrollViewValues}>
@@ -192,7 +192,7 @@ export default class ChargingStationProperties extends BaseScreen<Props, State> 
             )}
             keyExtractor={(item) => `${item.key}`}
             refreshControl={<RefreshControl onRefresh={this.manualRefresh} refreshing={this.state.refreshing} />}
-            ListEmptyComponent={() => <ListEmptyTextComponent navigation={navigation} text={I18n.t('chargers.noChargerParameters')} />}
+            ListEmptyComponent={() => <ListEmptyTextComponent navigation={navigation} text={t('chargers.noChargerParameters')} />}
           />
         )}
       </View>

@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 
 import Configuration from '../config/Configuration';
 import Message from '../utils/Message';
@@ -32,7 +32,7 @@ export default class MigrationManager {
         await SecuredStorage.setLastMigrationVersion(this.currentMigrationVersion);
       } catch (error) {
         // Error in code
-        Message.showError(I18n.t('general.migrationError'));
+        Message.showError(t('general.migrationError'));
       }
     }
   }

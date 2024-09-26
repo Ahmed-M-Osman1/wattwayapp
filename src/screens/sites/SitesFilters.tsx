@@ -6,7 +6,7 @@ import FilterModalContainerComponent
   from '../../components/search/filter/containers/FilterModalContainerComponent';
 import SwitchFilterComponent
   from '../../components/search/filter/controls/switch/SwitchFilterComponent';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import computeSitesFiltersStyles from './SitesFiltersStyles';
 
 export interface SitesFiltersDef {
@@ -36,7 +36,7 @@ export default class SitesFilters extends ScreenFilters<SitesFiltersDef> {
             internalFilterID={GlobalFilters.ROAMING}
             enabledValue={true}
             style={filtersStyles.switchFilterControlComponentContainer}
-            label={I18n.t('filters.sitesRoamingFilterLabel')}
+            label={t('filters.sitesRoamingFilterLabel')}
             initialValue={filters?.issuer}
             ref={async (
               roamingFilterControlComponent : SwitchFilterComponent<boolean>

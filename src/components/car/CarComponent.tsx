@@ -8,7 +8,7 @@ import Utils from '../../utils/Utils';
 import UserAvatar from '../user/avatar/UserAvatar';
 import computeStyleSheet from './CarComponentStyle';
 import computeListItemCommonStyle from '../list/ListItemCommonStyle';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -60,7 +60,7 @@ export default class CarComponent extends React.Component<Props, State> {
             ))}
             {!!car?.default && (
               <View style={style.defaultContainer}>
-                <Text style={style.defaultText}>{I18n.t('general.default')}</Text>
+                <Text style={style.defaultText}>{t('general.default')}</Text>
               </View>
             )}
           </View>

@@ -3,7 +3,7 @@ import {Image, ImageStyle, Text, View, ViewStyle} from 'react-native';
 
 import BaseProps from '../../types/BaseProps';
 import computeStyleSheet from './AuthStyles';
-import {scale} from 'react-native-size-matters';
+import {scale} from '../../helper/scale.ts';
 
 export interface Props extends BaseProps {
   tenantName?: string;

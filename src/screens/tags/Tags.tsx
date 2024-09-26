@@ -44,8 +44,8 @@ export default class Tags extends SelectableList<Tag> {
     super(props);
     this.selectMultipleTitle = 'tags.selectTags';
     this.selectSingleTitle = 'tags.selectTag';
-    this.singleItemTitle = I18n.t('tags.tag');
-    this.multiItemsTitle = I18n.t('tags.tags');
+    this.singleItemTitle = t('tags.tag');
+    this.multiItemsTitle = t('tags.tags');
     this.state = {
       projectFields: [],
       tags: [],

@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 
@@ -191,7 +191,7 @@ export default class TransactionsHistory extends BaseScreen<Props, State> {
             this.setHeaderComponent(headerComponent);
           }}
           navigation={navigation}
-          title={I18n.t('transactions.transactionsHistory')}
+          title={t('transactions.transactionsHistory')}
           subTitle={count > 0 ? `(${I18nManager.formatNumber(count)})` : null}
           sideBar={this.canOpenDrawer}
           containerStyle={style.headerContainer}
@@ -216,7 +216,7 @@ export default class TransactionsHistory extends BaseScreen<Props, State> {
               data={transactions}
               manualRefresh={this.manualRefresh.bind(this)}
               refreshing={refreshing}
-              emptyTitle={I18n.t('transactions.noTransactionsHistory')}
+              emptyTitle={t('transactions.noTransactionsHistory')}
               navigation={navigation}
               limit={limit}
             />

@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import i18next, { t } from 'i18next';
 import { Spinner } from 'native-base';
 import React from 'react';
 import { ScrollView, View, Text} from 'react-native';
@@ -27,7 +27,7 @@ export default class Eula extends BaseScreen<Props, State> {
     super(props);
     this.state = {
       eulaTextHtml: '',
-      i18nLanguage: Utils.getLanguageFromLocale(I18n.currentLocale()),
+      i18nLanguage: Utils.getLanguageFromLocale(i18next.language),
       loading: true
     };
   }
@@ -66,7 +66,7 @@ export default class Eula extends BaseScreen<Props, State> {
       <View style={style.container}>
         <HeaderComponent
           navigation={this.props.navigation}
-          title={I18n.t('authentication.eula')}
+          title={t('authentication.eula')}
         />
         {loading ? (
           <Spinner size={scale(30)} style={style.spinner} color="green" />

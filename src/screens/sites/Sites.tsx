@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import { Image, ImageStyle, SafeAreaView, TouchableOpacity, View, Modal } from 'react-native';
@@ -276,7 +276,7 @@ export default class Sites extends BaseAutoRefreshScreen<Props, State> {
         <HeaderComponent
           sideBar={this.canOpenDrawer}
           navigation={navigation}
-          title={I18n.t('sidebar.sites')}
+          title={t('sidebar.sites')}
           subTitle={count > 0 ? `(${I18nManager.formatNumber(count)})` : null}
         />
         <View style={style.content}>
@@ -294,7 +294,7 @@ export default class Sites extends BaseAutoRefreshScreen<Props, State> {
                   data={sites}
                   manualRefresh={this.manualRefresh}
                   refreshing={refreshing}
-                  emptyTitle={I18n.t('sites.noSites')}
+                  emptyTitle={t('sites.noSites')}
                   navigation={navigation}
                   limit={this.listLimit}
                 />

@@ -5,7 +5,7 @@ import CentralServerProvider from '../provider/CentralServerProvider';
 import {Notification} from '../types/UserNotifications';
 import {getApplicationName, getBundleId, getVersion} from 'react-native-device-info';
 import Message from '../utils/Message';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import SecuredStorage from '../utils/SecuredStorage';
 import ProviderFactory from '../provider/ProviderFactory';
 import {requestNotifications} from 'react-native-permissions';
@@ -71,7 +71,7 @@ export default class Notifications {
       }
       const currentSubdomain = this.centralServerProvider.getUserInfo()?.tenantSubdomain;
       if (notificationSubdomain !== currentSubdomain) {
-        Message.showError(I18n.t('authentication.wrongOrganization'));
+        Message.showError(t('authentication.wrongOrganization'));
         return false;
       }
       return true;
@@ -89,13 +89,13 @@ export default class Notifications {
     }
     const tenantSubdomain = remoteMessage.data.tenantSubdomain;
     if (!tenantSubdomain) {
-      Message.showError(I18n.t('general.tenantMissing'));
+      Message.showError(t('general.tenantMissing'));
       return false;
     }
     // Check tenant exist
     const tenant = await this.centralServerProvider.getTenant(tenantSubdomain);
     if (!tenant) {
-      Message.showError(I18n.t('general.tenantUnknown', {tenantSubdomain}));
+      Message.showError(t('general.tenantUnknown', {tenantSubdomain}));
       return false;
     }
     return true;

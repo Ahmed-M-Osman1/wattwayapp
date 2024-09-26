@@ -6,7 +6,7 @@ import computeStyleSheet from './TenantComponentStyle';
 import { TenantConnection } from '../../types/Tenant';
 import BaseProps from '../../types/BaseProps';
 import computeListItemCommonStyle from '../list/ListItemCommonStyle';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 
 interface State {}
 
@@ -45,7 +45,7 @@ export default class TenantComponent extends React.Component<Props, State> {
           {tenantEndpointName ? (
             <Text style={style.text}>{tenantEndpointName}</Text>
           ) : (
-            <Text style={[style.text, style.errorText]}>{I18n.t('authentication.noEndpoint')}</Text>
+            <Text style={[style.text, style.errorText]}>{t('authentication.noEndpoint')}</Text>
           )}
         </View>
       </TouchableOpacity>

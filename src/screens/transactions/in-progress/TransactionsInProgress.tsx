@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Spinner } from 'native-base';
 import React from 'react';
 
@@ -181,7 +181,7 @@ export default class TransactionsInProgress extends BaseAutoRefreshScreen<Props,
         <HeaderComponent
           ref={(headerComponent: HeaderComponent) => this.setHeaderComponent(headerComponent, true)}
           navigation={navigation}
-          title={I18n.t('transactions.transactionsInProgress')}
+          title={t('transactions.transactionsInProgress')}
           sideBar={this.canOpenDrawer}
           subTitle={count > 0 ? `(${I18nManager.formatNumber(count)})` : null}
           containerStyle={style.headerContainer}
@@ -211,7 +211,7 @@ export default class TransactionsInProgress extends BaseAutoRefreshScreen<Props,
               data={transactions}
               manualRefresh={this.manualRefresh.bind(this)}
               refreshing={refreshing}
-              emptyTitle={I18n.t('transactions.noTransactionsInProgress')}
+              emptyTitle={t('transactions.noTransactionsInProgress')}
               navigation={navigation}
               limit={limit}
             />

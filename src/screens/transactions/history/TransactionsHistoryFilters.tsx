@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import React from 'react';
 
 import computeStyleSheet from './TransactionHistoryFiltersStyles';
@@ -65,7 +65,7 @@ export default class TransactionsHistoryFilters extends ScreenFilters<Transactio
               internalFilterID={GlobalFilters.ROAMING}
               enabledValue={true}
               style={style.switchFilterControlComponentContainer}
-              label={I18n.t('filters.transactionsRoamingFilterLabel')}
+              label={t('filters.transactionsRoamingFilterLabel')}
               initialValue={filters?.issuer}
               ref={(roamingFilterControlComponent: SwitchFilterComponent<boolean>
               ) => this.addModalFilter(roamingFilterControlComponent)}
@@ -87,7 +87,7 @@ export default class TransactionsHistoryFilters extends ScreenFilters<Transactio
               filterID={'startDateTime'}
               style={style.dateFilterComponentContainer}
               internalFilterID={GlobalFilters.TRANSACTIONS_START_DATE_FILTER}
-              label={I18n.t('general.startDate')}
+              label={t('general.startDate')}
               onFilterChanged={(id: string, newStartDateTime: Date) => this.onFiltersChanged(null, {startDateTime: newStartDateTime})}
               ref={(dateFilterControlComponent: DateFilterControlComponent) => this.addModalFilter(dateFilterControlComponent)}
               locale={this.state.locale}
@@ -100,7 +100,7 @@ export default class TransactionsHistoryFilters extends ScreenFilters<Transactio
               filterID={'endDateTime'}
               internalFilterID={GlobalFilters.TRANSACTIONS_END_DATE_FILTER}
               style={style.dateFilterComponentContainer}
-              label={I18n.t('general.endDate')}
+              label={t('general.endDate')}
               onFilterChanged={(id: string, newEndDateTime: Date) => this.onFiltersChanged(null, {endDateTime: newEndDateTime})}
               ref={(dateFilterControlComponent: DateFilterControlComponent) => this.addModalFilter(dateFilterControlComponent)}
               locale={this.state.locale}

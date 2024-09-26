@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import {
@@ -307,7 +307,7 @@ export default class SiteAreas extends BaseAutoRefreshScreen<Props, State> {
         <HeaderComponent
           navigation={navigation}
           title={this.site?.name}
-          subTitle={count > 0 ? `(${I18nManager.formatNumber(count)} ${count > 1 ? I18n.t('siteAreas.siteAreas') : I18n.t('siteAreas.siteArea')})` : null}
+          subTitle={count > 0 ? `(${I18nManager.formatNumber(count)} ${count > 1 ? t('siteAreas.siteAreas') : t('siteAreas.siteArea')})` : null}
         />
         <View style={style.content}>
           {this.renderFilters()}
@@ -324,7 +324,7 @@ export default class SiteAreas extends BaseAutoRefreshScreen<Props, State> {
                   data={siteAreas}
                   manualRefresh={this.manualRefresh}
                   refreshing={refreshing}
-                  emptyTitle={I18n.t('siteAreas.noSiteAreas')}
+                  emptyTitle={t('siteAreas.noSiteAreas')}
                   navigation={navigation}
                   limit={this.listLimit}
                 />

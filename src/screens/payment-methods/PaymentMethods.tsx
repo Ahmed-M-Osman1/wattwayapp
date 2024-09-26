@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import { ActivityIndicator, SafeAreaView, TouchableOpacity, View } from 'react-native';
@@ -42,8 +42,8 @@ export default class PaymentMethods extends SelectableList<BillingPaymentMethod>
 
   public constructor(props: Props) {
     super(props);
-    this.singleItemTitle = I18n.t('paymentMethods.paymentMethod');
-    this.multiItemsTitle = I18n.t('paymentMethods.paymentMethods');
+    this.singleItemTitle = t('paymentMethods.paymentMethod');
+    this.multiItemsTitle = t('paymentMethods.paymentMethods');
     this.state = {
       paymentMethods: [],
       selectedItems: [],
@@ -180,7 +180,7 @@ export default class PaymentMethods extends SelectableList<BillingPaymentMethod>
               refreshing={refreshing}
               manualRefresh={() => void this.manualRefresh()}
               onEndReached={() => void this.onEndScroll()}
-              emptyTitle={I18n.t('paymentMethods.noPaymentMethod')}
+              emptyTitle={t('paymentMethods.noPaymentMethod')}
             />
           </View>
         )}
@@ -217,14 +217,14 @@ export default class PaymentMethods extends SelectableList<BillingPaymentMethod>
         withCloseButton={true}
         close={() => this.setState({ paymentMethodToBeDeleted: null })}
         withCancel={true}
-        title={I18n.t('paymentMethods.deletePaymentMethodTitle')}
-        description={I18n.t('paymentMethods.deletePaymentMethodSubtitle', {
+        title={t('paymentMethods.deletePaymentMethodTitle')}
+        description={t('paymentMethods.deletePaymentMethodSubtitle', {
           cardBrand: paymentMethod.brand,
           cardLast4: paymentMethod.last4
         })}
         buttons={[
           {
-            text: I18n.t('general.yes'),
+            text: t('general.yes'),
             buttonTextStyle: modalCommonStyle.primaryButtonText,
             buttonStyle: modalCommonStyle.primaryButton,
             action: async () => this.deletePaymentMethod(paymentMethod.id as string)
@@ -243,9 +243,9 @@ export default class PaymentMethods extends SelectableList<BillingPaymentMethod>
     try {
       const res = await this.centralServerProvider.deletePaymentMethod(userID, paymentMethodID);
       if (res?.succeeded) {
-        Message.showSuccess(I18n.t('paymentMethods.deletePaymentMethodSuccess'));
+        Message.showSuccess(t('paymentMethods.deletePaymentMethodSuccess'));
       } else {
-        Message.showError(I18n.t('paymentMethods.paymentMethodUnexpectedError'));
+        Message.showError(t('paymentMethods.paymentMethodUnexpectedError'));
       }
     } catch (error) {
       // Check if HTTP?

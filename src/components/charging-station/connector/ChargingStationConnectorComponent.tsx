@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon } from 'native-base';
 import React from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
@@ -91,7 +91,7 @@ export default class ChargingStationConnectorComponent extends React.Component<P
               : I18nManager.formatNumber(Math.trunc(connector.currentInstantWatts / 1000))}
           </Text>
           <Text style={style.label} numberOfLines={1}>
-            {I18n.t('details.instant')}
+            {t('details.instant')}
           </Text>
           <Text style={style.subLabel} numberOfLines={1}>
             (kW)
@@ -103,7 +103,7 @@ export default class ChargingStationConnectorComponent extends React.Component<P
           duration={Constants.ANIMATION_ROTATION_MILLIS}>
           <Text style={style.connectorValues}>{connector.currentStateOfCharge}</Text>
           <Text style={style.label} numberOfLines={1}>
-            {I18n.t('details.battery')}
+            {t('details.battery')}
           </Text>
           <Text style={style.subLabel} numberOfLines={1}>
             (%)
@@ -122,7 +122,7 @@ export default class ChargingStationConnectorComponent extends React.Component<P
       <View style={style.connectorDetail}>
         <Text style={style.connectorValues}>{I18nManager.formatNumber(Math.round(connector.currentTotalConsumptionWh / 1000))}</Text>
         <Text style={style.label} numberOfLines={1}>
-          {I18n.t('details.total')}
+          {t('details.total')}
         </Text>
         <Text style={style.subLabel} numberOfLines={1}>
           (kW.h)
@@ -132,7 +132,7 @@ export default class ChargingStationConnectorComponent extends React.Component<P
       <View style={style.connectorDetail}>
         <Text style={style.connectorValues}>{I18nManager.formatNumber(Math.trunc(connector.power / 1000))}</Text>
         <Text style={style.label} numberOfLines={1}>
-          {I18n.t('details.maximum')}
+          {t('details.maximum')}
         </Text>
         <Text style={style.subLabel} numberOfLines={1}>
           (kW)

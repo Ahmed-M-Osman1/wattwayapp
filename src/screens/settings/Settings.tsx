@@ -6,7 +6,7 @@ import BaseScreen from '../base-screen/BaseScreen';
 import BaseProps from '../../types/BaseProps';
 import { DistanceUnit } from '../../types/Settings';
 import SelectDropdown from 'react-native-select-dropdown';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import SecuredStorage from '../../utils/SecuredStorage';
 import I18nManager from '../../I18n/I18nManager';
 
@@ -40,10 +40,10 @@ export default class Settings extends BaseScreen<Props, State> {
     const { distanceUnit } = this.state;
     return (
       <View style={style.container}>
-        <HeaderComponent containerStyle={style.headerContainer} navigation={this.props.navigation} title={I18n.t('sidebar.settings')} sideBar={this.canOpenDrawer} />
+        <HeaderComponent containerStyle={style.headerContainer} navigation={this.props.navigation} title={t('sidebar.settings')} sideBar={this.canOpenDrawer} />
         <View style={style.content}>
           <View style={style.settingSection}>
-            <Text style={style.settingLabel}>{I18n.t('settingsDistanceUnit.distanceUnit')}</Text>
+            <Text style={style.settingLabel}>{t('settingsDistanceUnit.distanceUnit')}</Text>
             <SelectDropdown
               statusBarTranslucent={true}
               data={Object.values(DistanceUnit)}
@@ -53,10 +53,10 @@ export default class Settings extends BaseScreen<Props, State> {
               buttonTextStyle={style.selectDropdownButtonText}
               buttonStyle={style.selectDropdownButton}
               dropdownStyle={style.selectDropdown}
-              buttonTextAfterSelection={(item: DistanceUnit) => I18n.t(`settingsDistanceUnit.${item.toString()}`)}
+              buttonTextAfterSelection={(item: DistanceUnit) => t(`settingsDistanceUnit.${item.toString()}`)}
               renderCustomizedRowChild={(item: DistanceUnit) => (
                 <View style={style.selectDropdownRowContainer}>
-                  <Text style={style.selectDropdownRowText}>{I18n.t(`settingsDistanceUnit.${item.toString()}`)}</Text>
+                  <Text style={style.selectDropdownRowText}>{t(`settingsDistanceUnit.${item.toString()}`)}</Text>
                 </View>
               ) }   />
           </View>

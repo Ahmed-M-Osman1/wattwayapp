@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon } from 'native-base';
 import React from 'react';
 import { TouchableOpacity, ViewStyle, Text, View } from 'react-native';
@@ -61,7 +61,7 @@ export default class SiteAreaComponent extends React.Component<Props, State> {
                 key: `${Utils.randomNumber()}`
               });
             } else {
-              Message.showError(I18n.t('siteAreas.noChargers'));
+              Message.showError(t('siteAreas.noChargers'));
             }
           }}>
           <View style={style.titleContainer}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { BackHandler } from 'react-native';
 import DialogModal, { DialogCommonProps } from '../DialogModal';
 import computeStyleSheet from '../ModalCommonStyle';
@@ -16,17 +16,17 @@ export default class ExitAppDialog extends React.Component<Props, State> {
     const modalCommonStyle = computeStyleSheet();
     return (
       <DialogModal
-        title={I18n.t('general.exitApp')}
-        description={I18n.t('general.exitAppConfirm')}
+        title={t('general.exitApp')}
+        description={t('general.exitAppConfirm')}
         buttons={[
           {
-            text: I18n.t('general.yes'),
+            text: t('general.yes'),
             action: () => BackHandler.exitApp(),
             buttonStyle: modalCommonStyle.primaryButton,
             buttonTextStyle: modalCommonStyle.primaryButtonText
           },
           {
-            text: I18n.t('general.no'),
+            text: t('general.no'),
             action: () => this.props.close?.(),
             buttonStyle: modalCommonStyle.primaryButton,
             buttonTextStyle: modalCommonStyle.primaryButtonText

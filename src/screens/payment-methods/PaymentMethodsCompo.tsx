@@ -1,5 +1,5 @@
 import { DrawerActions } from '@react-navigation/native';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Container, Icon, Spinner } from 'native-base';
 import React, { createRef } from 'react';
 import { ActivityIndicator, Alert, TouchableOpacity, View } from 'react-native';
@@ -90,12 +90,12 @@ export default class PaymentMethodsCompo extends React.Component<Props, State> {
         </TouchableOpacity>
         <ItemsCompo<BillingPaymentMethod>
           ref={this.itemsRef}
-          headerTitle={I18n.t('sidebar.paymentMethods')}
-          headerSubTitle={I18n.t('paymentMethods.paymentMethods')}
+          headerTitle={t('sidebar.paymentMethods')}
+          headerSubTitle={t('paymentMethods.paymentMethods')}
           renderItem={(paymentMethod: BillingPaymentMethod) => this.renderItem(paymentMethod, style)}
           getItems={this.getPaymentMethods.bind(this)}
           navigation={this.props.navigation}
-          emptyTitle={I18n.t('paymentMethods.noPaymentMethod')}
+          emptyTitle={t('paymentMethods.noPaymentMethod')}
         />
       </Container>
     );
@@ -137,16 +137,16 @@ export default class PaymentMethodsCompo extends React.Component<Props, State> {
 
   private deletePaymentMethodConfirm(paymentMethod: BillingPaymentMethod): void {
     Alert.alert(
-      I18n.t('paymentMethods.deletePaymentMethodTitle'),
-      I18n.t('paymentMethods.deletePaymentMethodSubtitle', { cardBrand: paymentMethod.brand, cardLast4: paymentMethod.last4 }),
+      t('paymentMethods.deletePaymentMethodTitle'),
+      t('paymentMethods.deletePaymentMethodSubtitle', { cardBrand: paymentMethod.brand, cardLast4: paymentMethod.last4 }),
       [
         {
-          text: I18n.t('general.yes'),
+          text: t('general.yes'),
           onPress: () => {
             this.deletePaymentMethod(paymentMethod.id as string);
           }
         },
-        { text: I18n.t('general.cancel') }
+        { text: t('general.cancel') }
       ]
     );
   }
@@ -157,7 +157,7 @@ export default class PaymentMethodsCompo extends React.Component<Props, State> {
     try {
       // TODO check res data success (waiting for server change)
       await this.centralServerProvider.deletePaymentMethod(userID, paymentMethodID);
-      Message.showSuccess(I18n.t('paymentMethods.deletePaymentMethodSuccess'));
+      Message.showSuccess(t('paymentMethods.deletePaymentMethodSuccess'));
     } catch (error) {
       // Check if HTTP?
       Utils.handleHttpUnexpectedError(

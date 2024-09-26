@@ -1,5 +1,5 @@
 import { CardField, CardFieldInput, initStripe, useConfirmSetupIntent } from '@stripe/stripe-react-native';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import {Icon} from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { BackHandler, Text, View } from 'react-native';
@@ -36,7 +36,7 @@ export default function StripePaymentMethodCreationForm(props: Props) {
 
   useEffect(() => {
     setUp().catch((error) => {
-      console.error(I18n.t('paymentMethods.paymentMethodUnexpectedError'), error);
+      console.error(t('paymentMethods.paymentMethodUnexpectedError'), error);
     });
     // This screen does not extend from BaseScreen (functional component) so we need to add the logic
     props.navigation.getParent()?.setOptions({
@@ -104,7 +104,7 @@ export default function StripePaymentMethodCreationForm(props: Props) {
                 setLoading(false);
                 const routes = props.navigation.getState().routes;
                 props.navigation.navigate(routes[Math.max(0, routes.length-2)]?.name, {refresh: true});
-                Message.showSuccess(I18n.t('paymentMethods.addPaymentMethodSuccess'));
+                Message.showSuccess(t('paymentMethods.addPaymentMethodSuccess'));
                 // Return to prevent showError from triggering
                 return;
               }
@@ -112,7 +112,7 @@ export default function StripePaymentMethodCreationForm(props: Props) {
           }
         }
         // Every failure other than HTTP is handled here
-        Message.showError(I18n.t('paymentMethods.addPaymentMethodError'));
+        Message.showError(t('paymentMethods.addPaymentMethodError'));
         setLoading(false);
         // Handle HTTP errors
       } catch (error) {
@@ -153,7 +153,7 @@ export default function StripePaymentMethodCreationForm(props: Props) {
       keyboardShouldPersistTaps={'handled'}
     >
       <HeaderComponent
-        title={I18n.t('paymentMethods.addPaymentMethod')}
+        title={t('paymentMethods.addPaymentMethod')}
         navigation={props.navigation}
         containerStyle={style.headerContainer}
       />
@@ -165,19 +165,19 @@ export default function StripePaymentMethodCreationForm(props: Props) {
         style={style.cardFieldContainer}
       />
       <View style={style.eulaContainer}>
-        <Text style={[style.text, style.eulaText]}>{I18n.t('paymentMethods.paymentMethodCreationRules')}</Text>
+        <Text style={[style.text, style.eulaText]}>{t('paymentMethods.paymentMethodCreationRules')}</Text>
         <CheckBox
           containerStyle={[formStyle.checkboxContainer, style.checkboxContainer]}
           checked={eulaChecked}
           onPress={() => setEulaChecked(!eulaChecked)}
-          title={I18n.t('paymentMethods.paymentMethodsCreationCheckboxText')}
+          title={t('paymentMethods.paymentMethodsCreationCheckboxText')}
           textStyle={formStyle.checkboxText}
           uncheckedIcon={<Icon size={scale(25)} name="checkbox-blank-outline" as={MaterialCommunityIcons} style={formStyle.inputIcon} />}
           checkedIcon={<Icon size={scale(25)} name="checkbox-outline" as={MaterialCommunityIcons} style={formStyle.inputIcon} />}
         />
       </View>
       <Button
-        title={I18n.t('general.save')}
+        title={t('general.save')}
         titleStyle={formStyle.buttonText}
         disabled={!(cardDetails?.complete && eulaChecked && isBillingSetUp === true)}
         disabledStyle={formStyle.buttonDisabled}

@@ -20,7 +20,7 @@ import Users from '../users/list/Users';
 import Orientation from 'react-native-orientation-locker';
 import Message from '../../utils/Message';
 import {HTTPError} from '../../types/HTTPError';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import Constants from '../../utils/Constants';
 import {RestResponse} from '../../types/ActionResponse';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -106,7 +106,7 @@ export default class AddCar extends BaseScreen<Props, State> {
     return (
       <SafeAreaView edges={['bottom']} style={style.container}>
         <HeaderComponent
-          title={I18n.t('cars.addCarTitle')}
+          title={t('cars.addCarTitle')}
           navigation={navigation}
           backArrow={true}
           containerStyle={style.headerContainer}
@@ -142,7 +142,7 @@ export default class AddCar extends BaseScreen<Props, State> {
                 disabled={!selectedCarCatalog}
                 defaultValue={selectedConverter}
                 statusBarTranslucent={true}
-                defaultButtonText={I18n.t('cars.converter')}
+                defaultButtonText={t('cars.converter')}
                 data={selectedCarCatalogConverters}
                 buttonTextAfterSelection={(carConverter: CarConverter) => Utils.buildCarCatalogConverterName(carConverter)}
                 rowTextForSelection={(carConverter: CarConverter) => Utils.buildCarCatalogConverterName(carConverter)}
@@ -166,7 +166,7 @@ export default class AddCar extends BaseScreen<Props, State> {
             autoCapitalize={'characters'}
             autoCorrect={false}
             renderErrorMessage={!this.checkVIN()}
-            errorMessage={!this.checkVIN() ? vin && I18n.t('cars.invalidVIN'): null}
+            errorMessage={!this.checkVIN() ? vin && t('cars.invalidVIN'): null}
             errorStyle={formStyle.inputError}
             returnKeyType={'next'}
             onSubmitEditing={() => this.licensePlateInput?.focus()}
@@ -177,13 +177,13 @@ export default class AddCar extends BaseScreen<Props, State> {
             containerStyle={formStyle.inputContainer}
             inputStyle={formStyle.inputText}
             inputContainerStyle={[formStyle.inputTextContainer, !this.checkLicensePlate() && formStyle.inputTextContainerError]}
-            placeholder={I18n.t('cars.licensePlate')}
+            placeholder={t('cars.licensePlate')}
             placeholderTextColor={commonColors.disabledDark}
             labelStyle={style.inputLabel}
             autoCapitalize={'characters'}
             autoCorrect={false}
             renderErrorMessage={!this.checkLicensePlate()}
-            errorMessage={!this.checkLicensePlate() ? licensePlate && I18n.t('cars.invalidLicensePlate') : null}
+            errorMessage={!this.checkLicensePlate() ? licensePlate && t('cars.invalidLicensePlate') : null}
             errorStyle={style.inputError}
             returnKeyType={'done'}
             onSubmitEditing={() => Keyboard.dismiss()}
@@ -218,7 +218,7 @@ export default class AddCar extends BaseScreen<Props, State> {
               onValueChange={() => this.setState({ isDefault: !this.state.isDefault })}
               value={isDefault}
             />
-            <Text style={style.text}>{I18n.t('cars.defaultCar')}</Text>
+            <Text style={style.text}>{t('cars.defaultCar')}</Text>
           </View>
           <View style={style.carTypeContainer}>
             <CheckBox
@@ -228,7 +228,7 @@ export default class AddCar extends BaseScreen<Props, State> {
               checkedIcon={<Icon size={scale(25)} color={commonColors.textColor} name="radiobox-marked" as={MaterialCommunityIcons}/>}
               uncheckedIcon={<Icon size={scale(25)} color={commonColors.textColor} name="radiobox-blank" as={MaterialCommunityIcons} />}
               onPress={() => this.setState({ type: CarType.COMPANY })}
-              title={I18n.t('carTypes.companyCar')}
+              title={t('carTypes.companyCar')}
             />
             <CheckBox
               containerStyle={formStyle.checkboxContainer}
@@ -237,7 +237,7 @@ export default class AddCar extends BaseScreen<Props, State> {
               checkedIcon={<Icon size={scale(25)} color={commonColors.textColor} name="radiobox-marked" as={MaterialCommunityIcons}/>}
               uncheckedIcon={<Icon size={scale(25)} color={commonColors.textColor} name="radiobox-blank" as={MaterialCommunityIcons} />}
               onPress={() => this.setState({ type: CarType.POOL_CAR })}
-              title={I18n.t('carTypes.poolCar')}
+              title={t('carTypes.poolCar')}
             />
             <CheckBox
               containerStyle={formStyle.checkboxContainer}
@@ -246,11 +246,11 @@ export default class AddCar extends BaseScreen<Props, State> {
               checkedIcon={<Icon size={scale(25)} color={commonColors.textColor} name="radiobox-marked" as={MaterialCommunityIcons}/>}
               uncheckedIcon={<Icon size={scale(25)} color={commonColors.textColor} name="radiobox-blank" as={MaterialCommunityIcons} />}
               onPress={() => this.setState({ type: CarType.PRIVATE })}
-              title={I18n.t('carTypes.privateCar')}
+              title={t('carTypes.privateCar')}
             />
           </View>
           <Button
-            title={I18n.t('cars.addCarButton')}
+            title={t('cars.addCarButton')}
             titleStyle={formStyle.buttonTitle}
             disabled={!this.checkForm()}
             disabledStyle={formStyle.buttonDisabled}
@@ -334,7 +334,7 @@ export default class AddCar extends BaseScreen<Props, State> {
         disabled={true}
         data={[]}
         statusBarTranslucent={true}
-        defaultButtonText={I18n.t('cars.model')}
+        defaultButtonText={t('cars.model')}
         defaultValue={null}
         buttonStyle={style.selectField}
         buttonTextStyle={{...style.selectFieldText, ...(!this.state.selectedCarCatalog ? style.selectFieldTextPlaceholder : {})}}
@@ -389,24 +389,24 @@ export default class AddCar extends BaseScreen<Props, State> {
       try {
         const response = await this.centralServerProvider.createCar(car, forced);
         if (response?.status === RestResponse.SUCCESS) {
-          Message.showSuccess(I18n.t('cars.addCarSuccessfully'));
+          Message.showSuccess(t('cars.addCarSuccessfully'));
           const routes = this.props.navigation.getState().routes;
           this.props.navigation.navigate(routes[Math.max(0, routes.length-2)].name, {refresh: true});
           return;
         } else {
-          Message.showError(I18n.t('cars.addError'));
+          Message.showError(t('cars.addError'));
           return;
         }
       } catch (error) {
         switch (error?.response?.status) {
           case HTTPError.CAR_ALREADY_EXIST_ERROR:
-            Message.showError(I18n.t('cars.carAlreadyExistError'));
+            Message.showError(t('cars.carAlreadyExistError'));
             break;
           case HTTPError.USER_ALREADY_ASSIGNED_TO_CAR:
-            Message.showError(I18n.t('cars.userAlreadyAssignedError'));
+            Message.showError(t('cars.userAlreadyAssignedError'));
             break;
           default:
-            Message.showError(I18n.t('cars.addError'));
+            Message.showError(t('cars.addError'));
         }
       } finally {
         this.setState({ addCarPending: false });

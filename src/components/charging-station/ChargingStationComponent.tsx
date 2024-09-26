@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import moment from 'moment';
 import { Icon } from 'native-base';
 import React from 'react';
@@ -134,22 +134,22 @@ export default class ChargingStationComponent extends React.Component<Props, Sta
   private renderHeartbeatStatusDialog() {
     const { chargingStation } = this.props;
     const modalCommonStyle = computeModalCommonStyle();
-    let message = I18n.t('chargers.heartBeatOkMessage', { chargeBoxID: chargingStation.id });
+    let message = t('chargers.heartBeatOkMessage', { chargeBoxID: chargingStation.id });
     if (chargingStation.inactive) {
-      message = I18n.t('chargers.heartBeatKoMessage', {
+      message = t('chargers.heartBeatKoMessage', {
         chargeBoxID: chargingStation.id,
         lastSeen: moment(new Date(chargingStation.lastSeen), null, true).fromNow(true)
       });
     }
     return (
       <DialogModal
-        title={I18n.t('chargers.heartBeat')}
+        title={t('chargers.heartBeat')}
         onBackDropPress={() => this.setState({ showHeartbeatDialog: false })}
         onBackButtonPressed={() => this.setState({ showHeartbeatDialog: false })}
         description={message}
         buttons={[
           {
-            text: I18n.t('general.ok'),
+            text: t('general.ok'),
             buttonStyle: modalCommonStyle.primaryButton,
             buttonTextStyle: modalCommonStyle.primaryButtonText,
             action: () => this.setState({ showHeartbeatDialog: false })

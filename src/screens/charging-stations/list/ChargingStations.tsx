@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import {
@@ -358,7 +358,7 @@ export default class ChargingStations extends BaseAutoRefreshScreen<Props, State
         <HeaderComponent
           ref={(headerComponent: HeaderComponent) => this.setHeaderComponent(headerComponent)}
           navigation={navigation}
-          title={this.siteArea?.name ?? I18n.t('chargers.title')}
+          title={this.siteArea?.name ?? t('chargers.title')}
           subTitle={count > 0 ? `(${I18nManager.formatNumber(count)})` : null}
           actions={[
             {
@@ -395,7 +395,7 @@ export default class ChargingStations extends BaseAutoRefreshScreen<Props, State
                   data={chargingStations}
                   manualRefresh={this.manualRefresh.bind(this)}
                   refreshing={refreshing}
-                  emptyTitle={I18n.t('chargers.noChargers')}
+                  emptyTitle={t('chargers.noChargers')}
                   navigation={navigation}
                   limit={this.listLimit}
                 />

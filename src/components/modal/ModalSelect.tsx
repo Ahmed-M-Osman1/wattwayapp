@@ -4,7 +4,7 @@ import BaseProps from '../../types/BaseProps';
 import Utils from '../../utils/Utils';
 import { ItemSelectionMode } from '../list/ItemsList';
 import computeStyleSheet from './ModalSelectStyles';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import SelectableList from '../../screens/base-screen/SelectableList';
 import ListItem from '../../types/ListItem';
 import { SafeAreaView, Text, TouchableOpacity, View, Modal } from 'react-native';
@@ -127,14 +127,14 @@ export default class ModalSelect<T extends ListItem> extends React.Component<Pro
               <View style={style.buttonsContainer}>
                 <Button
                   disabled={!canValidateMultiSelect}
-                  title={I18n.t('general.validate')}
+                  title={t('general.validate')}
                   disabledStyle={style.disabledButton}
                   disabledTitleStyle={style.disabledButtonText}
                   containerStyle={[style.buttonContainer]}
                   onPress={() => this.validateSelection()}/>
                 <Button
                   containerStyle={[style.buttonContainer, modalCommonStyle.primaryButton]}
-                  title={I18n.t('general.reset')}
+                  title={t('general.reset')}
                   onPress={() => this.clearSelection()} />
               </View>
             )}

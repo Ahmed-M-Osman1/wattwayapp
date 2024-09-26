@@ -7,7 +7,7 @@ import { CarCatalog } from '../../types/Car';
 import Utils from '../../utils/Utils';
 import computeStyleSheet from './CarCatalogComponentStyle';
 import computeListItemCommonStyle from '../list/ListItemCommonStyle';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { scale } from 'react-native-size-matters';
@@ -87,7 +87,7 @@ export default class CarCatalogComponent extends React.Component<Props, State> {
                 </View>
                 {carCatalog?.drivetrainPowerHP ? (
                   <Text adjustsFontSizeToFit={true} numberOfLines={1} style={[style.text, style.powerDetailsText]}>
-                    {carCatalog?.drivetrainPowerHP} {I18n.t('cars.drivetrainPowerUnit')}
+                    {carCatalog?.drivetrainPowerHP} {t('cars.drivetrainPowerUnit')}
                   </Text>
                 ) : (
                   <Text style={style.text}>-</Text>

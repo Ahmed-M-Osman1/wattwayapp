@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import React from 'react';
 import { Animated, Easing, Text, View } from 'react-native';
 
@@ -151,7 +151,7 @@ export default class ConnectorStatusComponent extends React.Component<Props, Sta
     }
     // Text provided: Force text label
     if (text) {
-      return I18n.t(text);
+      return t(text);
     }
     // Status provided: Force status label
     if (status) {

@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon } from 'native-base';
 import React from 'react';
 import {TextInput, TouchableOpacity, View, ViewStyle} from 'react-native';
@@ -79,7 +79,7 @@ export default class SimpleSearchComponent extends React.Component<Props, State>
           style={style.inputField}
           autoCorrect={false}
           value={this.state.searchText}
-          placeholder={I18n.t('general.search')}
+          placeholder={t('general.search')}
           placeholderTextColor={commonColor.placeholderTextColor}
           keyboardType={'default'}
           returnKeyType={'search'}

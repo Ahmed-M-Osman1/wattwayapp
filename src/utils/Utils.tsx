@@ -1,6 +1,6 @@
 import { NavigationContainerRef, StackActions } from '@react-navigation/native';
 import { StatusCodes } from 'http-status-codes';
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import _ from 'lodash';
 import moment from 'moment';
 import { NativeModules, Platform, ViewStyle } from 'react-native';
@@ -154,7 +154,7 @@ export default class Utils {
 
   public static jumpToMapWithAddress(title: string, address: Address): void {
     if (!Utils.containsAddressGPSCoordinates(address)) {
-      Message.showError(I18n.t('general.noGPSCoordinates'));
+      Message.showError(t('general.noGPSCoordinates'));
     } else {
       Utils.jumpToMapWithCoordinates(title, address.coordinates);
     }
@@ -162,7 +162,7 @@ export default class Utils {
 
   public static jumpToMapWithCoordinates(title: string, coordinates: number[]): void {
     if (!Utils.containsGPSCoordinates(coordinates)) {
-      Message.showError(I18n.t('general.noGPSCoordinates'));
+      Message.showError(t('general.noGPSCoordinates'));
     } else {
       void showLocation({
         longitude: coordinates[0],
@@ -170,9 +170,9 @@ export default class Utils {
         title,
         googleForceLatLon: true, // optionally force GoogleMaps to use the latlon for the query instead of the title
         alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
-        dialogTitle: I18n.t('general.chooseApp'),
-        dialogMessage: I18n.t('general.availableApps'),
-        cancelText: I18n.t('general.close')
+        dialogTitle: t('general.chooseApp'),
+        dialogMessage: t('general.availableApps'),
+        cancelText: t('general.close')
       });
     }
   }
@@ -657,14 +657,14 @@ export default class Utils {
   }
 
   public static buildCarFastChargePower(fastChargePower: number): string | number {
-    return fastChargePower || I18n.t('general.notApplicable');
+    return fastChargePower || t('general.notApplicable');
   }
 
   public static buildCarCatalogConverterName(converter: CarConverter): string {
     let converterName = '';
     converterName += `${converter?.powerWatts ?? ''} kW`;
     if (converter?.numberOfPhases > 0) {
-      converterName += ` - ${converter?.numberOfPhases ?? ''} ${converter?.numberOfPhases > 1 ? I18n.t('cars.evse_phases') : I18n.t('cars.evse_phase')}`;
+      converterName += ` - ${converter?.numberOfPhases ?? ''} ${converter?.numberOfPhases > 1 ? t('cars.evse_phases') : t('cars.evse_phase')}`;
     }
     if (converter?.amperagePerPhase > 0) {
       converterName += ` - ${converter?.amperagePerPhase ?? ''} A`;
@@ -687,15 +687,15 @@ export default class Utils {
       switch (error.request.status) {
         // Backend not available
         case 0:
-          Message.showError(I18n.t('general.cannotConnectBackend'));
+          Message.showError(t('general.cannotConnectBackend'));
           break;
         // Backend not available
         case StatusCodes.FORBIDDEN:
-          Message.showError(I18n.t('general.notAuthorized'));
+          Message.showError(t('general.notAuthorized'));
           break;
         // Not logged in?
         case StatusCodes.UNAUTHORIZED:
-          Message.showError(I18n.t('general.notAuthorized'));
+          Message.showError(t('general.notAuthorized'));
           // Force auto login
           await centralServerProvider.triggerAutoLogin(navigation, fctRefresh);
           break;
@@ -721,7 +721,7 @@ export default class Utils {
             }
             if (centralServerProvider.isUserConnected()) {
               const tenantSubDomain = centralServerProvider.getUserTenant()?.subdomain;
-              Message.showWarning(I18n.t('general.userOrTenantUpdated'));
+              Message.showWarning(t('general.userOrTenantUpdated'));
               await centralServerProvider.logoff();
               navigation.dispatch(
                 StackActions.replace('AuthNavigator', {
@@ -740,7 +740,7 @@ export default class Utils {
           break;
         // Other errors
         default:
-          Message.showError(I18n.t(defaultErrorMessage || 'general.unexpectedErrorBackend'));
+          Message.showError(t(defaultErrorMessage || 'general.unexpectedErrorBackend'));
           break;
       }
     } else if (error.name === 'InvalidTokenError') {
@@ -751,7 +751,7 @@ export default class Utils {
       if (!__DEV__) {
         centralServerProvider.sendErrorReport(null,  error.message, error.stack);
       }
-      Message.showError(I18n.t('general.unexpectedError'));
+      Message.showError(t('general.unexpectedError'));
     }
   }
 
@@ -882,27 +882,27 @@ export default class Utils {
   public static translateConnectorStatus = (status: string): string => {
     switch (status) {
       case ChargePointStatus.AVAILABLE:
-        return I18n.t('connector.available');
+        return t('connector.available');
       case ChargePointStatus.CHARGING:
-        return I18n.t('connector.charging');
+        return t('connector.charging');
       case ChargePointStatus.OCCUPIED:
-        return I18n.t('connector.occupied');
+        return t('connector.occupied');
       case ChargePointStatus.FAULTED:
-        return I18n.t('connector.faulted');
+        return t('connector.faulted');
       case ChargePointStatus.RESERVED:
-        return I18n.t('connector.reserved');
+        return t('connector.reserved');
       case ChargePointStatus.FINISHING:
-        return I18n.t('connector.finishing');
+        return t('connector.finishing');
       case ChargePointStatus.PREPARING:
-        return I18n.t('connector.preparing');
+        return t('connector.preparing');
       case ChargePointStatus.SUSPENDED_EVSE:
-        return I18n.t('connector.suspendedEVSE');
+        return t('connector.suspendedEVSE');
       case ChargePointStatus.SUSPENDED_EV:
-        return I18n.t('connector.suspendedEV');
+        return t('connector.suspendedEV');
       case ChargePointStatus.UNAVAILABLE:
-        return I18n.t('connector.unavailable');
+        return t('connector.unavailable');
       default:
-        return I18n.t('connector.unknown');
+        return t('connector.unknown');
     }
   };
 
@@ -935,53 +935,53 @@ export default class Utils {
   public static translateConnectorType = (type: string): string => {
     switch (type) {
       case ConnectorType.TYPE_2:
-        return I18n.t('connector.type2');
+        return t('connector.type2');
       case ConnectorType.COMBO_CCS:
-        return I18n.t('connector.comboCCS');
+        return t('connector.comboCCS');
       case ConnectorType.CHADEMO:
-        return I18n.t('connector.chademo');
+        return t('connector.chademo');
       case ConnectorType.DOMESTIC:
-        return I18n.t('connector.domestic');
+        return t('connector.domestic');
       case ConnectorType.TYPE_1_CCS:
-        return I18n.t('connector.type1CCS');
+        return t('connector.type1CCS');
       case ConnectorType.TYPE_1:
-        return I18n.t('connector.type1');
+        return t('connector.type1');
       case ConnectorType.TYPE_3C:
-        return I18n.t('connector.type3C');
+        return t('connector.type3C');
       default:
-        return I18n.t('connector.unknown');
+        return t('connector.unknown');
     }
   };
 
   public static translateUserStatus(status: string): string {
     switch (status) {
       case UserStatus.ACTIVE:
-        return I18n.t('userStatuses.active');
+        return t('userStatuses.active');
       case UserStatus.PENDING:
-        return I18n.t('userStatuses.pending');
+        return t('userStatuses.pending');
       case UserStatus.INACTIVE:
-        return I18n.t('userStatuses.inactive');
+        return t('userStatuses.inactive');
       case UserStatus.LOCKED:
-        return I18n.t('userStatuses.locked');
+        return t('userStatuses.locked');
       case UserStatus.BLOCKED:
-        return I18n.t('userStatuses.suspended');
+        return t('userStatuses.suspended');
       default:
-        return I18n.t('userStatuses.unknown');
+        return t('userStatuses.unknown');
     }
   }
 
   public static translateUserRole(role: string): string {
     switch (role) {
       case UserRole.ADMIN:
-        return I18n.t('userRoles.admin');
+        return t('userRoles.admin');
       case UserRole.BASIC:
-        return I18n.t('userRoles.basic');
+        return t('userRoles.basic');
       case UserRole.DEMO:
-        return I18n.t('userRoles.demo');
+        return t('userRoles.demo');
       case UserRole.SUPER_ADMIN:
-        return I18n.t('userRoles.superAdmin');
+        return t('userRoles.superAdmin');
       default:
-        return I18n.t('userRoles.unknown');
+        return t('userRoles.unknown');
     }
   }
 

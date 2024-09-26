@@ -1,4 +1,4 @@
-import I18n from 'i18n-js';
+import { t } from 'i18next';
 import { Icon } from 'native-base';
 import React from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
@@ -72,7 +72,7 @@ export default class InvoiceComponent extends React.Component<Props, State> {
                 </Text>
                 {invoice.sessions && (
                   <Text numberOfLines={1} style={style.text}>
-                    {I18n.t('transactions.transactions')}
+                    {t('transactions.transactions')}
                   </Text>
                 )}
               </View>
@@ -119,17 +119,17 @@ export default class InvoiceComponent extends React.Component<Props, State> {
   private buildStatus(invoiceStatus: BillingInvoiceStatus): string {
     switch (invoiceStatus) {
       case BillingInvoiceStatus.DRAFT:
-        return I18n.t('invoiceStatus.draft');
+        return t('invoiceStatus.draft');
       case BillingInvoiceStatus.OPEN:
-        return I18n.t('invoiceStatus.unpaid');
+        return t('invoiceStatus.unpaid');
       case BillingInvoiceStatus.PAID:
-        return I18n.t('invoiceStatus.paid');
+        return t('invoiceStatus.paid');
       case BillingInvoiceStatus.VOID:
-        return I18n.t('invoiceStatus.void');
+        return t('invoiceStatus.void');
       case BillingInvoiceStatus.DELETED:
-        return I18n.t('invoiceStatus.deleted');
+        return t('invoiceStatus.deleted');
       case BillingInvoiceStatus.UNCOLLECTIBLE:
-        return I18n.t('invoiceStatus.uncollectible');
+        return t('invoiceStatus.uncollectible');
     }
   }
 
@@ -170,14 +170,14 @@ export default class InvoiceComponent extends React.Component<Props, State> {
     const modalCommonStyle = computeModalCommonStyle();
     return (
       <DialogModal
-        title={I18n.t('invoices.downloadInvoiceTitle')}
+        title={t('invoices.downloadInvoiceTitle')}
         withCloseButton={true}
         withCancel={true}
         close={() => this.setState({ showDownloadInvoiceDialog: false })}
-        description={I18n.t('invoices.downloadInvoiceSubtitle', { user: Utils.buildUserName(invoice.user), invoiceDate })}
+        description={t('invoices.downloadInvoiceSubtitle', { user: Utils.buildUserName(invoice.user), invoiceDate })}
         buttons={[
           {
-            text: I18n.t('general.yes'),
+            text: t('general.yes'),
             buttonStyle: modalCommonStyle.primaryButton,
             buttonTextStyle: modalCommonStyle.primaryButtonText,
             action: async () => this.downloadInvoice()
@@ -192,7 +192,7 @@ export default class InvoiceComponent extends React.Component<Props, State> {
     this.setState({ downloading: true, showDownloadInvoiceDialog: false });
     try {
       await this.centralServerProvider.downloadInvoice(invoice);
-      Message.showSuccess(`${I18n.t('invoices.downloadedSuccessfully')}!`);
+      Message.showSuccess(`${t('invoices.downloadedSuccessfully')}!`);
     } catch (error) {
       await Utils.handleHttpUnexpectedError(
         this.centralServerProvider,
