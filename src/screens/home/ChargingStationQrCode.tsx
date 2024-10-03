@@ -4,8 +4,7 @@ import { t } from 'i18next';
 import React from 'react';
 import { Alert, View } from 'react-native';
 import Orientation from 'react-native-orientation-locker';
-import QRCodeScanner from 'react-native-qrcode-scanner';
-
+// import QRCodeScanner from 'react-native-qrcode-scanner';
 import HeaderComponent from '../../components/header/HeaderComponent';
 import BaseProps from '../../types/BaseProps';
 import { Connector } from '../../types/ChargingStation';

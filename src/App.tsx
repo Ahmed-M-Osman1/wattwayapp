@@ -8,8 +8,8 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import I18n from 'i18n-js';
 import {Icon, NativeBaseProvider} from 'native-base';
+import { t } from 'i18next';
 import React, {useEffect, useState} from 'react';
 import {Appearance, ColorSchemeName, NativeEventSubscription, StatusBar, Text} from 'react-native';
 import { scale } from 'react-native-size-matters';
@@ -54,7 +54,7 @@ import AppUpdateDialog from './components/modal/app-update/AppUpdateDialog';
 import AddCar from './screens/cars/AddCar';
 import ChargingStationQrCode from './screens/home/ChargingStationQrCode';
 import ThemeManager from './custom-theme/ThemeManager';
-import TenantQrCode from './screens/tenants/TenantQrCode';
+// import TenantQrCode from './screens/tenants/TenantQrCode';
 import computeStyleSheet from './AppStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -130,7 +130,7 @@ function AuthNavigator(props: BaseProps) {
         <AuthStack.Navigator initialRouteName={'Login'} screenOptions={{ headerShown: false }}>
             <AuthStack.Screen name="Login" component={Login} initialParams={props?.route?.params?.params} />
             <AuthStack.Screen name="Tenants" component={Tenants} initialParams={props?.route?.params?.params} />
-            <AuthStack.Screen name="TenantQrCode" component={TenantQrCode} initialParams={props?.route?.params?.params} />
+            {/*<AuthStack.Screen name="TenantQrCode" component={TenantQrCode} initialParams={props?.route?.params?.params} />*/}
             <AuthStack.Screen name="Eula" component={Eula} initialParams={props?.route?.params?.params} />
             <AuthStack.Screen name="SignUp" component={SignUp} initialParams={props?.route?.params?.params} />
             <AuthStack.Screen name="ResetPassword" component={ResetPassword} initialParams={props?.route?.params?.params} />
@@ -181,7 +181,7 @@ function ChargingStationDetailsTabsNavigator(props: BaseProps) {
                 component={ChargingStationActions}
                 initialParams={{...(props?.route?.params?.params || {}), canOpenDrawer: false}}
                 options={{
-                    tabBarLabel: <Text style={style.bottomTabsIcon}>{I18n.t('chargers.actions')}</Text>,
+                    tabBarLabel: <Text style={style.bottomTabsIcon}>{t('chargers.actions')}</Text>,
                     tabBarIcon: (iconProps) => createTabBarIcon(iconProps, MaterialIcons, 'build')
                 }}
             />
@@ -190,7 +190,7 @@ function ChargingStationDetailsTabsNavigator(props: BaseProps) {
                 component={ChargingStationOcppParameters}
                 initialParams={{...(props?.route?.params?.params || {}), canOpenDrawer: false}}
                 options={{
-                    tabBarLabel: <Text style={style.bottomTabsIcon}>{I18n.t('chargers.ocpp')}</Text>,
+                    tabBarLabel: <Text style={style.bottomTabsIcon}>{t('chargers.ocpp')}</Text>,
                     tabBarIcon: (iconProps) => createTabBarIcon(iconProps, MaterialIcons, 'format-list-bulleted')
                 }}
             />
@@ -199,7 +199,7 @@ function ChargingStationDetailsTabsNavigator(props: BaseProps) {
                 component={ChargingStationProperties}
                 initialParams={{...(props?.route?.params?.params || {}), canOpenDrawer: false}}
                 options={{
-                    tabBarLabel: <Text style={style.bottomTabsIcon}>{I18n.t('chargers.properties')}</Text>,
+                    tabBarLabel: <Text style={style.bottomTabsIcon}>{t('chargers.properties')}</Text>,
                     tabBarIcon: (iconProps) => createTabBarIcon(iconProps, MaterialIcons, 'info')
                 }}
             />
@@ -225,7 +225,7 @@ function ChargingStationConnectorDetailsTabsNavigator(props: BaseProps) {
                 component={ChargingStationConnectorDetails}
                 initialParams={{...(props?.route?.params?.params || {}), canOpenDrawer: false}}
                 options={{
-                    tabBarLabel: <Text style={style.bottomTabsIcon}>{I18n.t('sites.chargePoint')}</Text>,
+                    tabBarLabel: <Text style={style.bottomTabsIcon}>{t('sites.chargePoint')}</Text>,
                     tabBarIcon: (iconProps) => createTabBarIcon(iconProps, FontAwesome, 'bolt')
                 }}
             />
@@ -234,7 +234,7 @@ function ChargingStationConnectorDetailsTabsNavigator(props: BaseProps) {
                 component={TransactionChart}
                 initialParams={{...(props?.route?.params?.params || {}), canOpenDrawer: false}}
                 options={{
-                    tabBarLabel: <Text style={style.bottomTabsIcon}>{I18n.t('details.graph')}</Text>,
+                    tabBarLabel: <Text style={style.bottomTabsIcon}>{t('details.graph')}</Text>,
                     tabBarIcon: (iconProps) => createTabBarIcon(iconProps, MaterialCommunityIcons, 'chart-areaspline-variant')
                 }}
             />
@@ -260,7 +260,7 @@ function TransactionDetailsTabsNavigator(props: BaseProps) {
                 component={TransactionDetails}
                 initialParams={{...(props?.route?.params?.params || {}), canOpenDrawer: false}}
                 options={{
-                    tabBarLabel: <Text style={style.bottomTabsIcon}>{I18n.t('transactions.transaction')}</Text>,
+                    tabBarLabel: <Text style={style.bottomTabsIcon}>{t('transactions.transaction')}</Text>,
                     tabBarIcon: (iconProps) => createTabBarIcon(iconProps, FontAwesome, 'bolt')
                 }}
             />
@@ -269,7 +269,7 @@ function TransactionDetailsTabsNavigator(props: BaseProps) {
                 component={TransactionChart}
                 initialParams={{...(props?.route?.params?.params || {}), canOpenDrawer: false}}
                 options={{
-                    tabBarLabel: <Text style={style.bottomTabsIcon}>{I18n.t('details.graph')}</Text>,
+                    tabBarLabel: <Text style={style.bottomTabsIcon}>{t('details.graph')}</Text>,
                     tabBarIcon: (iconProps) => createTabBarIcon(iconProps, MaterialCommunityIcons, 'chart-areaspline-variant')
                 }}
             />
@@ -529,7 +529,7 @@ function AppDrawerNavigator(props: BaseProps) {
                     name="QRCodeScanner"
                     component={ChargingStationQrCode}
                     options={{
-                        drawerLabel: I18n.t('sidebar.qrCodeScanner'),
+                        drawerLabel: t('sidebar.qrCodeScanner'),
                         drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="qr-code-scanner" />
 
                     }}
@@ -541,7 +541,7 @@ function AppDrawerNavigator(props: BaseProps) {
                     name="ChargingStationsNavigator"
                     component={ChargingStationsNavigator}
                     options={{
-                        drawerLabel: I18n.t('sidebar.chargers'),
+                        drawerLabel: t('sidebar.chargers'),
                         drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="ev-station" />
                     }}
                     initialParams={props?.route?.params?.params}
@@ -551,7 +551,7 @@ function AppDrawerNavigator(props: BaseProps) {
                         name="SitesNavigator"
                         component={SitesNavigator}
                         options={{
-                            drawerLabel: I18n.t('sidebar.sites'),
+                            drawerLabel: t('sidebar.sites'),
                             drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="store-mall-directory" />
                         }}
                         initialParams={props?.route?.params?.params}
@@ -563,7 +563,7 @@ function AppDrawerNavigator(props: BaseProps) {
                     name="TransactionHistoryNavigator"
                     component={TransactionHistoryNavigator}
                     options={{
-                        drawerLabel: I18n.t('sidebar.transactionsHistory'),
+                        drawerLabel: t('sidebar.transactionsHistory'),
                         drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="history" />
                     }}
                     initialParams={props?.route?.params?.params}
@@ -572,7 +572,7 @@ function AppDrawerNavigator(props: BaseProps) {
                     name="TransactionInProgressNavigator"
                     component={TransactionInProgressNavigator}
                     options={{
-                        drawerLabel: I18n.t('sidebar.transactionsInProgress'),
+                        drawerLabel: t('sidebar.transactionsInProgress'),
                         drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="play-arrow" />
                     }}
                     initialParams={props?.route?.params?.params}
@@ -581,7 +581,7 @@ function AppDrawerNavigator(props: BaseProps) {
                     name="StatisticsNavigator"
                     component={StatsNavigator}
                     options={{
-                        drawerLabel: I18n.t('sidebar.statistics'),
+                        drawerLabel: t('sidebar.statistics'),
                         drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="bar-chart" />
                     }}
                     initialParams={props?.route?.params?.params}
@@ -593,7 +593,7 @@ function AppDrawerNavigator(props: BaseProps) {
                         name="UsersNavigator"
                         component={UsersNavigator}
                         options={{
-                            drawerLabel: I18n.t('sidebar.users'),
+                            drawerLabel: t('sidebar.users'),
                             drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="people" />
                         }}
                         initialParams={props?.route?.params?.params}
@@ -604,7 +604,7 @@ function AppDrawerNavigator(props: BaseProps) {
                         name="TagsNavigator"
                         component={TagsNavigator}
                         options={{
-                            drawerLabel: I18n.t('sidebar.badges'),
+                            drawerLabel: t('sidebar.badges'),
                             drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialCommunityIcons} name="credit-card-wireless-outline" />
                         }}
                         initialParams={props?.route?.params?.params}
@@ -615,7 +615,7 @@ function AppDrawerNavigator(props: BaseProps) {
                         name="CarsNavigator"
                         component={CarsNavigator}
                         options={{
-                            drawerLabel: I18n.t('sidebar.cars'),
+                            drawerLabel: t('sidebar.cars'),
                             drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="directions-car" />
                         }}
                         initialParams={props?.route?.params?.params}
@@ -628,7 +628,7 @@ function AppDrawerNavigator(props: BaseProps) {
                         name="PaymentMethodsNavigator"
                         component={PaymentMethodsNavigator}
                         options={{
-                            drawerLabel: I18n.t('sidebar.paymentMethods'),
+                            drawerLabel: t('sidebar.paymentMethods'),
                             drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialCommunityIcons} name="credit-card-outline" />
                         }}
                         initialParams={props?.route?.params?.params}
@@ -640,7 +640,7 @@ function AppDrawerNavigator(props: BaseProps) {
                         name="InvoicesNavigator"
                         component={InvoicesNavigator}
                         options={{
-                            drawerLabel: I18n.t('sidebar.invoices'),
+                            drawerLabel: t('sidebar.invoices'),
                             drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="receipt" />
                         }}
                         initialParams={props?.route?.params?.params}
@@ -651,7 +651,7 @@ function AppDrawerNavigator(props: BaseProps) {
                 name="ReportErrorNavigator"
                 component={ReportErrorNavigator}
                 options={{
-                    drawerLabel: I18n.t('sidebar.reportError'),
+                    drawerLabel: t('sidebar.reportError'),
                     drawerIcon: () => <Icon color={commonColors.textColor} size={scale(22)} as={MaterialIcons} name="error-outline" />
                 }}
                 initialParams={props?.route?.params?.params}

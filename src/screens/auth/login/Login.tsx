@@ -9,7 +9,6 @@ import {
   Text,
   View, TextInput,
 } from 'react-native';
-
 import DialogModal from '../../../components/modal/DialogModal';
 import computeModalCommonStyle from '../../../components/modal/ModalCommonStyle';
 import computeFormStyleSheet from '../../../FormStyles';
