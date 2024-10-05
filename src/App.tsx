@@ -14,7 +14,6 @@ import React, {useEffect, useState} from 'react';
 import {Appearance, ColorSchemeName, NativeEventSubscription, StatusBar, Text} from 'react-native';
 import { scale } from 'react-native-size-matters';
 import DeepLinkingManager from './deeplinking/DeepLinkingManager';
-import I18nManager from './I18n/I18nManager';
 import LocationManager from './location/LocationManager';
 import MigrationManager from './migration/MigrationManager';
 import Notifications from './notification/Notifications';
@@ -68,9 +67,6 @@ import Loading from './screens/loading/Loading';
 import {Notification} from './types/UserNotifications';
 import Configuration from './config/Configuration';
 import {RootSiblingParent} from 'react-native-root-siblings';
-
-// Init i18n
-I18nManager.initialize();
 
 // Navigation Stack variable
 const AuthStack = createStackNavigator();
@@ -696,7 +692,7 @@ export default class App extends React.Component<Props, State> {
         this.state = {
             navigationState: null,
             showAppUpdateDialog: false,
-            isSignedIn: undefined
+            isSignedIn: false
         };
     }
 
@@ -743,7 +739,7 @@ export default class App extends React.Component<Props, State> {
         }
 
         // Set authentication state
-        let isSignedIn = false;
+        let isSignedIn = true;
         try {
             const userCredentials = await SecuredStorage.getUserCredentials(tenantSubdomain);
             if (userCredentials?.password && userCredentials?.email && userCredentials?.tenantSubDomain) {
@@ -783,7 +779,7 @@ export default class App extends React.Component<Props, State> {
                             <AppUpdateDialog appVersion={this.appVersion} close={() => this.setState({ showAppUpdateDialog: false })} />
                         )}
                         <StatusBar barStyle={ThemeManager.getInstance()?.isThemeTypeIsDark() ? 'light-content' : 'dark-content'} translucent backgroundColor="transparent" />
-                        {!isSignedIn == null ?
+                        {isSignedIn == null ?
                             <Loading/>
                             :
                             this.createRootNavigator()
