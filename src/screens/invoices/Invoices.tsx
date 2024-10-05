@@ -15,7 +15,7 @@ import Utils from '../../utils/Utils';
 import computeStyleSheet from './InvoicesStyles';
 import InvoicesFilters, { InvoicesFiltersDef } from './InvoicesFilters';
 import { Spinner } from 'native-base';
-import { scale } from 'react-native-size-matters';
+import { scale } from '../../helper/scale.ts';
 
 export interface Props extends BaseProps {}
 

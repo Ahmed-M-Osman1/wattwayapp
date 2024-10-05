@@ -35,7 +35,7 @@ import Type1CCS from '../../assets/connectorType/type1-ccs.svg';
 import Type3C from '../../assets/connectorType/type3c.svg';
 import NoConnector from '../../assets/connectorType/no-connector.svg';
 import React from 'react';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../helper/scale.ts';
 import SecuredStorage from './SecuredStorage';
 import { checkVersion, CheckVersionResponse } from 'react-native-check-version';
 import ProviderFactory from '../provider/ProviderFactory';

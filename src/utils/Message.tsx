@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import Toast from 'react-native-root-toast';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../helper/scale.ts';
 
 import Utils from './Utils';
 

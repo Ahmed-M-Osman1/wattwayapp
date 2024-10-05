@@ -8,7 +8,7 @@ import { Animation } from 'react-native-animatable';
 import {Button, Input} from '@rneui/base';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 

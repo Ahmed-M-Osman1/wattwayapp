@@ -14,7 +14,7 @@ import Utils from '../../../utils/Utils';
 import BaseScreen from '../../base-screen/BaseScreen';
 import computeStyleSheet from './ChargingStationOcppParametersStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 
 export interface Props extends BaseProps {}
 

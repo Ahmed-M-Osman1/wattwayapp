@@ -12,7 +12,7 @@ import computeListItemCommonStyle from '../list/ListItemCommonStyle';
 import computeModalCommonStyle from './ModalCommonStyle';
 import { Button } from '@rneui/base';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 
 export interface Props<T> extends BaseProps {
   defaultItems?: T[];

@@ -1,7 +1,5 @@
 import deepmerge from 'deepmerge';
 import { StyleSheet } from 'react-native';
-// // import ResponsiveStylesSheet from 'react-native-responsive-stylesheet';
-// import {scale, ScaledSheet} from 'react-native-size-matters';
 import {ScaledSheet , scale} from './helper/scale.ts';
 import {createOriented} from './helper/responsiveStylesSheet';
 import Utils from './utils/Utils';

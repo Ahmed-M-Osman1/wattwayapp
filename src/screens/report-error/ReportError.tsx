@@ -11,7 +11,7 @@ import Utils from '../../utils/Utils';
 import BaseScreen from '../base-screen/BaseScreen';
 import computeStyleSheet from './ReportErrorStyles';
 import computeFormStyleSheet from '../../FormStyles';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Button, Input} from '@rneui/base';

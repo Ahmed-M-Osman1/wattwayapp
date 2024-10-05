@@ -20,7 +20,7 @@ import Orientation from 'react-native-orientation-locker';
 import computeFabStyles from '../../components/fab/FabComponentStyles';
 import CarsFilters, { CarsFiltersDef } from './CarsFilters';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 
 interface State extends SelectableState<Car> {
   cars?: Car[];

@@ -16,7 +16,7 @@ import BaseAutoRefreshScreen from '../../base-screen/BaseAutoRefreshScreen';
 import computeStyleSheet from '../TransactionsStyles';
 import TransactionsInProgressFilters, { TransactionsInProgressFiltersDef } from './TransactionsInProgressFilters';
 import { View } from 'react-native';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 
 export interface Props extends BaseProps {}
 

@@ -2,8 +2,7 @@ import { t } from 'i18next';
 import { Icon } from 'native-base';
 import React from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { scale } from 'react-native-size-matters';
-
+import {scale } from '../../helper/scale.ts';
 import I18nManager from '../../I18n/I18nManager';
 import CentralServerProvider from '../../provider/CentralServerProvider';
 import ProviderFactory from '../../provider/ProviderFactory';

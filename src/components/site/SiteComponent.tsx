@@ -11,7 +11,7 @@ import computeListItemCommonStyle from '../list/ListItemCommonStyle';
 import I18nManager from '../../I18n/I18nManager';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 
 export interface Props extends BaseProps {
   site: Site;

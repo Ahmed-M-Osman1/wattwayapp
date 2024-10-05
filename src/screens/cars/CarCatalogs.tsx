@@ -17,7 +17,7 @@ import computeCarsStyles from './CarsStyles';
 import SelectableList, { SelectableProps, SelectableState } from '../base-screen/SelectableList';
 import Orientation from 'react-native-orientation-locker';
 import CarCatalogComponent from '../../components/car/CarCatalogComponent';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 
 interface State extends SelectableState<Car> {
   cars?: CarCatalog[];

@@ -22,7 +22,7 @@ import BaseScreen from '../../base-screen/BaseScreen';
 import computeStyleSheet from '../AuthStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 import {AuthContext, AuthService} from '../../../context/AuthContext';
 import {Button, CheckBox, Input} from '@rneui/base';
 import {getVersion} from 'react-native-device-info';
@@ -274,7 +274,7 @@ export default class Login extends BaseScreen<Props, State> {
     const navigation = this.props.navigation;
     const {tenantLogo, eula, loggingIn, loading, hidePassword, showNoTenantFoundDialog, tenantName, password, email, tenantSubDomain } = this.state;
     // Render
-    return !loading ? (
+    return loading ? (
         <Spinner style={formStyle.spinner} color="grey" />
     ) : (
         <AuthContext.Consumer>

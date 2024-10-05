@@ -10,7 +10,8 @@ import computeListItemCommonStyle from '../list/ListItemCommonStyle';
 import { t } from 'i18next';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { scale } from 'react-native-size-matters';
+import {scale} from '../../helper/scale.ts';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 interface State {

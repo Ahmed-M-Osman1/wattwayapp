@@ -38,7 +38,7 @@ import standardDarkLayout from '../../../../assets/map/standard-dark.png';
 import standardLightLayout from '../../../../assets/map/standard-light.png';
 import satelliteLayout from '../../../../assets/map/satellite.png';
 import computeActivityIndicatorCommonStyle from '../../../components/activity-indicator/ActivityIndicatorCommonStyle';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -502,11 +502,11 @@ export default class ChargingStations extends BaseAutoRefreshScreen<Props, State
     const commonColors = Utils.getCurrentCommonColor();
     return (
       <View style={[style.filtersContainer, showMap && style.mapFiltersContainer]}>
-        <ChargingStationsFilters
-          showRoamingFilter={!this.siteArea}
-          onFilterChanged={(newFilters: ChargingStationsFiltersDef) => this.filterChanged(newFilters)}
-          ref={(chargingStationsFilters: ChargingStationsFilters) => this.setScreenFilters(chargingStationsFilters)}
-        />
+        {/*<ChargingStationsFilters*/}
+        {/*  showRoamingFilter={!this.siteArea}*/}
+        {/*  onFilterChanged={(newFilters: ChargingStationsFiltersDef) => this.filterChanged(newFilters)}*/}
+        {/*  ref={(chargingStationsFilters: ChargingStationsFilters) => this.setScreenFilters(chargingStationsFilters)}*/}
+        {/*/>*/}
         <SimpleSearchComponent searchText={this.searchText} containerStyle={showMap ? style.mapSearchBarComponent : style.listSearchBarComponent} onChange={async (searchText) => this.search(searchText)} navigation={this.props.navigation} />
         {this.screenFilters?.canFilter() && (
           <TouchableOpacity onPress={() => this.screenFilters?.openModal()}  style={showMap? [fabStyles.fab, style.mapFilterButton] : style.listFilterButton}>

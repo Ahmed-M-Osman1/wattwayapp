@@ -12,7 +12,7 @@ import {Icon, NativeBaseProvider} from 'native-base';
 import { t } from 'i18next';
 import React, {useEffect, useState} from 'react';
 import {Appearance, ColorSchemeName, NativeEventSubscription, StatusBar, Text} from 'react-native';
-import { scale } from 'react-native-size-matters';
+import {scale } from './helper/scale.ts';
 import DeepLinkingManager from './deeplinking/DeepLinkingManager';
 import LocationManager from './location/LocationManager';
 import MigrationManager from './migration/MigrationManager';
@@ -708,10 +708,10 @@ export default class App extends React.Component<Props, State> {
         // Set up theme
         const themeManager = ThemeManager.getInstance();
         themeManager.setThemeType(Appearance.getColorScheme() as ThemeType);
-        // Listen for theme changes
+
         this.themeSubscription = Appearance.addChangeListener(({ colorScheme }) => {
             themeManager.setThemeType(Appearance.getColorScheme() as ThemeType);
-            this.setState({theme: colorScheme});
+            this.setState({ theme: colorScheme });
         });
 
         // Get the central server
@@ -728,40 +728,35 @@ export default class App extends React.Component<Props, State> {
         // Setup notifications
         await Notifications.initialize();
 
-        // Store initial url through which app was launched (if any)
-        const initialNotification = await messaging().getInitialNotification() as Notification;
-        const canHandleNotification = await Notifications.canHandleNotification(initialNotification);
-        let tenantSubdomain: string;
-        if (canHandleNotification) {
-            tenantSubdomain = initialNotification.data.tenantSubdomain;
-            // Store the initial url because second call returns null
-            this.initialUrl = initialNotification.data.deepLink;
-        }
-
-        // Set authentication state
-        let isSignedIn = true;
+        let isSignedIn = false;  // Start with false
         try {
+            const tenantSubdomain = "your-tenant-domain";  // Placeholder, replace with actual logic
             const userCredentials = await SecuredStorage.getUserCredentials(tenantSubdomain);
+
             if (userCredentials?.password && userCredentials?.email && userCredentials?.tenantSubDomain) {
-                await this.centralServerProvider.login(userCredentials.email, userCredentials.password, true, userCredentials.tenantSubDomain);
-                isSignedIn = true;
+                // Attempt login
+                await this.centralServerProvider.login(
+                    userCredentials.email,
+                    userCredentials.password,
+                    true,
+                    userCredentials.tenantSubDomain
+                );
+                isSignedIn = true;  // Set to true if login is successful
             } else {
-                this.initialUrl = `${Configuration.AWS_REST_ENDPOINT_PROD}/login?tenantSubDomain=${userCredentials?.tenantSubDomain}`;
+                this.initialUrl = `${Configuration.AWS_REST_ENDPOINT_PROD}/login`;
             }
         } catch (error) {
             if (__DEV__) {
-                console.log(error);
+                console.log(error);  // Log error in development mode
             }
         }
 
-        // Check for app updates
-        this.appVersion = await Utils.checkForUpdate();
-        // Set
         this.setState({
             showAppUpdateDialog: !!this.appVersion?.needsUpdate,
-            isSignedIn
+            isSignedIn,  // Set the authentication state
         });
     }
+
 
     public componentWillUnmount() {
         this.themeSubscription?.remove();

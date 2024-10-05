@@ -16,7 +16,7 @@ import { View } from 'react-native';
 import StatisticsComponent from '../../components/statistics/StatisticsComponent';
 import computeActivityIndicatorCommonStyles from '../../components/activity-indicator/ActivityIndicatorCommonStyle';
 import { ActivityIndicator } from 'react-native';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 import DurationUnitFormat from 'intl-unofficial-duration-unit-format';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';

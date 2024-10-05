@@ -16,7 +16,7 @@ import I18nManager from '../../I18n/I18nManager';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 
 export interface Props extends BaseProps {
   chargingStation: ChargingStation;

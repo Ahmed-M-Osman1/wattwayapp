@@ -19,6 +19,7 @@ export default class Notifications {
     this.centralServerProvider = await ProviderFactory.getProvider();
     try {
       const response = await requestNotifications(['alert', 'sound']);
+
       if (response?.status === 'granted' ) {
         const fcmToken = await messaging().getToken();
         if (fcmToken) {

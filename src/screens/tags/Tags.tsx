@@ -15,7 +15,7 @@ import SelectableList, { SelectableProps, SelectableState } from '../base-screen
 import computeStyleSheet from './TagsStyles';
 import TagsFilters, { TagsFiltersDef } from './TagsFilters';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 
 export interface Props extends SelectableProps<Tag> {
   userIDs?: string[];

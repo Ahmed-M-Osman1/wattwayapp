@@ -3,7 +3,7 @@ import { t } from 'i18next';
 import {Icon} from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { BackHandler, Text, View } from 'react-native';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 import { useFocusEffect } from '@react-navigation/native';
 
 import HeaderComponent from '../../../components/header/HeaderComponent';

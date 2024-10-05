@@ -16,7 +16,7 @@ import computeStyleSheet from '../AuthStyles';
 import { StatusCodes } from 'http-status-codes';
 import { TenantConnection } from '../../../types/Tenant';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { scale } from 'react-native-size-matters';
+import {scale} from '../../../helper/scale.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Button, Input, CheckBox} from '@rneui/base';

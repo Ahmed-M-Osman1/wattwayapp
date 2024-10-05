@@ -27,7 +27,7 @@ import ThemeManager from '../../custom-theme/ThemeManager';
 import { ChargingStationsFiltersDef } from '../charging-stations/list/ChargingStationsFilters';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export interface Props extends BaseProps {}

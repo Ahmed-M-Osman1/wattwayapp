@@ -18,7 +18,7 @@ import TenantComponent from '../../components/tenant/TenantComponent';
 import computeFabStyles from '../../components/fab/FabComponentStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 
 export interface Props extends BaseProps {}
 

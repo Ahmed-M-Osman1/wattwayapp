@@ -41,6 +41,9 @@ export default class DeepLinkingManager {
             'https://*.e-mobility-labs.com',
             'https://*.e-mobility-labs.org',
             'https://*.qa-e-mobility-group.com',
+            'https://api.watt-way.com/v1',
+            'https://api.watt-way.com/v1/*',
+            'https://api.watt-way.com/*'
         ];
     }
 

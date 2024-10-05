@@ -18,7 +18,8 @@ import BaseAutoRefreshScreen from '../base-screen/BaseAutoRefreshScreen';
 import computeStyleSheet from './PaymentMethodsStyle';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Message from '../../utils/Message';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
+
 import ItemsCompo from '../../components/list/testCompo/ItemsCompo';
 import SelectableList from '../base-screen/SelectableList';
 

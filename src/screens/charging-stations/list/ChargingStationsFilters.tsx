@@ -67,15 +67,15 @@ export default class ChargingStationsFilters extends ScreenFilters<ChargingStati
               ref={(roamingFilterControlComponent: SwitchFilterComponent<boolean>) => this.addModalFilter(roamingFilterControlComponent)}
             />
           )}
-          <ConnectorTypeFilterControlComponent
-            filterID={'connectorTypes'}
-            internalFilterID={GlobalFilters.CONNECTOR_TYPES}
-            initialValue={filters?.connectorTypes}
-            label={t('details.connectors')}
-            ref={(connectorTypeFilterControlComponent: ConnectorTypeFilterControlComponent) =>
-              this.addModalFilter(connectorTypeFilterControlComponent)
-            }
-          />
+          {/*<ConnectorTypeFilterControlComponent*/}
+          {/*  filterID={'connectorTypes'}*/}
+          {/*  internalFilterID={GlobalFilters.CONNECTOR_TYPES}*/}
+          {/*  initialValue={filters?.connectorTypes}*/}
+          {/*  label={t('details.connectors')}*/}
+          {/*  ref={(connectorTypeFilterControlComponent: ConnectorTypeFilterControlComponent) =>*/}
+          {/*    this.addModalFilter(connectorTypeFilterControlComponent)*/}
+          {/*  }*/}
+          {/*/>*/}
         </FilterModalContainerComponent>
       </View>
     );

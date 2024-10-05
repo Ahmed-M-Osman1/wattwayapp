@@ -4,10 +4,9 @@ import {Buffer} from 'buffer';
 import {NavigationContainerRef, StackActions} from '@react-navigation/native';
 import {AxiosInstance} from 'axios';
 import { t } from 'i18next';
-import jwtDecode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import {Platform} from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
-
 import Configuration from '../config/Configuration';
 import Notifications from '../notification/Notifications';
 import {PLATFORM} from '../theme/variables/commonColor';
@@ -106,7 +105,6 @@ export default class CentralServerProvider {
     }
     // Adjust the language according the device default
   }
-
   public getCaptchaBaseUrl(): string {
     return this.captchaBaseUrl;
   }
@@ -292,19 +290,20 @@ export default class CentralServerProvider {
     this.password = null;
   }
 
-  public async login(email: string, password: string, acceptEula: boolean, tenantSubDomain: string): Promise<void> {
-    this.debugMethod('login');
+  public async login(email: string, password: string, acceptEula: boolean): Promise<void> {
+    this.debugMethod('login')
     // Get the Tenant
-    const tenant = await this.getTenant(tenantSubDomain);
+    const tenant = "emsp";
+    const tenantSubDomain= "emsp"
     this.tenant = tenant;
     // Call
     const result = await this.axiosInstance.post<any>(
-      `${this.buildRestServerAuthURL(tenant)}/${RESTServerRoute.REST_SIGNIN}`,
+      `https://api.watt-way.com/v1/auth/signin`,
       {
         acceptEula,
         email,
         password,
-        tenant: tenantSubDomain
+        tenant: "emsp"
       },
       { headers: this.buildHeaders() }
     );
@@ -317,7 +316,7 @@ export default class CentralServerProvider {
     this.currency = this.decodedToken.currency;
     this.securityProvider = new SecurityProvider(this.decodedToken);
     // Save
-    await SecuredStorage.saveUserCredentials(tenantSubDomain, {
+    await SecuredStorage.saveUserCredentials("emsp", {
       email,
       password,
       tenantSubDomain,
@@ -512,6 +511,8 @@ export default class CentralServerProvider {
         }
       }
     );
+    this.debugMethod('getChargingStation', result);
+
     return result.data;
   }
 
@@ -1141,6 +1142,8 @@ export default class CentralServerProvider {
   }
 
   private buildRestServerAuthURL(tenant: TenantConnection): string {
+    console.log(" ==== endpoint",tenant.endpoint )
+    console.log(" ==== tenant",tenant )
     return (tenant?.endpoint?.endpoint) + '/v1/auth';
   }
 

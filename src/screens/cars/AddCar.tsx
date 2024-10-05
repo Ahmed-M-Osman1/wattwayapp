@@ -24,7 +24,7 @@ import { t } from 'i18next';
 import Constants from '../../utils/Constants';
 import {RestResponse} from '../../types/ActionResponse';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {scale} from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';

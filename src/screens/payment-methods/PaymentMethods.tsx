@@ -2,7 +2,7 @@ import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import { ActivityIndicator, SafeAreaView, TouchableOpacity, View } from 'react-native';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 
 import HeaderComponent from '../../components/header/HeaderComponent';
 import ItemsList from '../../components/list/ItemsList';

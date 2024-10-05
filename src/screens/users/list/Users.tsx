@@ -14,8 +14,7 @@ import SelectableList, { SelectableProps, SelectableState } from '../../base-scr
 import computeListItemCommonStyles from '../../../components/list/ListItemCommonStyle';
 import UsersFilters, { UsersFiltersDef } from './UsersFilters';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { scale } from 'react-native-size-matters';
-
+import {scale } from '../../../helper/scale.ts';
 export interface Props extends SelectableProps<User> {
   filters?: UsersFiltersDef
 }

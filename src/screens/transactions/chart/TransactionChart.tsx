@@ -3,7 +3,7 @@ import { Spinner } from 'native-base';
 import React from 'react';
 import { View, processColor, Text } from 'react-native';
 import { LineChart, LineChartProps, LineValue } from 'react-native-charts-wrapper';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 
 import HeaderComponent from '../../../components/header/HeaderComponent';
 import TransactionHeaderComponent from '../../../components/transaction/header/TransactionHeaderComponent';

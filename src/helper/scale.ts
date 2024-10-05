@@ -74,7 +74,6 @@ const scaleByAnnotation = (scale, verticalScale, moderateScale, moderateVertical
             result = moderateVerticalScale(size, scaleFactor);
             break;
     }
-    console.log('======', result)
     return shouldRound ? Math.round(result) : result;
 };
 

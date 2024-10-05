@@ -23,7 +23,7 @@ import CentralServerProvider from '../../provider/CentralServerProvider';
 import ProviderFactory from '../../provider/ProviderFactory';
 import SecurityProvider from '../../provider/SecurityProvider';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 import {AuthContext} from '../../context/AuthContext';
 import {CommonActions, DrawerActions} from '@react-navigation/native';
 import {
@@ -31,7 +31,6 @@ import {
   DrawerContentScrollView,
   DrawerItem,
 } from '@react-navigation/drawer';
-import Color from 'color';
 
 export interface Props extends DrawerContentComponentProps {}
 

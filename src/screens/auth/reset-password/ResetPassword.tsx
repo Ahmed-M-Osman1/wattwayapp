@@ -14,7 +14,7 @@ import AuthHeader from '../AuthHeader';
 import computeStyleSheet from '../AuthStyles';
 import { TenantConnection } from '../../../types/Tenant';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Button, Input} from '@rneui/base';

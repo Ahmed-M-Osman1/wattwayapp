@@ -9,7 +9,7 @@ import ScreenFilters from '../search/filter/screen/ScreenFilters';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../helper/scale.ts';
 import Utils from '../../utils/Utils';
 
 export interface Props extends BaseProps {
