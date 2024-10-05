@@ -189,7 +189,7 @@ export default class Tenants extends BaseScreen<Props, State> {
       <DialogModal
         animationIn={'fadeInLeft'}
         title={t('authentication.addTenantTitle')}
-        renderIcon={(iconStyle) => <Icon size={scale(iconStyle.fontSize)} style={iconStyle} as={MaterialIcons} name={'add-business'} />}
+        renderIcon={(iconStyle) => <Icon size={scale(iconStyle?.fontSize)} style={iconStyle} as={MaterialIcons} name={'add-business'} />}
         description={t('authentication.addTenantText')}
         close={() => this.setState({ showAddTenantDialog: false })}
         withCancel={true}

@@ -1,7 +1,6 @@
-import i18n from 'i18n-js';
 import React from 'react';
 import { View } from 'react-native';
-
+import { t } from 'i18next';
 import HeaderComponent from '../../components/header/HeaderComponent';
 import InvoiceComponent from '../../components/invoice/InvoiceComponent';
 import ItemsList from '../../components/list/ItemsList';
@@ -138,7 +137,7 @@ export default class Invoices extends BaseScreen<Props, State> {
     return (
       <View style={style.container}>
         <HeaderComponent
-          title={i18n.t('sidebar.invoices')}
+          title={t('sidebar.invoices')}
           subTitle={count > 0 ? `(${I18nManager.formatNumber(count)})` : null}
           navigation={this.props.navigation}
           sideBar={this.canOpenDrawer}
@@ -161,7 +160,7 @@ export default class Invoices extends BaseScreen<Props, State> {
               refreshing={refreshing}
               manualRefresh={this.manualRefresh.bind(this)}
               onEndReached={this.onEndScroll}
-              emptyTitle={i18n.t('invoices.noInvoices')}
+              emptyTitle={t('invoices.noInvoices')}
             />
           </View>
         )}

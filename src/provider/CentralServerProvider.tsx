@@ -9,7 +9,6 @@ import {Platform} from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 
 import Configuration from '../config/Configuration';
-import I18nManager from '../I18n/I18nManager';
 import Notifications from '../notification/Notifications';
 import {PLATFORM} from '../theme/variables/commonColor';
 import {ActionResponse, BillingOperationResult} from '../types/ActionResponse';
@@ -106,9 +105,6 @@ export default class CentralServerProvider {
       } catch (error) {}
     }
     // Adjust the language according the device default
-    I18nManager.switchLanguage(this.getUserLanguage(), this.currency);
-    const userSettings = await SecuredStorage.getSettings();
-    I18nManager.switchDistanceUnit(userSettings?.distanceUnit);
   }
 
   public getCaptchaBaseUrl(): string {
@@ -330,7 +326,6 @@ export default class CentralServerProvider {
       currency: this.decodedToken.currency
     });
     // Adjust the language according the device default
-    I18nManager.switchLanguage(this.getUserLanguage(), this.currency);
     try {
       // Save the User's token
       await this.saveUserMobileData(this.getUserInfo().id, {

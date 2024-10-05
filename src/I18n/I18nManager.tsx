@@ -1,5 +1,5 @@
-import { createIntl, createIntlCache } from "@formatjs/intl";
-import moment from "moment";
+import { createIntl, createIntlCache } from '@formatjs/intl';
+import moment from 'moment';
 import 'moment/locale/de';
 import 'moment/locale/en-gb';
 import 'moment/locale/es';
@@ -7,8 +7,8 @@ import 'moment/locale/fr';
 import 'moment/locale/it';
 import 'moment/locale/cs';
 import 'moment/locale/pt-br';
-import { I18nManager as I18nReactNativeManager } from "react-native";
-import * as RNLocalize from "react-native-localize";
+import { I18nManager as I18nReactNativeManager } from 'react-native';
+import * as RNLocalize from 'react-native-localize';
 
 // Translation files
 const translations = {
@@ -47,18 +47,6 @@ export default class I18nManager {
   public static initialize(): void {
     moment.locale(languageTag);
   }
-
-  public static switchLanguage(language: string, currency: string) {
-    if (translations[language as Translation]) {
-      intl?.update({
-        locale: language,
-        messages: translations[language as Translation],
-      });
-      moment.locale(language);
-    }
-    I18nManager.currency = currency;
-  }
-
   public static switchDistanceUnit(distanceUnit: string): void {
     I18nManager.distanceUnit = distanceUnit;
   }

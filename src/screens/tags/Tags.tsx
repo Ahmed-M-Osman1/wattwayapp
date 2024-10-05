@@ -1,8 +1,7 @@
-import i18n, { default as I18n } from 'i18n-js';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-
+import { t } from 'i18next';
 import HeaderComponent from '../../components/header/HeaderComponent';
 import ItemsList from '../../components/list/ItemsList';
 import SimpleSearchComponent from '../../components/search/simple/SimpleSearchComponent';
@@ -184,7 +183,7 @@ export default class Tags extends SelectableList<Tag> {
               refreshing={refreshing}
               manualRefresh={this.manualRefresh.bind(this)}
               onEndReached={this.onEndScroll}
-              emptyTitle={i18n.t('tags.noTags')}
+              emptyTitle={t('tags.noTags')}
             />
           </View>
         )}

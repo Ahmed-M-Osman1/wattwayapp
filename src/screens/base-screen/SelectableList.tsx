@@ -3,7 +3,6 @@ import BaseProps from '../../types/BaseProps';
 import ItemsList, { ItemSelectionMode } from '../../components/list/ItemsList';
 import ListItem from '../../types/ListItem';
 import BaseScreen from './BaseScreen';
-import { default as I18n } from 'i18n-js';
 import I18nManager from '../../I18n/I18nManager';
 
 export interface SelectableProps<T> extends BaseProps {

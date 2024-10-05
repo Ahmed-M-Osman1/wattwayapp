@@ -1,8 +1,8 @@
 import deepmerge from 'deepmerge';
 import {Platform, StyleSheet} from 'react-native';
 // // import ResponsiveStylesSheet from 'react-native-responsive-stylesheet';
-import { ScaledSheet, scale } from 'react-native-size-matters';
-
+import {ScaledSheet, scale } from '../../helper/scale.ts';
+import {createOriented} from '../../helper/responsiveStylesSheet';
 import Utils from '../../utils/Utils';
 import {PLATFORM} from '../../theme/variables/commonColor';
 
@@ -61,8 +61,8 @@ export default function computeStyleSheet(): StyleSheet.NamedStyles<any> {
   });
   const portraitStyles = {};
   const landscapeStyles = {};
-  return {
+  return createOriented({
     landscape: deepmerge(commonStyles, landscapeStyles) as StyleSheet.NamedStyles<any>,
     portrait: deepmerge(commonStyles, portraitStyles) as StyleSheet.NamedStyles<any>
-  }
+  })
 }

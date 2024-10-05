@@ -1,8 +1,6 @@
-import { default as I18n } from 'i18n-js';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-
 import HeaderComponent from '../../../components/header/HeaderComponent';
 import ItemsList, { ItemSelectionMode } from '../../../components/list/ItemsList';
 import SimpleSearchComponent from '../../../components/search/simple/SimpleSearchComponent';
