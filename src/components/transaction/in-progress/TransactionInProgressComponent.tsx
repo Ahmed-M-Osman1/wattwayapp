@@ -12,7 +12,7 @@ import computeListItemCommonStyle from '../../list/ListItemCommonStyle';
 import DurationUnitFormat from 'intl-unofficial-duration-unit-format';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 
 export interface Props extends BaseProps {
   transaction: Transaction;

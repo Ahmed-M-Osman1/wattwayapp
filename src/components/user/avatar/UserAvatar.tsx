@@ -1,7 +1,6 @@
 import React from 'react';
 import { Avatar } from '@rneui/base';
-import { scale } from 'react-native-size-matters';
-
+import {scale } from '../../../helper/scale.ts';
 import CentralServerProvider from '../../../provider/CentralServerProvider';
 import ProviderFactory from '../../../provider/ProviderFactory';
 import BaseProps from '../../../types/BaseProps';

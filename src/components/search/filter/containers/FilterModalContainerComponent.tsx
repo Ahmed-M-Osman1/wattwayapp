@@ -8,7 +8,7 @@ import { t } from 'i18next';
 import { Icon } from 'native-base';
 import { Button } from '@rneui/base';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../../helper/scale.ts';
 
 export interface Props extends FilterContainerComponentProps {}
 

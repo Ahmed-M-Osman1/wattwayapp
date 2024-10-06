@@ -12,8 +12,7 @@ import { KeyValue, PropertyDisplay } from '../../../types/Global';
 import Utils from '../../../utils/Utils';
 import BaseScreen from '../../base-screen/BaseScreen';
 import computeStyleSheet from './ChargingStationPropertiesStyles';
-import { scale } from 'react-native-size-matters';
-
+import {scale } from '../../../helper/scale.ts';
 export interface Props extends BaseProps {}
 
 interface State {

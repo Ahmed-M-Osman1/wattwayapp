@@ -18,8 +18,7 @@ import computeStyleSheet from '../TransactionsStyles';
 import TransactionsHistoryFilters, { TransactionsHistoryFiltersDef } from './TransactionsHistoryFilters';
 import { TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { scale } from 'react-native-size-matters';
-
+import {scale } from '../../../helper/scale.ts';
 export interface Props extends BaseProps {}
 
 interface State {

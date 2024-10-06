@@ -7,7 +7,7 @@ import Constants from '../../../../../utils/Constants';
 import FilterControlComponent, { FilterControlComponentProps, FilterControlComponentState } from '../FilterControlComponent';
 import computeStyleSheet from './DateFilterControlComponentStyles';
 import I18nManager from '../../../../../I18n/I18nManager';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../../../helper/scale.ts';
 import Foundation from 'react-native-vector-icons/Foundation';
 import { t } from 'i18next';
 

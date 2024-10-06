@@ -8,7 +8,7 @@ import BaseProps from '../../../types/BaseProps';
 import Utils from '../../../utils/Utils';
 import BaseScreen from '../../base-screen/BaseScreen';
 import computeStyleSheet from './EulaStyles';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 // import RenderHtml from 'react-native-render-html';
 
 export interface Props extends BaseProps {}

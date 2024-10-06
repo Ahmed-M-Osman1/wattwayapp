@@ -17,7 +17,7 @@ import { t } from 'i18next';
 import Utils from '../../../../../utils/Utils';
 import { withBadge } from '@rneui/base';
 import ListItem from '../../../../../types/ListItem';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../../../helper/scale.ts';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 

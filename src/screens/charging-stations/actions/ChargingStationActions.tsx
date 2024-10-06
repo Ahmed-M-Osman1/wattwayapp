@@ -11,8 +11,7 @@ import Utils from '../../../utils/Utils';
 import BaseAutoRefreshScreen from '../../base-screen/BaseAutoRefreshScreen';
 import computeStyleSheet from './ChargingStationActionsStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { scale } from 'react-native-size-matters';
-
+import {scale } from '../../../helper/scale.ts';
 export interface Props extends BaseProps {}
 
 interface State {

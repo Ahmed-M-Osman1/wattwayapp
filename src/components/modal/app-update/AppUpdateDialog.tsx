@@ -5,7 +5,7 @@ import { Icon } from 'native-base';
 import DialogModal, { DialogCommonProps } from '../DialogModal';
 import { CheckVersionResponse } from 'react-native-check-version';
 import computeStyleSheet from '../ModalCommonStyle';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export interface Props extends DialogCommonProps {
@@ -33,7 +33,7 @@ export default class AppUpdateDialog extends React.Component<Props, State> {
         buttons={[
           {
             text: t('general.update'),
-            action: async () => Linking.openURL(appVersion?.url),
+            action: async () => Linking.openURL(appVersion?.url ?? ''),
             buttonTextStyle: modalCommonStyle.primaryButtonText,
             buttonStyle: modalCommonStyle.primaryButton
           }

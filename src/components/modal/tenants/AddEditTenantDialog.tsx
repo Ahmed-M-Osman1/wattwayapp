@@ -14,7 +14,7 @@ import computeStyleSheet from './AddTenantManuallyDialogStyle';
 import computeModalCommonStyle from '../ModalCommonStyle';
 import Message from '../../../utils/Message';
 import {TouchableOpacity, Text, View, TextInput} from 'react-native';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';

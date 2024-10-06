@@ -12,7 +12,7 @@ import Utils from '../../../utils/Utils';
 import ConnectorStatusComponent from '../../connector-status/ConnectorStatusComponent';
 import computeStyleSheet from './ChargingStationConnectorComponentStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { scale } from 'react-native-size-matters';
+import {scale } from '../../../helper/scale.ts';
 
 export interface Props extends BaseProps {
   chargingStation: ChargingStation;

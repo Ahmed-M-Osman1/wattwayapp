@@ -1,10 +1,8 @@
 import deepmerge from 'deepmerge';
 import { Platform, StyleSheet } from 'react-native';
 // // import ResponsiveStylesSheet from 'react-native-responsive-stylesheet';
-import { ScaledSheet } from 'react-native-size-matters';
-
 import Utils from '../../../../utils/Utils';
-import {moderateScale} from '../../../../helper/scale.ts';
+import {moderateScale, ScaledSheet} from '../../../../helper/scale.ts';
 import {createOriented} from '../../../../helper/responsiveStylesSheet';
 import { PLATFORM } from '../../../../theme/variables/commonColor';
 
