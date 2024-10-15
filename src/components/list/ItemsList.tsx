@@ -95,7 +95,7 @@ export default class ItemsList<T extends ListItem> extends React.Component<Props
                 <TouchableOpacity
                   style={[style.rowItem, isItemDisabled && selectionEnabled && listItemCommonStyles.disabled]}
                   disabled={!selectionEnabled}
-                  onPress={selectionEnabled && !isItemDisabled ? () => this.onSelectItem(item) : () => {}}>
+                  onPress={selectionEnabled && !isItemDisabled ? () => this.onSelectItem(item) : () => {console.log(" ===== ", selectionEnabled , "===== ", isItemDisabled)}}>
                   {this.props.renderItem(item, selectedItems.has(item.id))}
                 </TouchableOpacity>
                 {this.renderItemsSeparator(itemsSeparator, style)}

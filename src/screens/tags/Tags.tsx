@@ -70,10 +70,12 @@ export default class Tags extends SelectableList<Tag> {
     try {
       const userID = isModal ? this.props.userIDs?.join('|') : this.state.filters?.users?.map(user => user.id).join('|');
       const params = {
-        Search: searchText,
+        // Search: searchText,
         WithUser: true,
-        UserID: userID
+        UserID: userID,
+        Limit: 100
       };
+      console.log("==== params",params)
       // Get the Tags
       const tags = await this.centralServerProvider.getTags(params, { skip, limit }, [sorting ?? '-createdOn']);
       // Get total number of records

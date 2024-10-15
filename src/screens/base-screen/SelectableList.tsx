@@ -3,7 +3,7 @@ import BaseProps from '../../types/BaseProps';
 import ItemsList, { ItemSelectionMode } from '../../components/list/ItemsList';
 import ListItem from '../../types/ListItem';
 import BaseScreen from './BaseScreen';
-import I18nManager from '../../I18n/I18nManager';
+import { t } from 'i18next';
 
 export interface SelectableProps<T> extends BaseProps {
   selectionMode?: ItemSelectionMode;
@@ -49,6 +49,7 @@ export default class SelectableList<T extends ListItem> extends BaseScreen<Selec
   }
 
   protected onItemsSelected(selectedItems: T[]): void {
+    console.log('Items selected:', selectedItems); // Debug log
     this.setState({ selectedItems }, () => this.props.onItemsSelected?.(selectedItems));
   }
 
@@ -58,7 +59,7 @@ export default class SelectableList<T extends ListItem> extends BaseScreen<Selec
 
   protected buildHeaderSubtitle(): string {
     const { count } = this.state;
-    return count > 0 && `(${I18nManager.formatNumber(count)})`;
+    return count > 0 ? `${count}` : "0" ;
   }
 
   public buildModalHeaderTitle(): string {
@@ -75,9 +76,9 @@ export default class SelectableList<T extends ListItem> extends BaseScreen<Selec
     const { selectedItems, count } = this.state;
     switch (selectionMode) {
       case ItemSelectionMode.MULTI:
-        return `(${I18nManager.formatNumber(selectedItems.length)}/${I18nManager.formatNumber(count)})`;
+        return `(${selectedItems.length}/${count})`;
       case ItemSelectionMode.SINGLE:
-        return `(${I18nManager.formatNumber(count)})`;
+        return `(${count})`;
       default:
         return '';
     }

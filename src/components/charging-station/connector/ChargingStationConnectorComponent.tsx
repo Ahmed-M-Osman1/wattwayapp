@@ -130,7 +130,7 @@ export default class ChargingStationConnectorComponent extends React.Component<P
       </View>
     ) : (
       <View style={style.connectorDetail}>
-        <Text style={style.connectorValues}>{I18nManager.formatNumber(Math.trunc(connector.power / 1000))}</Text>
+        <Text style={style.connectorValues}>{Math.trunc(connector.power / 1000)}</Text>
         <Text style={style.label} numberOfLines={1}>
           {t('details.maximum')}
         </Text>

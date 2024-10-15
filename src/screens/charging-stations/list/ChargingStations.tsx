@@ -310,6 +310,7 @@ export default class ChargingStations extends BaseAutoRefreshScreen<Props, State
   public onMapRegionChangeComplete = (region: Region) => {
     if(region.latitude.toFixed(6) !== this.currentRegion.latitude.toFixed(6) ||
       region.longitude.toFixed(6) !== this.currentRegion.longitude.toFixed(6)) {
+      console.log("onMapRegionChangeComplete ::::::: ", region)
       this.currentRegion = region;
       this.refresh();
     }

@@ -5,11 +5,11 @@ export default class LocationManager {
 
     // Static fixed location that will be returned for both Android and iOS
     private static fixedLocation = {
-        latitude: 23.35102681060004,
-        longitude: 42.670324109494686,
-        latitudeDelta: 0.014298002823881717,
-        longitudeDelta: 0.009999945759773254,
-        accuracy: 0, // You can add more properties if required
+        longitude:  7.2857311,
+        latitude: 43.7131659,
+        latitudeDelta: 0.2246253528461608,
+        longitudeDelta: 0.1599987968802452,
+        accuracy: 0,
         altitude: 0,
         heading: 0,
         speed: 0,

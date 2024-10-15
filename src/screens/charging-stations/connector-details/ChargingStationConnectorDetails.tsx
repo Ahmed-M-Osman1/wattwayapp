@@ -543,7 +543,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
   ): { totalInactivitySecs?: number; elapsedTimeFormatted?: string; inactivityFormatted?: string } => {
     // Transaction loaded?
     const durationFormatOptions = {style: DurationUnitFormat.styles.NARROW, format: '{hour} {minutes}'};
-    const defaultDuration = I18nManager.formatDuration(0, durationFormatOptions);
+    const defaultDuration = durationFormatOptions ?? 0;
     if (transaction) {
       let elapsedTimeFormatted = defaultDuration;
       let inactivityFormatted = defaultDuration;
