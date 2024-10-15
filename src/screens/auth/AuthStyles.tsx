@@ -39,9 +39,9 @@ export default function computeStyleSheet(): StyleSheet.NamedStyles<any> {
       marginVertical: scale(20)
     },
     tenantName: {
-      fontSize: scale(15),
+      fontSize: scale(32),
       color: commonColor.textColor,
-      textAlign: 'left',
+      textAlign: 'center',
       flexShrink: 1
     },
     dropdownIcon: {
@@ -85,8 +85,8 @@ export default function computeStyleSheet(): StyleSheet.NamedStyles<any> {
       flexShrink: 1
     },
     tenantLogo: {
-      height: scale(50),
-      width: scale(100),
+      height: scale(150),
+      width: scale(300),
       resizeMode: 'contain'
     },
     eulaLink: {

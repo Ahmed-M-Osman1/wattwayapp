@@ -1,13 +1,13 @@
 import {Platform} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
-
+let ProviderFactory;
 import CentralServerProvider from '../provider/CentralServerProvider';
 import {Notification} from '../types/UserNotifications';
 import {getApplicationName, getBundleId, getVersion} from 'react-native-device-info';
 import Message from '../utils/Message';
 import { t } from 'i18next';
 import SecuredStorage from '../utils/SecuredStorage';
-import ProviderFactory from '../provider/ProviderFactory';
+// import ProviderFactory from '../provider/ProviderFactory';
 import {requestNotifications} from 'react-native-permissions';
 
 export default class Notifications {
@@ -15,6 +15,9 @@ export default class Notifications {
   private static token: string;
 
   public static async initialize(): Promise<void> {
+    if (!ProviderFactory) {
+      ProviderFactory = require('../provider/ProviderFactory').default;
+    }
     // Setup central provider
     this.centralServerProvider = await ProviderFactory.getProvider();
     try {

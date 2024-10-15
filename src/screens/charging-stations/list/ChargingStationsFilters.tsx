@@ -1,7 +1,6 @@
 import { t } from 'i18next';
 import React from 'react';
-
-import ConnectorTypeFilterControlComponent from '../../../components/search/filter/controls/connector-type/ConnectorTypeFilterControlComponent';
+import ConnectorTypeFilterControlComponent from '../../../components/search/filter/controls/connector-type/ConnectorTypeFilterControlComponent.tsx';
 import ScreenFilters, { ScreenFiltersProps } from '../../../components/search/filter/screen/ScreenFilters';
 import { GlobalFilters } from '../../../types/Filter';
 import SwitchFilterComponent
@@ -67,15 +66,15 @@ export default class ChargingStationsFilters extends ScreenFilters<ChargingStati
               ref={(roamingFilterControlComponent: SwitchFilterComponent<boolean>) => this.addModalFilter(roamingFilterControlComponent)}
             />
           )}
-          {/*<ConnectorTypeFilterControlComponent*/}
-          {/*  filterID={'connectorTypes'}*/}
-          {/*  internalFilterID={GlobalFilters.CONNECTOR_TYPES}*/}
-          {/*  initialValue={filters?.connectorTypes}*/}
-          {/*  label={t('details.connectors')}*/}
-          {/*  ref={(connectorTypeFilterControlComponent: ConnectorTypeFilterControlComponent) =>*/}
-          {/*    this.addModalFilter(connectorTypeFilterControlComponent)*/}
-          {/*  }*/}
-          {/*/>*/}
+          <ConnectorTypeFilterControlComponent
+            filterID={'connectorTypes'}
+            internalFilterID={GlobalFilters.CONNECTOR_TYPES}
+            initialValue={filters?.connectorTypes}
+            label={t('details.connectors')}
+            ref={(connectorTypeFilterControlComponent: ConnectorTypeFilterControlComponent) =>
+              this.addModalFilter(connectorTypeFilterControlComponent)
+            }
+          />
         </FilterModalContainerComponent>
       </View>
     );

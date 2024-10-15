@@ -1,6 +1,6 @@
 import React from 'react';
 import ClusterComponent from './cluster/ClusterComponent';
-import MapView, { Region } from 'react-native-maps';
+import MapView, { Region, PROVIDER_GOOGLE } from 'react-native-maps';
 import ChargingStation from '../../types/ChargingStation';
 import Site from '../../types/Site';
 import SiteArea from '../../types/SiteArea';
@@ -43,7 +43,8 @@ export default class ClusterMap<T extends Localizable> extends React.Component<P
         <View style={style.mapOverlay} />
         {initialRegion && (
           <MapView
-            customMapStyle={isDarkModeEnabled ? this.darkMapTheme : null}
+              provider={PROVIDER_GOOGLE}
+            // customMapStyle={isDarkModeEnabled ? this.darkMapTheme : null}
             style={style.map}
             showsCompass={false}
             zoomControlEnabled={false}

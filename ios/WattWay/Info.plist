@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>NSCameraUsageDescription</key>
+    <string>YOUR TEXT</string>
 	<key>CFBundleDisplayName</key>
 	<string>WattWay</string>
 	<key>CFBundleExecutable</key>

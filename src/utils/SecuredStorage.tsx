@@ -135,7 +135,7 @@ export default class SecuredStorage {
   }
 
   public static async getTenants(): Promise<TenantConnection[]> {
-    const tenants = (await SecuredStorage.getJson(SecuredStorageKey.TENANTS)) || [];
+    const tenants = (await SecuredStorage.getJson(SecuredStorageKey.TENANTS)) || [{"endpoint": {"endpoint": "https://api.watt-way.com/v1", "id": "aws", "name": "Amazon Web Service"}, "name": "Test", "subdomain": "emsp"}];
     return tenants as TenantConnection[];
   }
 

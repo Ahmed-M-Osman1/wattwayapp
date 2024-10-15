@@ -135,12 +135,24 @@ export default class ChargingStations extends BaseAutoRefreshScreen<Props, State
     super.setState(state, callback);
   };
 
-  public getChargingStations = async (searchText: string, skip: number, limit: number): Promise<DataResult<ChargingStation>> => {
-    if(this.state.filters) {
+  public getChargingStations = async (
+      searchText: string,
+      skip: number,
+      limit: number
+  ): Promise<DataResult<ChargingStation>> => {
+    if (this.state.filters) {
       let chargingStations: DataResult<ChargingStation>;
       const { filters, showMap } = this.state;
+
+      console.log('Filters:', filters);
+      console.log('Show Map:', showMap);
+
       const currentLocation = await Utils.getUserCurrentLocation();
-      const projectFields = 'id|coordinates|inactive|connectors.connectorId|connectors.coordinates|connectors.status|siteArea.siteID';
+      console.log('Current Location:', currentLocation);
+
+      const projectFields =
+          'id|coordinates|inactive|connectors.connectorId|connectors.coordinates|connectors.status|siteArea.siteID';
+
       try {
         const params = {
           Search: searchText,
@@ -154,25 +166,40 @@ export default class ChargingStations extends BaseAutoRefreshScreen<Props, State
           LocMaxDistanceMeters: showMap ? Utils.computeMaxBoundaryDistanceKm(this.currentRegion) : null,
           ProjectFields: showMap ? projectFields : ''
         };
+
+        console.log('Params:', params);
+
         // Get with the Site Area
         chargingStations = await this.centralServerProvider.getChargingStations(params, { skip, limit }, ['id']);
+        console.log('Charging Stations:', chargingStations);
+
         // Get total number of records
         if (chargingStations?.count === -1) {
-          const chargingStationsNbrRecordsOnly = await this.centralServerProvider.getChargingStations(params, Constants.ONLY_RECORD_COUNT);
+          console.log('Fetching total number of records...');
+          const chargingStationsNbrRecordsOnly = await this.centralServerProvider.getChargingStations(
+              params,
+              Constants.ONLY_RECORD_COUNT
+          );
           chargingStations.count = chargingStationsNbrRecordsOnly?.count;
+          console.log('Updated Charging Stations Count:', chargingStations.count);
         }
       } catch (error) {
+        console.error('Error fetching charging stations:', error);
+
         // Other common Error
         await Utils.handleHttpUnexpectedError(
-          this.centralServerProvider,
-          error,
-          'chargers.chargerUnexpectedError',
-          this.props.navigation,
-          this.refresh.bind(this)
+            this.centralServerProvider,
+            error,
+            'chargers.chargerUnexpectedError',
+            this.props.navigation,
+            this.refresh.bind(this)
         );
       }
+
       return chargingStations;
     }
+
+    console.log('No filters provided, returning null.');
     return null;
   };
 
@@ -359,7 +386,7 @@ export default class ChargingStations extends BaseAutoRefreshScreen<Props, State
           ref={(headerComponent: HeaderComponent) => this.setHeaderComponent(headerComponent)}
           navigation={navigation}
           title={this.siteArea?.name ?? t('chargers.title')}
-          subTitle={count > 0 ? `(${I18nManager.formatNumber(count)})` : null}
+          subTitle={count > 0 ? count : null}
           actions={[
             {
               onPress: () => navigation.navigate('QRCodeScanner'),
@@ -502,11 +529,11 @@ export default class ChargingStations extends BaseAutoRefreshScreen<Props, State
     const commonColors = Utils.getCurrentCommonColor();
     return (
       <View style={[style.filtersContainer, showMap && style.mapFiltersContainer]}>
-        {/*<ChargingStationsFilters*/}
-        {/*  showRoamingFilter={!this.siteArea}*/}
-        {/*  onFilterChanged={(newFilters: ChargingStationsFiltersDef) => this.filterChanged(newFilters)}*/}
-        {/*  ref={(chargingStationsFilters: ChargingStationsFilters) => this.setScreenFilters(chargingStationsFilters)}*/}
-        {/*/>*/}
+        <ChargingStationsFilters
+          showRoamingFilter={!this.siteArea}
+          onFilterChanged={(newFilters: ChargingStationsFiltersDef) => this.filterChanged(newFilters)}
+          ref={(chargingStationsFilters: ChargingStationsFilters) => this.setScreenFilters(chargingStationsFilters)}
+        />
         <SimpleSearchComponent searchText={this.searchText} containerStyle={showMap ? style.mapSearchBarComponent : style.listSearchBarComponent} onChange={async (searchText) => this.search(searchText)} navigation={this.props.navigation} />
         {this.screenFilters?.canFilter() && (
           <TouchableOpacity onPress={() => this.screenFilters?.openModal()}  style={showMap? [fabStyles.fab, style.mapFilterButton] : style.listFilterButton}>

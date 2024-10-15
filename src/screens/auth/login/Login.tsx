@@ -61,7 +61,7 @@ export default class Login extends BaseScreen<Props, State> {
       eula: false,
       password: null,
       email: Utils.getParamFromNavigation(this.props.route, 'email', '') as string,
-      tenantSubDomain: Utils.getParamFromNavigation(this.props.route, 'tenantSubDomain', '') as string,
+      tenantSubDomain: Utils.getParamFromNavigation(this.props.route, 'tenantSubDomain', 'emsp') as string,
       tenantName: t('authentication.tenant'),
       loggingIn: false,
       loading: true,
@@ -78,49 +78,64 @@ export default class Login extends BaseScreen<Props, State> {
   };
 
   public async componentDidMount() {
+    console.log('componentDidMount: Start initialization');
     await super.componentDidMount();
+
     let email = (this.state.email = '');
     let password = (this.state.password = '');
     let tenant: TenantConnection;
-    // Get tenants
+
+    console.log('Fetching tenants...');
     this.tenants = await this.centralServerProvider.getTenants();
-    if (Utils.isEmptyArray(this.tenants)) {
-      this.setState({ showNoTenantFoundDialog: true });
-    }
+    console.log('Tenants fetched:', this.tenants);
+
+    // if (Utils.isEmptyArray(this.tenants)) {
+    //   console.log('No tenants found, showing NoTenantFoundDialog');
+    //   this.setState({ showNoTenantFoundDialog: true });
+    // }
+
     // Check if sub-domain is provided
     if (!this.state.tenantSubDomain) {
-      // Not provided: Use last saved connexion info
+      console.log('Tenant subdomain not provided, fetching last saved connection info');
       const userCredentials = await SecuredStorage.getUserCredentials();
+      console.log('User credentials fetched:', userCredentials);
+
       if (userCredentials) {
         tenant = await this.centralServerProvider.getTenant(userCredentials.tenantSubDomain);
+        console.log('Tenant fetched based on last saved credentials:', tenant);
         email = userCredentials.email;
         password = userCredentials.password;
       }
     } else {
-      // Get the Tenant
+      console.log(`Tenant subdomain provided: ${this.state.tenantSubDomain}, fetching tenant`);
       tenant = await this.centralServerProvider.getTenant(this.state.tenantSubDomain);
-      // Get user connection
+      console.log('Tenant fetched:', tenant);
+
       if (tenant) {
         const userCredentials = await SecuredStorage.getUserCredentials(tenant.subdomain);
+        console.log('User credentials for tenant fetched:', userCredentials);
+
         if (userCredentials) {
-          email = userCredentials.email;
-          password = userCredentials.password;
+          email = userCredentials.email ?? '';
+          password = userCredentials.password ?? '';
         }
       }
     }
-    // Set logo
+
+    console.log('Setting tenant logo...');
     await this.setTenantLogo(tenant);
-    // Set
-    this.setState(
-        {
-          email,
-          password,
-          tenantName: tenant?.endpoint?.name ? tenant.name : t('authentication.tenant'),
-          tenantSubDomain: tenant?.endpoint?.name ? tenant.subdomain : null,
-          loading: false
-        }
-    );
+    console.log('Updating state with email, password, tenant information, and loading status');
+    this.setState({
+      email,
+      password,
+      tenantName: tenant.endpoint.name ? tenant.name : t('authentication.tenant'),
+      tenantSubDomain: tenant.endpoint.name ? tenant.subdomain : null,
+      loading: false,
+    });
+
+    console.log('componentDidMount: Initialization completed');
   }
+
 
   public async setTenantLogo (tenant: TenantConnection): Promise<void> {
     try {
@@ -283,10 +298,9 @@ export default class Login extends BaseScreen<Props, State> {
             return (
                 <SafeAreaView style={style.container}>
                   {showNoTenantFoundDialog && this.renderNoTenantFoundDialog()}
-                  <TouchableOpacity onPress={() => this.goToTenants()} style={style.tenantSelectionContainer}>
+                  <View style={style.tenantSelectionContainer}>
                     <AuthHeader navigation={this.props.navigation} tenantName={tenantName} tenantLogo={tenantLogo} />
-                    <Icon style={style.dropdownIcon} size={scale(25)} as={MaterialIcons} name={'arrow-drop-down'} />
-                  </TouchableOpacity>
+                  </View>
                   <KeyboardAwareScrollView keyboardShouldPersistTaps={'handled'} bounces={false} persistentScrollbar={true} style={style.scrollView} contentContainerStyle={style.scrollViewContentContainer}>
                     <Input
                         leftIcon={<Icon size={scale(20)} name="email" as={MaterialCommunityIcons} style={formStyle.inputIcon} />}

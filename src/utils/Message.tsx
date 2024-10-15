@@ -1,8 +1,7 @@
 import { Platform } from 'react-native';
 import Toast from 'react-native-root-toast';
 import {scale } from '../helper/scale.ts';
-
-import Utils from './Utils';
+import { getCommonColor } from './ThemeUtils';
 
 export default class Message {
   public static showError(message: string): void {
@@ -18,7 +17,7 @@ export default class Message {
   }
 
   private static show(message: string, type: 'danger' | 'success' | 'warning'): void {
-    const commonColor = Utils.getCurrentCommonColor();
+    const commonColor = getCommonColor();
     Toast.show(message, {
       shadow: false,
       animation: true,
@@ -29,7 +28,7 @@ export default class Message {
       textColor: '#FFF',
       textStyle: {
         fontSize: scale(15),
-        textAlign: 'center'
+        textAlign: 'center',
       },
       backgroundColor: commonColor[type]
     });

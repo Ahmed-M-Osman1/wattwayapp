@@ -15,6 +15,8 @@ import computeListItemCommonStyles from '../../../components/list/ListItemCommon
 import UsersFilters, { UsersFiltersDef } from './UsersFilters';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {scale } from '../../../helper/scale.ts';
+import { t } from 'i18next';
+
 export interface Props extends SelectableProps<User> {
   filters?: UsersFiltersDef
 }

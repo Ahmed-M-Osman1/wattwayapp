@@ -41,6 +41,7 @@ export default class ConnectorTypeFilterControlComponent extends FilterControlCo
     const { connectorTypes } = this.state;
     const commonColors = Utils.getCurrentCommonColor();
     return (
+        <>
       <View style={StyleSheet.compose(internalStyle.connectorTypeFilterContainer, style)}>
         {Object.values(ConnectorType)?.map((connector, index) => (
           <TouchableOpacity key={index} onPress={async () => this.onValueChanged(connector)} style={[internalStyle.connectorContainer, connectorTypes.has(connector) && internalStyle.selectedConnectorContainer]}>
@@ -51,6 +52,7 @@ export default class ConnectorTypeFilterControlComponent extends FilterControlCo
           </TouchableOpacity>
         ))}
       </View>
+          </>
     );
   };
 

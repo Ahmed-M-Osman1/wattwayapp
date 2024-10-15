@@ -335,7 +335,7 @@ export default class CentralServerProvider {
         mobileBundleID: getBundleId()
       });
     } catch (error) {
-      console.log('Error saving Mobile Token:', error);
+      console.log('Error saving Mobile Token:', error.message, error.response);
     }
   }
 
@@ -1142,21 +1142,19 @@ export default class CentralServerProvider {
   }
 
   private buildRestServerAuthURL(tenant: TenantConnection): string {
-    console.log(" ==== endpoint",tenant.endpoint )
-    console.log(" ==== tenant",tenant )
-    return (tenant?.endpoint?.endpoint) + '/v1/auth';
+    return "https://api.watt-way.com" + '/v1/auth';
   }
 
   private buildRestServerURL(): string {
-    return this.tenant?.endpoint?.endpoint + '/v1/api';
+    return "https://api.watt-way.com" + '/v1/api';
   }
 
   private buildUtilRestServerURL(tenant?: TenantConnection): string {
-    return (tenant?.endpoint?.endpoint ?? this.tenant?.endpoint?.endpoint) + '/v1/util';
+    return "https://api.watt-way.com" + '/v1/util';
   }
 
   private buildCentralRestServerServiceSecuredURL(): string {
-    return this.tenant?.endpoint.endpoint + '/client/api';
+    return "https://api.watt-way.com" + '/client/api';
   }
 
   public buildRestEndpointUrl(urlPatternAsString: RESTServerRoute, params: { [name: string]: string | number | null } = {}, urlPrefix = this.buildRestServerURL()): string {

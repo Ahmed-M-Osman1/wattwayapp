@@ -1,3 +1,5 @@
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs(false);
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import {
@@ -705,56 +707,34 @@ export default class App extends React.Component<Props, State> {
 
 
     public async componentDidMount() {
-        // Set up theme
-        const themeManager = ThemeManager.getInstance();
-        themeManager.setThemeType(Appearance.getColorScheme() as ThemeType);
-
-        this.themeSubscription = Appearance.addChangeListener(({ colorScheme }) => {
-            themeManager.setThemeType(Appearance.getColorScheme() as ThemeType);
-            this.setState({ theme: colorScheme });
-        });
-
-        // Get the central server
-        this.centralServerProvider = await ProviderFactory.getProvider();
-
-        // Set up location
-        this.location = await LocationManager.getInstance();
-        this.location.startListening();
-
-        // Perform local data migration
-        const migrationManager = MigrationManager.getInstance();
-        await migrationManager.migrate();
-
-        // Setup notifications
-        await Notifications.initialize();
-
-        let isSignedIn = false;  // Start with false
         try {
-            const tenantSubdomain = "your-tenant-domain";  // Placeholder, replace with actual logic
-            const userCredentials = await SecuredStorage.getUserCredentials(tenantSubdomain);
+            const themeManager = ThemeManager.getInstance();
+            themeManager.setThemeType(Appearance.getColorScheme() as ThemeType);
 
-            if (userCredentials?.password && userCredentials?.email && userCredentials?.tenantSubDomain) {
-                // Attempt login
-                await this.centralServerProvider.login(
-                    userCredentials.email,
-                    userCredentials.password,
-                    true,
-                    userCredentials.tenantSubDomain
-                );
-                isSignedIn = true;  // Set to true if login is successful
+            this.themeSubscription = Appearance.addChangeListener(({ colorScheme }) => {
+                themeManager.setThemeType(colorScheme as ThemeType);
+                this.setState({ theme: colorScheme });
+            });
+
+            // Fetch the central server provider
+            this.centralServerProvider = await ProviderFactory.getProvider();
+
+            // Setup location
+            this.location = await LocationManager.getInstance();
+            if (this.location.granted) {
+                this.location.startListening();
             } else {
-                this.initialUrl = `${Configuration.AWS_REST_ENDPOINT_PROD}/login`;
+                console.warn('Location permission not granted');
             }
-        } catch (error) {
-            if (__DEV__) {
-                console.log(error);  // Log error in development mode
-            }
-        }
 
-        this.setState({
-            showAppUpdateDialog: !!this.appVersion?.needsUpdate,
-            isSignedIn,  // Set the authentication state
-        });
+            const migrationManager = MigrationManager.getInstance();
+            await migrationManager.migrate();
+
+            // Initialize notifications
+            await Notifications.initialize();
+        } catch (error) {
+            console.error('Error during initialization:', error);
+        }
     }
 
 

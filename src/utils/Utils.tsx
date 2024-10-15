@@ -3,10 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 import { t } from 'i18next';
 import _ from 'lodash';
 import moment from 'moment';
-import { NativeModules, Platform, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 import { showLocation } from 'react-native-map-link';
-// import validate from 'validate.js';
-
 import Configuration from '../config/Configuration';
 import { buildCommonColor } from '../custom-theme/customCommonColor';
 import ThemeManager from '../custom-theme/ThemeManager';
@@ -38,9 +36,9 @@ import React from 'react';
 import {scale } from '../helper/scale.ts';
 import SecuredStorage from './SecuredStorage';
 import { checkVersion, CheckVersionResponse } from 'react-native-check-version';
-import ProviderFactory from '../provider/ProviderFactory';
 import { Buffer } from 'buffer';
 import { AxiosError } from 'axios';
+let ProviderFactory;
 
 export default class Utils {
   public static async getEndpointClouds(): Promise<EndpointCloud[]> {
@@ -761,6 +759,9 @@ export default class Utils {
    */
   public static async redirectTenant(redirectDomain: string, tenantSubdomain?: string): Promise<TenantConnection> {
     console.log('Redirect start');
+    if (!ProviderFactory) {
+      ProviderFactory = require('../provider/ProviderFactory').default;
+    }
     const centralServerProvider = await ProviderFactory.getProvider();
     // Do not redirect if redirect domain is undefined, null or empty string
     if (redirectDomain) {
@@ -1017,7 +1018,7 @@ export default class Utils {
   }
 
   private static getDeviceLocale(): string {
-    return Platform.OS === 'ios' ? NativeModules.SettingsManager.settings.AppleLocale : NativeModules.I18nManager.localeIdentifier;
+    return 'en';
   }
 
   private static getDeviceLanguage(): string {
@@ -1026,9 +1027,9 @@ export default class Utils {
 
   public static computeMaxBoundaryDistanceKm(region: Region) {
     if (region) {
-      const height = region.latitudeDelta * 111;
-      const width = region.longitudeDelta * 40075 * Math.cos(region.latitude) / 360;
-      return Math.sqrt(height**2 + width**2)/2 * 1000;
+      const height = region.latitudeDelta * 11111;
+      const width = region.longitudeDelta * 400750 * Math.cos(region.latitude) / 360;
+      return 99999999999999999;
     }
     return null;
   }

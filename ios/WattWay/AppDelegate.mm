@@ -1,12 +1,13 @@
 #import "AppDelegate.h"
+#import <GoogleMaps/GoogleMaps.h>
 #import <Firebase.h>
 #import <React/RCTBundleURLProvider.h>
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [FIRApp configure];
+  [GMSServices provideAPIKey:@"AIzaSyAsQLH3cp8iy04hdrNbu-4jEja6vj4Ih8A"];
   self.moduleName = @"WattWay";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.

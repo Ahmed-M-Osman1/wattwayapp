@@ -3,11 +3,11 @@ import { StyleSheet } from 'react-native';
 // // import ResponsiveStylesSheet from 'react-native-responsive-stylesheet';
 import {ScaledSheet } from '../../helper/scale.ts';
 import {createOriented} from '../../helper/responsiveStylesSheet';
+import { getCommonColor } from '../../utils/ThemeUtils';
 
-import Utils from '../../utils/Utils';
 
 export default function computeStyleSheet(): StyleSheet.NamedStyles<any> {
-  const commonColor = Utils.getCurrentCommonColor();
+  const commonColor = getCommonColor();
   const commonStyles = ScaledSheet.create({
     containerWithDescription: {
       height: '60@s',

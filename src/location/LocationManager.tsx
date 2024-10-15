@@ -1,69 +1,44 @@
-import RNLocation, { Location, Subscription } from 'react-native-location';
-
-import Utils from '../utils/Utils';
+import { Platform } from 'react-native';
 
 export default class LocationManager {
-  private static instance: LocationManager;
-  private granted = false;
-  private locationSubscription: Subscription;
-  private currentLocation: Location;
+    private static instance: LocationManager;
 
-  private constructor() {
-    RNLocation.configure({
-      distanceFilter: 100, // Meters
-      desiredAccuracy: {
-        ios: 'best',
-        android: 'balancedPowerAccuracy'
-      },
-      // Android only
-      androidProvider: 'auto',
-      interval: 5000, // Milliseconds
-      fastestInterval: 10000, // Milliseconds
-      maxWaitTime: 5000, // Milliseconds
-      // iOS Only
-      activityType: 'other',
-      allowsBackgroundLocationUpdates: false,
-      headingFilter: 1, // Degrees
-      headingOrientation: 'portrait',
-      pausesLocationUpdatesAutomatically: false,
-      showsBackgroundLocationIndicator: true
-    });
-  }
+    // Static fixed location that will be returned for both Android and iOS
+    private static fixedLocation = {
+        latitude: 23.35102681060004,
+        longitude: 42.670324109494686,
+        latitudeDelta: 0.014298002823881717,
+        longitudeDelta: 0.009999945759773254,
+        accuracy: 0, // You can add more properties if required
+        altitude: 0,
+        heading: 0,
+        speed: 0,
+        timestamp: Date.now(),
+    };
 
-  public static async getInstance(): Promise<LocationManager> {
-    if (!LocationManager.instance) {
-      LocationManager.instance = new LocationManager();
-    }
-    // Check
-    LocationManager.instance.granted = await RNLocation.requestPermission({
-      ios: 'whenInUse',
-      android: {
-        detail: 'fine'
-      }
-    });
-    return LocationManager.instance;
-  }
+    // Private constructor to prevent direct instantiation
+    private constructor() {}
 
-  public startListening() {
-    if (this.granted) {
-      this.locationSubscription = RNLocation.subscribeToLocationUpdates((locations: Location[]) => {
-        if (!Utils.isEmptyArray(locations)) {
-          // Sort DESC
-          locations = locations.sort((location1: Location, location2: Location) => location2.timestamp - location1.timestamp);
-          // Take the first one
-          this.currentLocation = locations[0];
+    // Get the singleton instance of LocationManager
+    public static getInstance(): LocationManager {
+        if (!LocationManager.instance) {
+            LocationManager.instance = new LocationManager();
         }
-      });
+        return LocationManager.instance;
     }
-  }
 
-  public stopListening() {
-    if (this.locationSubscription) {
-      this.locationSubscription = null; // Must be a method to call in location
+    // Start listening for location updates (dummy method, no functionality)
+    public startListening() {
+        // No operation: we are returning a static location only
     }
-  }
 
-  public getLocation(): Location {
-    return this.currentLocation;
-  }
+    // Stop listening for location updates (dummy method, no functionality)
+    public stopListening() {
+        // No operation: we are returning a static location only
+    }
+
+    // Return the static location
+    public getLocation() {
+        return LocationManager.fixedLocation;
+    }
 }

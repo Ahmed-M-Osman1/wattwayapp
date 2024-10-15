@@ -1,10 +1,8 @@
 import React from 'react';
 import {Image, ImageStyle, Text, View, ViewStyle} from 'react-native';
-
 import BaseProps from '../../types/BaseProps';
 import computeStyleSheet from './AuthStyles';
 import {scale} from '../../helper/scale.ts';
-
 export interface Props extends BaseProps {
   tenantName?: string;
   tenantLogo?: string;
@@ -27,13 +25,13 @@ export default class AuthHeader extends React.Component<Props, State>{
   public render() {
     const style = computeStyleSheet();
     const { tenantName, tenantLogo, containerStyle } = this.props;
-    const imageSource = tenantLogo ? {uri: tenantLogo} : require('../../../assets/no-image.png');
+    const imageSource = tenantLogo ? {uri: tenantLogo} : require('../../../assets/logo.png');
     return (
       <View style={[style.header, (containerStyle || {})]}>
         <View style={{padding: scale(10)}}>
           <Image style={style.tenantLogo as ImageStyle} source={imageSource} />
+          <Text style={style.tenantName}>WattWay</Text>
         </View>
-        <Text numberOfLines={2} ellipsizeMode={'tail'} style={style.tenantName}>{tenantName}</Text>
       </View>
     );
   }

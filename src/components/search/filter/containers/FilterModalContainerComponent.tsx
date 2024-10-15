@@ -1,14 +1,13 @@
 import React from 'react';
-
-import FilterContainerComponent, { FilterContainerComponentProps, FilterContainerComponentState } from './FilterContainerComponent';
-import computeModalCommonStyle from '../../../modal/ModalCommonStyle';
-import computeStyleSheet from'./FilterModalContainerComponentStyles';
-import {SafeAreaView, Text, TouchableOpacity, View, Modal} from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View, Modal } from 'react-native';
 import { t } from 'i18next';
 import { Icon } from 'native-base';
 import { Button } from '@rneui/base';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import {scale } from '../../../../helper/scale.ts';
+import { scale } from '../../../../helper/scale.ts';
+import computeModalCommonStyle from '../../../modal/ModalCommonStyle';
+import computeStyleSheet from './FilterModalContainerComponentStyles';
+import FilterContainerComponent, {FilterContainerComponentProps, FilterContainerComponentState} from "./FilterContainerComponent.tsx";
 
 export interface Props extends FilterContainerComponentProps {}
 
@@ -32,40 +31,32 @@ export default class FilterModalContainerComponent extends FilterContainerCompon
   }
 
   public setState = (
-    state: State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, never>) | Pick<State, never>,
-    callback?: () => void
+      state: State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, never>) | Pick<State, never>,
+      callback?: () => void
   ) => {
     super.setState(state, callback);
   };
 
   public async notifyFilterChanged() {
     const { onFilterChanged } = this.props;
-    // Notify
     onFilterChanged?.(this.getFilters(), false);
   }
 
   public applyFiltersAndNotify = async () => {
     const { onFilterChanged } = this.props;
-    this.setState({applyLoading: true});
-    // Save
+    this.setState({ applyLoading: true });
     await this.saveFilters();
-    // Notify
     onFilterChanged(this.getFilters(), true);
-    // Close
-    this.setState({visible: false, applyLoading: false});
+    this.setState({ visible: false, applyLoading: false }); // Close modal
   };
 
   public async clearFiltersAndNotify(): Promise<void> {
     const { onFilterChanged } = this.props;
-    this.setState({clearLoading: true})
-    // Clear
+    this.setState({ clearLoading: true });
     this.clearFilters();
-    // Save
     await this.saveFilters();
-    // Notify
     onFilterChanged(this.getFilters(), true);
-    // Close
-    this.setState({clearLoading: false});
+    this.setState({ clearLoading: false });
   };
 
   public render = () => {
@@ -73,42 +64,42 @@ export default class FilterModalContainerComponent extends FilterContainerCompon
     const modalCommonStyle = computeModalCommonStyle();
     const style = computeStyleSheet();
     return (
-      <View>
-        <Modal
-          style={style.modal}
-          animationOut={'slideOutDown'}
-          animationIn={'slideInUp'}
-          animationInTiming={700}
-          animationOutTiming={200}
-          useNativeDriver={true}
-          isVisible={visible}
-          onBackButtonPress={() => this.setState({visible: false})}
-          onBackdropPress={() => this.setState({visible: false})}
-        >
-          <View style={style.modalContent}>
-            <SafeAreaView style={style.safeArea}>
-              <View style={style.header}>
-                <Text style={style.title}>{t('general.filters')}</Text>
-                <TouchableOpacity onPress={() => this.setState({visible: false})}>
-                  <Icon size={scale(37)}  name={'close'} as={EvilIcons} style={style.closeIcon}/>
-                </TouchableOpacity>
-              </View>
-              {this.props.children}
-              <View style={style.buttonsContainer}>
-                <Button
-                  loading={applyLoading}
-                  containerStyle={style.buttonContainer} style={modalCommonStyle.primary}
-                  onPress={() => this.applyFiltersAndNotify()} title={t('general.apply')}/>
-                <Button
-                  loading={clearLoading}
-                  containerStyle={style.buttonContainer} style={modalCommonStyle.primary}
-                  onPress={() => this.clearFilters()} title={t('general.clear')}/>
-              </View>
-            </SafeAreaView>
-          </View>
-
-        </Modal>
-      </View>
+        <View>
+          <Modal
+              visible={visible}
+              animationType="slide"
+              transparent={true}
+              onRequestClose={() => this.setState({ visible: false })}
+          >
+            <View style={style.modalContent}>
+              <SafeAreaView style={style.safeArea}>
+                <View style={style.header}>
+                  <Text style={style.title}>{t('general.filters')}</Text>
+                  <TouchableOpacity onPress={() => this.setState({ visible: false })}>
+                    <Icon size={scale(37)} name={'close'} as={EvilIcons} style={style.closeIcon} />
+                  </TouchableOpacity>
+                </View>
+                {this.props.children}
+                <View style={style.buttonsContainer}>
+                  <Button
+                      loading={applyLoading}
+                      containerStyle={style.buttonContainer}
+                      style={modalCommonStyle.primary}
+                      onPress={() => this.applyFiltersAndNotify()}
+                      title={t('general.apply')}
+                  />
+                  <Button
+                      loading={clearLoading}
+                      containerStyle={style.buttonContainer}
+                      style={modalCommonStyle.primary}
+                      onPress={() => this.clearFiltersAndNotify()}
+                      title={t('general.clear')}
+                  />
+                </View>
+              </SafeAreaView>
+            </View>
+          </Modal>
+        </View>
     );
-  }
+  };
 }
