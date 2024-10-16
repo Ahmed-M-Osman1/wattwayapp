@@ -3,15 +3,14 @@ import { Icon, Spinner } from 'native-base';
 import React from 'react';
 import {
   ActivityIndicator,
-  Alert,
   BackHandler,
   Image,
   ImageStyle,
   SafeAreaView,
   TouchableOpacity,
   View,
-  Modal
 } from 'react-native';
+import Modal from '../../../components/replace-modal'
 import { Marker, Region } from 'react-native-maps';
 import computeConnectorStatusStyles from '../../../components/connector-status/ConnectorStatusComponentStyles';
 

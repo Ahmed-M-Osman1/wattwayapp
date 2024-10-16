@@ -19,7 +19,6 @@ import {
   ViewStyle
 } from 'react-native';
 import Orientation from 'react-native-orientation-locker';
-
 import noSite from '../../../../assets/no-site.png';
 import CarComponent from '../../../components/car/CarComponent';
 import ChargingStationConnectorComponent
@@ -550,12 +549,12 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
       // Elapsed Time?
       if (transaction.currentTotalDurationSecs) {
         // Format
-        elapsedTimeFormatted = I18nManager.formatDuration(transaction.currentTotalDurationSecs, durationFormatOptions);
+        elapsedTimeFormatted = I18nManager.formatDuration(transaction.currentTotalDurationSecs);
       }
       // Inactivity?
       if (transaction.currentTotalInactivitySecs) {
         // Format
-        inactivityFormatted = I18nManager.formatDuration(transaction.currentTotalInactivitySecs, durationFormatOptions);
+        inactivityFormatted = I18nManager.formatDuration(transaction.currentTotalInactivitySecs);
       }
       // Set
       return {
@@ -660,7 +659,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
     return connector && connector.currentTransactionID ? (
       <View style={style.columnContainer}>
         <Icon size={scale(25)} as={MaterialIcons} name="timer" style={[style.icon, style.info]} />
-        <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue, style.info]}>{elapsedTimeFormatted}</Text>
+        <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue, style.info]}>{elapsedTimeFormatted?.format}</Text>
       </View>
     ) : (
       <View style={style.columnContainer}>
@@ -676,7 +675,7 @@ export default class ChargingStationConnectorDetails extends BaseAutoRefreshScre
     return connector && connector.currentTransactionID ? (
       <View style={style.columnContainer}>
         <Icon size={scale(25)} as={MaterialIcons} name="timer-off" style={[style.icon, inactivityStyle]} />
-        <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue, inactivityStyle]}>{inactivityFormatted}</Text>
+        <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[style.label, style.labelValue, inactivityStyle]}>{inactivityFormatted.formate}</Text>
       </View>
     ) : (
       <View style={style.columnContainer}>

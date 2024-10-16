@@ -6,9 +6,9 @@ import {
   ImageStyle,
   SafeAreaView,
   TouchableOpacity,
-  View,
-  Modal
+  View
 } from 'react-native';
+import Modal from '../../components/replace-modal';
 import ClusterMap from '../../components/map/ClusterMap';
 import { Marker, Region } from 'react-native-maps';
 
@@ -246,17 +246,17 @@ export default class SiteAreas extends BaseAutoRefreshScreen<Props, State> {
     const style = computeStyleSheet();
     return (
       <Modal
-        // useNativeDriverForBackdrop={true}
+        useNativeDriverForBackdrop={true}
         statusBarTranslucent={true}
-        // animationInTiming={500}
-        // animationOutTiming={500}
-        // swipeDirection={['down']}
-        // hideModalContentWhileAnimating={true}
-        // onSwipeComplete={() => this.setState({ selectedSiteArea: null })}
+        animationInTiming={500}
+        animationOutTiming={500}
+        swipeDirection={['down']}
+        hideModalContentWhileAnimating={true}
+        onSwipeComplete={() => this.setState({ selectedSiteArea: null })}
         style={modalStyle.modalBottomHalf}
-        // isVisible={true}
-        // propagateSwipe={true}
-        // onBackButtonPress={() => this.setState({ selectedSiteArea: null })}
+        isVisible={true}
+        propagateSwipe={true}
+        onBackButtonPress={() => this.setState({ selectedSiteArea: null })}
       >
         <SafeAreaView style={style.siteAreaDetailsModalContainer}>
           <View style={style.siteAreaDetailsModalHeader}>

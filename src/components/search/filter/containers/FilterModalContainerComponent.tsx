@@ -1,5 +1,6 @@
 import React from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View, Modal } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import Modal from '../../../replace-modal';
 import { t } from 'i18next';
 import { Icon } from 'native-base';
 import { Button } from '@rneui/base';
@@ -66,7 +67,7 @@ export default class FilterModalContainerComponent extends FilterContainerCompon
     return (
         <View>
           <Modal
-              visible={visible}
+              isVisible={visible}
               animationType="slide"
               transparent={true}
               onRequestClose={() => this.setState({ visible: false })}

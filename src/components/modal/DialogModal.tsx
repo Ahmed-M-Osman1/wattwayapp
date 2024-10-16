@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, Modal } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import Modal from '../replace-modal';
 import { Icon } from 'native-base';
 import { t } from 'i18next';
 import computeStyleSheet from './DialogModalStyle';
 import computeModalCommonStyles from '../modal/ModalCommonStyle';
 import { Animation } from 'react-native-animatable';
-import {Button, Input} from '@rneui/base';
+import {Button} from '@rneui/base';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {scale } from '../../helper/scale.ts';

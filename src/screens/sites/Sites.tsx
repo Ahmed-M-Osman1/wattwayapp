@@ -1,7 +1,8 @@
 import { t } from 'i18next';
 import { Icon, Spinner } from 'native-base';
 import React from 'react';
-import { Image, ImageStyle, SafeAreaView, TouchableOpacity, View, Modal } from 'react-native';
+import { Image, ImageStyle, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import Modal from '../../components/replace-modal'
 import { Marker, Region } from 'react-native-maps';
 
 import HeaderComponent from '../../components/header/HeaderComponent';

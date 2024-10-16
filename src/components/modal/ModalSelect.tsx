@@ -7,7 +7,8 @@ import computeStyleSheet from './ModalSelectStyles';
 import { t } from 'i18next';
 import SelectableList from '../../screens/base-screen/SelectableList';
 import ListItem from '../../types/ListItem';
-import { SafeAreaView, Text, TouchableOpacity, View, Modal } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import Modal from '../replace-modal';
 import computeListItemCommonStyle from '../list/ListItemCommonStyle';
 import computeModalCommonStyle from './ModalCommonStyle';
 import { Button } from '@rneui/base';
@@ -97,7 +98,7 @@ export default class ModalSelect<T extends ListItem> extends React.Component<Pro
           // Inner component list also unsubscribe on unmount, allowing the last subscriber to choose back implementation.
           // Here the last subscriber is the parent component
           onBackButtonPress={() => this.setState({ isVisible: false })}
-         // onBackdropPress={() => this.setState({ isVisible: false })}
+          onBackdropPress={() => this.setState({ isVisible: false })}
           hideModalContentWhileAnimating={true}>
           <SafeAreaView style={style.modalContainer}>
             <View style={style.modalHeader}>

@@ -21,7 +21,8 @@ export default function computeStyleSheet(): StyleSheet.NamedStyles<any> {
       paddingTop : Platform.OS === PLATFORM.IOS ? '5@s' : '1%' + scale(5),
       borderTopWidth: 0,
       backgroundColor: commonColor.containerBgColor,
-      elevation: 0
+      elevation: 0,
+      marginTop:"5%"
     },
     leftIconContainer: {
       marginRight: '15@s'
@@ -41,14 +42,14 @@ export default function computeStyleSheet(): StyleSheet.NamedStyles<any> {
       marginLeft: '2.5@s',
       flexWrap: 'wrap',
       alignItems: 'center',
-      alignContent: 'stretch',
-      justifyContent: 'flex-start',
-      height: '100%'
+      alignContent: 'center',
+      justifyContent: 'center',
+      height: '100%',
     },
     title: {
       fontSize: '17@s',
       color: commonColor.textColor,
-      marginRight: '5@s'
+      marginRight: '5@s',
     },
     subTitle: {
       fontSize: '17@s',

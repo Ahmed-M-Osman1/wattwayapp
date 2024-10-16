@@ -531,15 +531,15 @@ export default class CentralServerProvider {
   public async getSites(params = {}, paging: PagingParams = Constants.DEFAULT_PAGING, sorting: string[] = []): Promise<DataResult<Site>> {
     this.debugMethod('getSites');
     // Build Paging
-    this.buildPaging(paging, params);
+    // this.buildPaging(paging, params);
     // Build Sorting
-    this.buildSorting(sorting, params);
+    // this.buildSorting(sorting, params);
     // Call
     const result = await this.axiosInstance.get<any>(
       this.buildRestEndpointUrl(RESTServerRoute.REST_SITES),
       {
-        headers: this.buildSecuredHeaders(),
-        params
+        headers: this.buildSecuredHeaders()
+        // params
       }
     );
     return result.data;

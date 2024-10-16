@@ -1,14 +1,13 @@
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
-let ProviderFactory;
-import CentralServerProvider from '../provider/CentralServerProvider';
-import {Notification} from '../types/UserNotifications';
-import {getApplicationName, getBundleId, getVersion} from 'react-native-device-info';
+import { requestNotifications } from 'react-native-permissions';
+import { getApplicationName, getBundleId, getVersion } from 'react-native-device-info';
 import Message from '../utils/Message';
 import { t } from 'i18next';
 import SecuredStorage from '../utils/SecuredStorage';
-// import ProviderFactory from '../provider/ProviderFactory';
-import {requestNotifications} from 'react-native-permissions';
+let ProviderFactory;
+import CentralServerProvider from '../provider/CentralServerProvider';
+import { Notification } from '../types/UserNotifications';
 
 export default class Notifications {
   private static centralServerProvider: CentralServerProvider;
@@ -18,19 +17,20 @@ export default class Notifications {
     if (!ProviderFactory) {
       ProviderFactory = require('../provider/ProviderFactory').default;
     }
-    // Setup central provider
     this.centralServerProvider = await ProviderFactory.getProvider();
+
     try {
+      await messaging().registerDeviceForRemoteMessages();
       const response = await requestNotifications(['alert', 'sound']);
 
-      if (response?.status === 'granted' ) {
+      if (response?.status === 'granted') {
         const fcmToken = await messaging().getToken();
         if (fcmToken) {
           this.token = fcmToken;
         }
       }
-    } catch ( error ) {
-      console.error(error);
+    } catch (error) {
+      console.error('Error during FCM initialization:', error);
     }
   }
 
@@ -46,7 +46,7 @@ export default class Notifications {
           mobileOS: Platform.OS,
           mobileAppName: getApplicationName(),
           mobileBundleID: getBundleId(),
-          mobileVersion: getVersion()
+          mobileVersion: getVersion(),
         });
       } catch (error) {
         console.log(error);
@@ -96,10 +96,9 @@ export default class Notifications {
       Message.showError(t('general.tenantMissing'));
       return false;
     }
-    // Check tenant exist
     const tenant = await this.centralServerProvider.getTenant(tenantSubdomain);
     if (!tenant) {
-      Message.showError(t('general.tenantUnknown', {tenantSubdomain}));
+      Message.showError(t('general.tenantUnknown', { tenantSubdomain }));
       return false;
     }
     return true;

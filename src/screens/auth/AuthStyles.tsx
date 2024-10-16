@@ -85,8 +85,8 @@ export default function computeStyleSheet(): StyleSheet.NamedStyles<any> {
       flexShrink: 1
     },
     tenantLogo: {
-      height: scale(150),
-      width: scale(300),
+      height: scale(100),
+      width: scale(200),
       resizeMode: 'contain'
     },
     eulaLink: {

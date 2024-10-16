@@ -1,5 +1,4 @@
-import { LogBox } from 'react-native';
-LogBox.ignoreAllLogs(false);
+import {Platform, SafeAreaView} from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import {
@@ -55,7 +54,6 @@ import AppUpdateDialog from './components/modal/app-update/AppUpdateDialog';
 import AddCar from './screens/cars/AddCar';
 import ChargingStationQrCode from './screens/home/ChargingStationQrCode';
 import ThemeManager from './custom-theme/ThemeManager';
-// import TenantQrCode from './screens/tenants/TenantQrCode';
 import computeStyleSheet from './AppStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -67,7 +65,6 @@ import messaging from '@react-native-firebase/messaging';
 import {AuthContext} from './context/AuthContext';
 import Loading from './screens/loading/Loading';
 import {Notification} from './types/UserNotifications';
-import Configuration from './config/Configuration';
 import {RootSiblingParent} from 'react-native-root-siblings';
 
 // Navigation Stack variable
@@ -753,12 +750,17 @@ export default class App extends React.Component<Props, State> {
                         {showAppUpdateDialog && (
                             <AppUpdateDialog appVersion={this.appVersion} close={() => this.setState({ showAppUpdateDialog: false })} />
                         )}
-                        <StatusBar barStyle={ThemeManager.getInstance()?.isThemeTypeIsDark() ? 'light-content' : 'dark-content'} translucent backgroundColor="transparent" />
-                        {isSignedIn == null ?
-                            <Loading/>
-                            :
-                            this.createRootNavigator()
-                        }
+                        {/* StatusBar with appropriate settings */}
+                        <StatusBar
+                            barStyle={ThemeManager.getInstance()?.isThemeTypeIsDark() ? 'light-content' : 'dark-content'}
+                            translucent
+                            backgroundColor="transparent"
+                        />
+                        <SafeAreaProvider>
+                            <SafeAreaView style={{ flex: 1, backgroundColor: 'transparent' }}>
+                                {isSignedIn == null ? <Loading /> : this.createRootNavigator()}
+                            </SafeAreaView>
+                        </SafeAreaProvider>
                     </RootSiblingParent>
                 </GestureHandlerRootView>
             </NativeBaseProvider>
@@ -837,7 +839,7 @@ export default class App extends React.Component<Props, State> {
         return (
             <AuthContext.Provider value={this.appContext}>
                 <SafeAreaProvider>
-                    <NavigationContainer
+                        <NavigationContainer
                         onReady={() => this.onReady()}
                         linking={this.buildLinking()}
                         ref={this.navigationRef}
