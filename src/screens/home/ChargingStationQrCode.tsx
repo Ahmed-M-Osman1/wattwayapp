@@ -199,6 +199,7 @@ export default class ChargingStationQrCode extends BaseScreen<State, Props> {
         />
        {activateQrCode && (
           <QRCodeScanner
+              navigation={this.props.navigation}
             cameraProps={{ captureAudio: false }}
             markerStyle={{borderColor: commonColor.primaryLight}}
             showMarker

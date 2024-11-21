@@ -39,6 +39,7 @@
     "i18next": "^23.15.1",
     "intl-unofficial-duration-unit-format": "^3.1.0",
     "jwt-decode": "^4.0.0",
+    "lottie-react-native": "^6.6.0",
     "moment": "^2.30.1",
     "native-base": "^3.4.28",
     "react": "18.3.1",

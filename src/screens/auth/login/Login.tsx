@@ -30,6 +30,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import AuthHeader from '../AuthHeader';
+import SplashScreen from "../../splash";
 
 export interface Props extends BaseProps {}
 
@@ -290,7 +291,7 @@ export default class Login extends BaseScreen<Props, State> {
     const {tenantLogo, eula, loggingIn, loading, hidePassword, showNoTenantFoundDialog, tenantName, password, email, tenantSubDomain } = this.state;
     // Render
     return loading ? (
-        <Spinner style={formStyle.spinner} color="grey" />
+        <SplashScreen />
     ) : (
         <AuthContext.Consumer>
           {authService => {

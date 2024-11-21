@@ -66,6 +66,7 @@ import {AuthContext} from './context/AuthContext';
 import Loading from './screens/loading/Loading';
 import {Notification} from './types/UserNotifications';
 import {RootSiblingParent} from 'react-native-root-siblings';
+import SplashScreen from "./screens/splash";
 
 // Navigation Stack variable
 const AuthStack = createStackNavigator();
@@ -758,7 +759,7 @@ export default class App extends React.Component<Props, State> {
                         />
                         <SafeAreaProvider>
                             <SafeAreaView style={{ flex: 1, backgroundColor: 'transparent' }}>
-                                {isSignedIn == null ? <Loading /> : this.createRootNavigator()}
+                                {isSignedIn == null ? <SplashScreen /> : this.createRootNavigator()}
                             </SafeAreaView>
                         </SafeAreaProvider>
                     </RootSiblingParent>
